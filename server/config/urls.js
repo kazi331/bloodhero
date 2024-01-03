@@ -1,0 +1,1 @@
+export const clientURI = process.env.NODE_ENV === 'production' ? 'https://bloodhero.vercel.app' : 'http://localhost:3000';

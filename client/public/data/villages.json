@@ -1,0 +1,395 @@
+[
+  {
+    "union": "Brahman Para",
+    "bangla": "ব্রাহ্মণ পাড়া",
+    "villages": [
+      {
+        "id": 1,
+        "name": "Brahman Para",
+        "bangla": "ব্রাহ্মণ পাড়া"
+      },
+      {
+        "id": 2,
+        "name": "Dagra Para",
+        "bangla": "ডাগরা পাড়া"
+      },
+      {
+        "id": 3,
+        "name": "Kalpabash",
+        "bangla": "কল্পবাশ"
+      },
+      {
+        "id": 4,
+        "name": "Dirghabhumi",
+        "bangla": "দীর্ঘভূমি"
+      },
+      {
+        "id": 5,
+        "name": "Mahalakshmi Para",
+        "bangla": "মহালক্ষ্মী পাড়া"
+      },
+      {
+        "id": 6,
+        "name": "Naighar",
+        "bangla": "নাইঘর"
+      },
+      {
+        "id": 7,
+        "name": "Nandi Para",
+        "bangla": "নন্দী পাড়া"
+      },
+      {
+        "id": 8,
+        "name": "Dhanya Daul",
+        "bangla": "ধন্য দৌল"
+      }
+    ]
+  },
+  {
+    "union": "Dulalpur",
+    "bangla": "দুলালপুর",
+    "villages": [
+      {
+        "id": 9,
+        "name": "Bejora",
+        "bangla": "বেজোরা"
+      },
+      {
+        "id": 10,
+        "name": "Gopalnagar",
+        "bangla": "গোপালনগর"
+      },
+      {
+        "id": 11,
+        "name": "Dulalpur",
+        "bangla": "দুলালপুর"
+      },
+      {
+        "id": 12,
+        "name": "Balina",
+        "bangla": "বালিনা"
+      },
+      {
+        "id": 13,
+        "name": "Nalla",
+        "bangla": "নাল্লা"
+      }
+    ]
+  },
+  {
+    "union": "Chandla",
+    "bangla": "চাঁদলা",
+    "villages": [
+      {
+        "id": 14,
+        "name": "Bara Dhusia",
+        "bangla": "বড় ধুসিয়া"
+      },
+      {
+        "id": 15,
+        "name": "Chhota Dhusia",
+        "bangla": "ছোট ধুসিয়া"
+      },
+      {
+        "id": 16,
+        "name": "Dakshin Chandla",
+        "bangla": "দক্ষিণ চান্দলা"
+      },
+      {
+        "id": 17,
+        "name": "Chandla Parba",
+        "bangla": "চাঁদলা পার্ব"
+      },
+      {
+        "id": 18,
+        "name": "Purba Chandla",
+        "bangla": "পূর্ব চাঁদলা"
+      },
+      {
+        "id": 19,
+        "name": "Dhalgram",
+        "bangla": "ধলগ্রাম"
+      }
+    ]
+  },
+  {
+    "union": "Sidlai",
+    "bangla": "সিদলাই",
+    "villages": [
+      {
+        "id": 20,
+        "name": "Berakhola",
+        "bangla": "বেরাখোলা"
+      },
+      {
+        "id": 21,
+        "name": "Dighirpar",
+        "bangla": "দীঘিরপাড়"
+      },
+      {
+        "id": 22,
+        "name": "Laruchu",
+        "bangla": "লারুচু"
+      },
+      {
+        "id": 23,
+        "name": "Purba Pomkara",
+        "bangla": "পূর্বা পোমকারা"
+      },
+      {
+        "id": 24,
+        "name": "Sidlai",
+        "bangla": "সিডলাই"
+      }
+    ]
+  },
+  {
+    "union": "Madhabpur",
+    "bangla": "মাধবপুর",
+    "villages": [
+      {
+        "id": 25,
+        "name": "Kandughar",
+        "bangla": "কান্দুঘর"
+      },
+      {
+        "id": 26,
+        "name": "Makimpur",
+        "bangla": "মকিমপুর"
+      },
+      {
+        "id": 27,
+        "name": "Mangochh",
+        "bangla": "মাঙ্গোচ্ছ"
+      },
+      {
+        "id": 28,
+        "name": "Rajabari",
+        "bangla": "রাজাবাড়ি"
+      },
+      {
+        "id": 29,
+        "name": "Ranigachh",
+        "bangla": "রানিগাছ"
+      },
+      {
+        "id": 30,
+        "name": "Shaitsala",
+        "bangla": "শৈতশালা"
+      },
+      {
+        "id": 31,
+        "name": "Uttar Chandla",
+        "bangla": "উত্তর চান্দলা"
+      },
+      {
+        "id": 32,
+        "name": "Barani",
+        "bangla": "বরানী"
+      },
+      {
+        "id": 33,
+        "name": "Jamtali",
+        "bangla": "জামতলী"
+      },
+      {
+        "id": 34,
+        "name": "Uttar Madhabpur",
+        "bangla": "উত্তর মাধবপুর"
+      },
+      {
+        "id": 35,
+        "name": "Uttar Mirpur",
+        "bangla": "উত্তর মিরপুর"
+      }
+    ]
+  },
+  {
+    "union": "Malapara",
+    "bangla": "মালাপাড়া",
+    "villages": [
+      {
+        "id": 36,
+        "name": "Asadnagar",
+        "bangla": "আসাদনগর"
+      },
+      {
+        "id": 37,
+        "name": "Alua Chandipur",
+        "bangla": "আলুয়া চন্ডিপুর"
+      },
+      {
+        "id": 38,
+        "name": "Chand Para",
+        "bangla": "চাঁদ পাড়া"
+      },
+      {
+        "id": 39,
+        "name": "Mala Para",
+        "bangla": "মালা পাড়া"
+      },
+      {
+        "id": 40,
+        "name": "Paschim Manoharpur",
+        "bangla": "পশ্চিম মনোহরপুর"
+      },
+      {
+        "id": 41,
+        "name": "Uttar Krishnapur",
+        "bangla": "উত্তর কৃষ্ণপুর"
+      },
+      {
+        "id": 42,
+        "name": "Uttar Ramnagar",
+        "bangla": "উত্তর রামনগর"
+      }
+    ]
+  },
+  {
+    "union": "Sahebabad",
+    "bangla": "সাহেবাবাদ",
+    "villages": [
+      {
+        "id": 43,
+        "name": "Chhatiani",
+        "bangla": "ছাতিয়ানী"
+      },
+      {
+        "id": 44,
+        "name": "Jiran Naya Para",
+        "bangla": "জিরান নয়া পাড়া"
+      },
+      {
+        "id": 45,
+        "name": "Sahebabad",
+        "bangla": "সাহেবাবাদ"
+      },
+      {
+        "id": 46,
+        "name": "Uttar Jiran",
+        "bangla": "উত্তর জিরান"
+      },
+      {
+        "id": 47,
+        "name": "Nagarpar",
+        "bangla": "নগরপাড়"
+      },
+      {
+        "id": 48,
+        "name": "Takai",
+        "bangla": "টাকাই"
+      },
+      {
+        "id": 49,
+        "name": "Tatera",
+        "bangla": "তাতেরা"
+      }
+    ]
+  },
+  {
+    "union": "Shashidal",
+    "bangla": "শশীদল",
+    "villages": [
+      {
+        "id": 50,
+        "name": "Asabari",
+        "bangla": "আসাবরী"
+      },
+      {
+        "id": 51,
+        "name": "Begamabad",
+        "bangla": "বেগমাবাদ"
+      },
+      {
+        "id": 52,
+        "name": "Dakshin Shashidal",
+        "bangla": "দক্ষিণ শশীদল"
+      },
+      {
+        "id": 53,
+        "name": "Dakshin Tetabhumi",
+        "bangla": "দক্ষিণ তেতাভূমি"
+      },
+      {
+        "id": 54,
+        "name": "Deosh",
+        "bangla": "দেওশ"
+      },
+      {
+        "id": 55,
+        "name": "Dighi",
+        "bangla": "দীঘি"
+      },
+      {
+        "id": 56,
+        "name": "Sajghar",
+        "bangla": "সাজঘর"
+      },
+      {
+        "id": 57,
+        "name": "Chubash",
+        "bangla": "চুবাশ"
+      },
+      {
+        "id": 58,
+        "name": "Malliker Dighi",
+        "bangla": "মল্লিকার দিঘী"
+      },
+      {
+        "id": 59,
+        "name": "Manara",
+        "bangla": "মানারা"
+      },
+      {
+        "id": 60,
+        "name": "Nagaish",
+        "bangla": "নাগাইশ"
+      },
+      {
+        "id": 61,
+        "name": "Dakshin Nagaish",
+        "bangla": "দক্ষিণ নাগাইশ"
+      },
+      {
+        "id": 62,
+        "name": "Uttar Nagaish",
+        "bangla": "উত্তর নাগাইশ"
+      },
+      {
+        "id": 63,
+        "name": "Uttar Bagra",
+        "bangla": "উত্তর বাগড়া"
+      },
+      {
+        "id": 64,
+        "name": "Uttar Narayanpur",
+        "bangla": "উত্তর নারায়ণপুর"
+      },
+      {
+        "id": 65,
+        "name": "Uttar Shashidal",
+        "bangla": "উত্তর শশীদল"
+      },
+      {
+        "id": 66,
+        "name": "Uttar Shibpur",
+        "bangla": "উত্তর শিবপুর"
+      },
+      {
+        "id": 67,
+        "name": "Ramchandrapur",
+        "bangla": "রামচন্দ্রপুর"
+      },
+      {
+        "id": 68,
+        "name": "Ganganagar",
+        "bangla": "গঙ্গানগর"
+      },
+      {
+        "id": 69,
+        "name": "Uttar Tetabhumi",
+        "bangla": "উত্তর তেতাভূমি"
+      }
+    ]
+  }
+]
