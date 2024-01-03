@@ -25,7 +25,7 @@ router.get("/failed/:provider", (req, res) => {
 
 
 // GOOGLE AUTH ROUTES
-router.get('/google', passport.authenticate('google'))
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 // GOOGLE CALLBACK
 router.get('/google/callback',
     passport.authenticate('google', { session: false, failureRedirect: '/failed/google', }),

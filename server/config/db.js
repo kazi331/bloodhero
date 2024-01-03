@@ -1,6 +1,6 @@
 import { connect } from 'mongoose';
-
-connect('mongodb://localhost:27017/bloodHero')
+import { mongoURI } from './urls.js';
+connect(mongoURI)
     .then(() => console.log('Database connected successfully'))
     .catch(err => console.log("Failed to connect to database", err))
 
