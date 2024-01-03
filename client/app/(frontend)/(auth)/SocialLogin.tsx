@@ -5,7 +5,8 @@ import { Github } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../../../components/ui/button';
 
-console.log(process.env.NEXT_PUBLIC_SERVER_URL_PROD)
+console.log(serverURI, process.env.NEXT_PUBLIC_SERVER_URL_PROD)
+
 const SocialLogin = () => {
     const { push } = useRouter();
 
