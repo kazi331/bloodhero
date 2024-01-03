@@ -123,12 +123,6 @@ const login = async (req, res) => {
 const logout = (req, res) => {
 
     try {
-        // req.logout(() => {
-        //     res.json({
-        //         success: true,
-        //         message: 'user has successfully logged out',
-        //     })
-        // });
 
         res.cookie('token', '', {
             httpOnly: true,
@@ -148,32 +142,39 @@ const logout = (req, res) => {
 
 // CHECK IF LOGGED IN USER'S TOKEN  IS VALID
 const checkToken = (req, res) => {
-    // GET TOKEN FROM HEADER OR COOKIE
-    const token = req.headers.authorization?.split(" ")[1] || req.cookies['token'];
-    if (!token) return res.status(401).json({
-        success: false,
-        message: 'No Token Provided',
-    });
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        if (decoded) {
-            res.json({
-                success: true,
-                message: 'Token is valid',
-            })
-        } else {
-            res.status(401).json({
+        const token = req.cookies['token'];
+        if (!token) return res.status(401).json({
+            success: false,
+            message: 'No Token Provided',
+        });
+        try {
+
+            const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
+            if (decoded) {
+                res.json({
+                    success: true,
+                    message: 'Token is valid',
+                })
+            } else {
+                res.status(401).json({
+                    success: false,
+                    message: 'Invalid Token',
+                })
+            }
+
+        } catch (err) {
+            res.status(500).json({
                 success: false,
-                message: 'Invalid Token',
+                message: 'Token validation failed',
             })
         }
-
     } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: 'Token validation failed',
-        })
+
     }
+    // GET TOKEN FROM HEADER OR COOKIE
+
+
 }
 
 export { checkToken, login, logout, register, updateDonor };

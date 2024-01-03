@@ -3,7 +3,10 @@ import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import passport from 'passport';
-import './middlewares/passport.js';
+
+import './services/githubStrategy.js';
+import './services/googleStrategy.js';
+
 import authRoutes from './routes/authRoutes.js';
 import routes from './routes/routes.js';
 

@@ -67,7 +67,7 @@ const Cards = () => {
                                 </div>
                                 <p className="text-sm text-gray-500 my-2">{item.title}</p>
                                 {/* <span className="px-3 py-1 rounded-full text-white text-sm mt-2 bg-blue-300">{item.count}</span> */}
-                                <Badge variant="secondary">{item.count}</Badge>
+                                <Badge variant="secondary" className="py-1 text-sm text-gray-600">{item.count}</Badge>
                             </div>
                         </div>
                     </Link>)

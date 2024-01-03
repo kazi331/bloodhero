@@ -14,50 +14,50 @@ router.get('/logout', logout)
 router.get('/checktoken', checkToken)
 router.patch('/update/:donorId', checkLogin, updateDonor)
 
-// GOOGLE FAILED ROUTES
-router.get("/google/failed", (req, res) => {
+// SOCIAL FAILED ROUTES
+router.get("/failed/:provider", (req, res) => {
+    console.log('failed provider:', req.params.provider)
     res.status(401).json({
         success: false,
         message: "Authentication failed.",
-        user: null,
-    });
-});
-// FACEBOOK FAILED ROUTES
-router.get("/facebook/failed", (req, res) => {
-    res.status(401).json({
-        success: false,
-        message: "Authentication failed.",
-        user: null,
     });
 });
 
-// GOOGLE AUTH
-router.get('/google', passport.authenticate('google', { session: false, scope: ['profile', 'email'] }))
+
+// GOOGLE AUTH ROUTES
+router.get('/google', passport.authenticate('google'))
 // GOOGLE CALLBACK
 router.get('/google/callback',
-    passport.authenticate('google', {
-        session: false,
-        scope: ['profile', 'email'],
-        failureRedirect: '/google/failed',
-    }),
+    passport.authenticate('google', { session: false, failureRedirect: '/failed/google', }),
     (req, res) => {
         const token = req.user.generateJWT();
-        res.cookie('token', "Bearer " + token);
-        res.redirect(clientURI)
+        res.cookie('token', "Bearer " + token, { httpOnly: true, secure: true });
+        res.redirect(clientURI + '/profile')
     }
 )
 
 // FACEBOOK AUTH ROUTES
-router.get('/facebook', passport.authenticate('facebook', { session: false, scope: ['id', 'displayName', 'photos', 'email'] }));
+router.get('/facebook', passport.authenticate('facebook'));
 
 router.get('/facebook/callback',
-    passport.authenticate('facebook', { session: false, failureRedirect: '/api/auth/facebook/failed' }),
+    passport.authenticate('facebook', { session: false, failureRedirect: '/failed/facebook' }),
     function (req, res) {
-
         const token = req.user.generateJWT();
-        res.cookie('token', "Bearer " + token);
-        res.send(req.user)
-        // res.redirect(clientURI);
+        res.cookie('token', "Bearer " + token, { httpOnly: true, secure: true });
+        res.redirect(clientURI + '/profile');
+    });
+
+
+// GITHUB AUTH ROUTES
+router.get('/github',
+    passport.authenticate('github'));
+
+router.get('/github/callback',
+    passport.authenticate('github', { session: false, failureRedirect: '/failed/github' }),
+    function (req, res) {
+        const token = req.user.generateJWT();
+        res.cookie('token', "Bearer " + token, { httpOnly: true, secure: true });
+        res.redirect(clientURI + '/profile')
     });
 
 export default router;

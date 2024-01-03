@@ -1,21 +1,25 @@
 'use client'
 import { GoogleIcon } from '@/components/ui/icons';
-import { Facebook, Github } from 'lucide-react';
+import { serverURI } from '@/lib/utils';
+import { Github } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Button } from '../../../components/ui/button';
+
+console.log(process.env.NEXT_PUBLIC_SERVER_URL_PROD)
 const SocialLogin = () => {
     const { push } = useRouter();
-    const server = 'http://localhost:5000';
+
+
     const loginWith = (provider: string) => {
-        window.open(`${server}/api/auth/${provider}`, '_self')
+        window.open(`${serverURI}/api/auth/${provider}`, '_self')
     }
 
     return (
         <div className='flex flex-col gap-y-2'>
-            <Button onClick={() => loginWith('facebook')} className="w-full text-gray-700" variant="outline">
+            {/*  <Button onClick={() => loginWith('facebook')} className="w-full text-gray-700" variant="outline">
                 <Facebook className="h-5 w-5 mr-2" />
                 Login with Facebook
-            </Button>
+            </Button> */}
             <Button onClick={() => loginWith('google')} className="w-full text-gray-700 " variant="outline">
                 <GoogleIcon className="h-5 w-5 mr-2" />
                 Login with Google
