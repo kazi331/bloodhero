@@ -1,9 +1,8 @@
-import DonorsGrid from "./c/DonorsGrid"
-import FilterBarNative from "./c/FilterBarNative"
-import HeaderSearch from "./c/HeaderSearch"
+import DonorsGrid from "./c/DonorsGrid";
+import FilterBarNative from "./c/FilterBarNative";
+import HeaderSearch from "./c/HeaderSearch";
 
 const Page = () => {
-
     return (
         <div className="pb-5">
             <HeaderSearch />

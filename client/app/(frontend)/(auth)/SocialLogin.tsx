@@ -1,16 +1,12 @@
 'use client'
 import { GoogleIcon } from '@/components/ui/icons';
 import { serverURI } from '@/lib/utils';
+import { Button } from '@components/ui/button';
 import { Github } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { Button } from '../../../components/ui/button';
-
-console.log(serverURI, process.env.NEXT_PUBLIC_SERVER_URL_PROD)
 
 const SocialLogin = () => {
     const { push } = useRouter();
-
-
     const loginWith = (provider: string) => {
         window.open(`${serverURI}/api/auth/${provider}`, '_self')
     }

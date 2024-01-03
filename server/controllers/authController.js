@@ -143,7 +143,8 @@ const logout = (req, res) => {
 // CHECK IF LOGGED IN USER'S TOKEN  IS VALID
 const checkToken = (req, res) => {
     try {
-        const token = req.cookies['token'];
+
+        const token = req.headers?.authorization;
         if (!token) return res.status(401).json({
             success: false,
             message: 'No Token Provided',
