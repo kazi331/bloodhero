@@ -13,10 +13,6 @@ const SocialLogin = () => {
 
     return (
         <div className='flex flex-col gap-y-2'>
-            {/*  <Button onClick={() => loginWith('facebook')} className="w-full text-gray-700" variant="outline">
-                <Facebook className="h-5 w-5 mr-2" />
-                Login with Facebook
-            </Button> */}
             <Button onClick={() => loginWith('google')} className="w-full text-gray-700 " variant="outline">
                 <GoogleIcon className="h-5 w-5 mr-2" />
                 Login with Google

@@ -46,10 +46,7 @@ const LoginForm = () => {
     }
 
     return (
-
-
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <label htmlFor="email" className="flex relative mt-2">
                 <Input
                     {...register('email', { required: true, pattern: emailRegExp })}

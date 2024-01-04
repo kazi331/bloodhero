@@ -2,9 +2,14 @@ import jwt from "jsonwebtoken";
 
 const checkLogin = async (req, res, next) => {
     try {
-
-        const token = req.cookies['token'] || req.headers.authorization?.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(401).json({
+                success: false,
+                message: 'Authentication failed',
+            });
+        }
+        const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
         // assign userId and email to req object
         req.user = decoded
         next();

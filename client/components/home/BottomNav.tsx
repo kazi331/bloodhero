@@ -46,7 +46,7 @@ const BottomNav = () => {
 type NavImgProps = { src: string | StaticImport, alt: string, url: String, pathname: String }
 
 const NavLink = ({ children, url }: { children: React.ReactNode, url: Url }) => {
-    return <Link href={url} className={`bottom-link flex flex-col items-center justify-center p-2 focus:outline-none`}>
+    return <Link href={url} className={`bottom-link flex flex-col items-center justify-center p-2 active:!bg-transparent `}>
         {children}
     </Link>
 }

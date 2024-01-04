@@ -189,7 +189,7 @@ const UpdateUserData = () => {
                     {/* isAvailable */}
                     <label htmlFor="isAvailable" className="flex w-full items-center justify-between pl-1 py-2 mt-2 text-base ">
                         <div className="flex items-center justify-between w-full select-none ">
-                            <p className="cursor-pointer">Are you available to donate blood?</p>
+                            <p className="cursor-pointer">Are you available?</p>
                             {/* AVAILABILITY SWITCH */}
                             {/* custom checkbox switch  */}
                             <div className="relative ">

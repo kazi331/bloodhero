@@ -1,16 +1,27 @@
 'use client'
 import Donations from '@/components/common/Donations'
+import axios from '@/lib/axios'
 import { userProps } from '@/lib/types'
 import { ExternalLink, Info } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import HeaderProfile from './c/HeaderProfile'
 import ProfileArea from './c/ProfileArea'
+
+const userId = JSON.parse(localStorage.getItem('user'))._id;
 
 const Page = () => {
     const [user, setUser] = useState<userProps>({} as userProps);
     const { push, } = useRouter();
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get(`/users/${userId}`)
+            console.log(res.data)
+            setUser(res.data)
+        }
+        fetchUser();
+    }, [])
 
     return (
         <div className='px-6 bg-[#2d2d63] profile-bg h-full min-h-[calc(100vh-4rem)]'>

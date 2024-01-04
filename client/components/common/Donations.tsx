@@ -10,8 +10,8 @@ const Donations = ({ donations }: { donations: donationType[] | null }) => {
     return (
         <Tabs defaultValue="donations" className="mt-10 text-white/80">
             <TabsList className="w-full rounded-lg shadow bg-transparent mb-4">
-                <TabsTrigger className='flex-1 rounded-lg data-[state=active]:bg-primary/20 data-[state=active]:text-primary' value="donations">Donations</TabsTrigger>
-                <TabsTrigger className='flex-1 rounded-lg data-[state=active]:bg-primary/20 data-[state=active]:text-primary' value="requests"  >Requests</TabsTrigger>
+                <TabsTrigger className='flex-1 rounded-lg data-[state=active]:bg-primary/20 text-gray-300 data-[state=active]:text-primary' value="donations">Donations</TabsTrigger>
+                <TabsTrigger className='flex-1 rounded-lg data-[state=active]:bg-primary/20 text-gray-300 data-[state=active]:text-primary' value="requests"  >Requests</TabsTrigger>
             </TabsList>
             <TabsContent value="donations" className='pb-4'>
 
