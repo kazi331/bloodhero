@@ -14,7 +14,7 @@ const Page = () => {
     useEffect(() => {
         const fetchUser = async () => {
             const res = await axios.get(`/logged-user`, { withCredentials: true })
-            console.log(res.data)
+            // login(res.data)
             setUser(res.data)
         }
         try {
@@ -23,6 +23,7 @@ const Page = () => {
             console.log(err)
         }
     }, [])
+
     return (
         <div className='px-6 bg-[#2d2d63] profile-bg h-full min-h-[calc(100vh-4rem)]'>
             <HeaderProfile userId={user?._id} />

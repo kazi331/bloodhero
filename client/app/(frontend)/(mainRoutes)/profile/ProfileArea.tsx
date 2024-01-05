@@ -2,16 +2,16 @@
 import { userProps } from '@/lib/types'
 import moment from 'moment'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import profileImage from 'public/images/user.jpg'
 const ProfileArea = ({ user }: { user: userProps }) => {
     const age = moment().diff(moment(user.dob), 'years');
 
 
+
     return (
         <div className='grid grid-cols-1 xs:grid-cols-2 gap-4  text-white/90 pt-10'>
-            <Image src={profileImage} alt="ProfileImage" className='rounded-xl object-cover object-center' />
+            <Image src={user.image || profileImage} alt="ProfileImage" width={400} height={400} className='rounded-xl object-cover object-center' />
             <div className='flex flex-col '>
                 <h1 className='font-bold text-lg'>{user.name}</h1>
                 <div className='text-xs mt-1 capitalize text-gray-300'>

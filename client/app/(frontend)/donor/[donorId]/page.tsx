@@ -5,13 +5,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import axios from '@/lib/axios';
 import { donorProfileType } from '@/lib/types';
+import { Phone } from 'lucide-react';
 import moment from 'moment';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import toggleIcon from 'public/icons/home/toggle.svg';
-import bloodIcon from 'public/icons/nav/blood.svg';
 import arrowLeft from 'public/icons/profile/arrow-left.svg';
-import absendProfileImage from 'public/images/user.jpg';
 import { useEffect, useState } from 'react';
 
 
@@ -45,7 +44,7 @@ const DonorProfile = () => {
         }
         fetchDonorProfile()
     }, [donorId])
-    // log(donor)
+    console.log(donor)
 
     return (
         <>
@@ -59,29 +58,50 @@ const DonorProfile = () => {
                     <Image src={toggleIcon} alt="Toggle button" className='w-5 h-5' />
                 </div>
                 {/* profile area  */}
-                <div className='relative rounded-xl h-60'>
-                    <Image src={donor.image || absendProfileImage} alt="ProfileImage" className=' h-full object-cover object-center rounded-2xl absolute top-0 left-0 w-full' width={300} height={300} />
-                    {/* overlay */}
-                    <div className='relative'>
-                        <div className={`rounded-xl w-full h-60  text-gray-200 overflow-hidden`}
-                        // style={{ backgroundImage: `url(${profileImage.src})` }}
-                        >
-                            <div className='flex flex-col bg-gradient-to-b from-black/20 to-black/90 p-5 w-full h-full'>
-                                <div className='flex-1'></div>
-                                <div className='flex flex-col items-start'>
-                                    <h1 className='font-bold text-lg'>{donor?.name}</h1>
-                                    <p className='text-xs my-1'>Last Donated: {donor.lastDonation ? moment(donor.lastDonation).format('DD MMM, YYYY') : 'No donations found!'}</p>
-                                    <p className='text-xs capitalize'>Blood: {donor.type.split('')[0]} {donor.type.includes('-') ? 'Negative' : 'Positive'}</p>
-                                    <Badge variant={`${donor.isAvailable ? 'active_neon' : 'inactive_neon'}`} className='mt-2'>
-                                        {donor.isAvailable ? 'Available' : 'Not Available'}
-                                    </Badge>
-                                </div>
+                <div className="w-full max-w-2xl mx-auto p-6 space-y-6 ">
+                    <div className="flex items-center space-x-10">
+                        <div className="rounded-full border-4 border-gray-300 dark:border-gray-700 overflow-hidden">
+                            <Image
+                                alt="Donor Avatar"
+                                className="rounded-full"
+                                height="100"
+                                src={donor?.image || "/images/avatars/avatar-1.jpg"}
+                                style={{
+                                    aspectRatio: "100/100",
+                                    objectFit: "cover",
+                                }}
+                                width="100"
+                            />
+                        </div>
+                        <div className="space-y-4">
+                            <h1 className="text-2xl font-bold text-gray-200">{donor.name}</h1>
+                            <div className='flex items-center space-x-2 mt-2 '>
+                                <Badge className='capitalize rounded-md' >{donor.type} {donor.type?.split('')[1] === '-' ? 'Negative' : 'Positive'}</Badge>
+                                <Badge variant={`${donor.isAvailable ? 'active_neon' : 'inactive_neon'}`} >
+                                    {donor.isAvailable ? "Available" : "Unavailable"}
+                                </Badge>
+                                <a href={`tel:${donor.phone}`} ><Phone className={`ml-2 ${donor.isAvailable ? 'text-green-600' : 'text-yellow-500'}`} size={20} /></a>
                             </div>
                         </div>
-                        <Image
-                            alt="profile"
-                            src={bloodIcon}
-                            className='rounded-2xl object-contain bg-gradient-to-br from-[#ff78a9] to-[#df1b49] p-2 w-12 h-12 absolute bottom-0 right-4 transform  translate-y-1/2' />
+                    </div>
+                    <div className='w-full border-t-2 border-gray-200/10'></div>
+                    <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Last Donation</p>
+                            <p className="text-gray-200">{donor.lastDonation || 'No donations'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Date of Birth</p>
+                            <p className="text-gray-200">{String(donor.age || 'Not provided')}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Joined Date</p>
+                            <p className="text-gray-200">{moment(donor.joined).format('LL')}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Phone Number</p>
+                            <p className="text-gray-200">{String(donor.phone) || 'not provided'}</p>
+                        </div>
                     </div>
                 </div>
 

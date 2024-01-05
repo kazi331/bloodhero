@@ -39,7 +39,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "sonner": "^1.0.3",
-    "vaul": "^0.8.0"
+    "vaul": "^0.8.0",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",

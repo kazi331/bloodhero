@@ -18,6 +18,10 @@ const donationSchema = new Schema({
         required: true,
         default: Date.now
     },
+    phone: {
+        type: String,
+        required: true,
+    },
     isApproved: {
         type: Boolean,
         default: false,

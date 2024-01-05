@@ -11,8 +11,8 @@ const router = express.Router();
 router.get('/users', getUsers);
 router.get('/logged-user', getLoggedUser); // used
 router.get('/users/:userId', getUser); // unused
-router.delete('/users/:userId', checkLogin, checkAdmin, deleteUser)
-router.patch('/users/:userId', checkLogin, checkAdmin, updateUser)
+router.delete('/users/:userId', checkLogin, checkAdmin, deleteUser) // admin
+router.patch('/users/:userId', checkLogin, checkAdmin, updateUser) // admin
 
 
 // DONOR RELATED ROUTES
@@ -20,7 +20,8 @@ router.get('/donors', getDonors);
 router.get('/donors/:donorId', getDonor);
 
 // DONATION RELATED ROUTES 
-router.post('/donations', checkLogin, createDonation)
+router.post('/donations', checkLogin, createDonation) // for logged in users only
+router.post('/donations', checkLogin, checkAdmin, createDonation) // for admin only
 router.get('/donations', getDonations)
 router.get('/donations/:id', getDonation)
 

@@ -1,16 +1,29 @@
 'use client'
 
-
-
 import BottomNav from '@/components/home/BottomNav';
-import { Inter } from 'next/font/google';
-import React from 'react';
+import axios from '@/lib/axios';
+import useAuthStore from '@/state/auth';
+import React, { useEffect } from 'react';
 import { Toaster } from 'sonner';
-
-const inter = Inter({ subsets: ['latin'] })
 
 
 export default function FrontLayout({ children, }: { children: React.ReactNode }) {
+
+    const { user, login, setLoading } = useAuthStore();
+    useEffect(() => {
+        const fetchUser = async () => {
+            setLoading(true)
+            const res = await axios.get(`/logged-user`, { withCredentials: true })
+            login(res.data)
+            setLoading(false)
+        }
+        try {
+            fetchUser();
+        } catch (err: any) {
+            console.log(err)
+        }
+    }, [login, setLoading])
+
 
     return (
         <div className="bg-slate-700">

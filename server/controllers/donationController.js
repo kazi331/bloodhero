@@ -4,10 +4,19 @@ import User from "../models/userSchema.js";
 // create new donation
 const createDonation = async (req, res) => {
     try {
-        const newDonation = await Donation.create({ ...req.body, donor: req.userId });
+        const { patient, phone, hospital, type, date } = req.body;
+        const newDonation = await Donation.create({
+            patient,
+            phone,
+            hospital,
+            type,
+            date,
+            isApproved: req.user.role === 'admin' ? true : false, // if admin, then approved
+            donor: req.user._id
+        });
         // update user donations
         await User.updateOne(
-            { _id: req.userId },
+            { _id: req.user._id },
             {
                 lastDonation: Date.now(),
                 $push: {
