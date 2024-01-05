@@ -15,6 +15,19 @@ const getUser = async (req, res) => {
         })
     }
 }
+// get single user
+const getLoggedUser = async (req, res) => {
+    console.log(req.cookies.user_id)
+    try {
+        const user = await User.findById(req.cookies._id, "-password -role -__v").populate("donations", "-donor -__v");
+        res.json(user);
+    } catch (err) {
+        res.status(404).json({
+            success: false,
+            message: "User not found",
+        })
+    }
+}
 // get all users
 const getUsers = async (req, res) => {
     try {
@@ -76,6 +89,6 @@ const updateUser = async (req, res) => {
 }
 
 export {
-    deleteUser, getUser, getUsers, updateUser
+    deleteUser, getLoggedUser, getUser, getUsers, updateUser
 };
 

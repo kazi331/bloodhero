@@ -4,25 +4,25 @@ import axios from '@/lib/axios'
 import { userProps } from '@/lib/types'
 import { ExternalLink, Info } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import HeaderProfile from './c/HeaderProfile'
-import ProfileArea from './c/ProfileArea'
+import HeaderProfile from './HeaderProfile'
+import ProfileArea from './ProfileArea'
 
-const userId = JSON.parse(localStorage.getItem('user'))._id;
 
 const Page = () => {
     const [user, setUser] = useState<userProps>({} as userProps);
-    const { push, } = useRouter();
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`/users/${userId}`)
+            const res = await axios.get(`/logged-user`, { withCredentials: true })
             console.log(res.data)
             setUser(res.data)
         }
-        fetchUser();
+        try {
+            fetchUser();
+        } catch (err: any) {
+            console.log(err)
+        }
     }, [])
-
     return (
         <div className='px-6 bg-[#2d2d63] profile-bg h-full min-h-[calc(100vh-4rem)]'>
             <HeaderProfile userId={user?._id} />
@@ -32,11 +32,10 @@ const Page = () => {
             </> :
                 <div className='p-10 bg-gray-100/10 rounded flex flex-col items-center justify-center '>
                     <p className='flex gap-2 text-yellow-300'><Info /> Please Update Your profile</p>
-                    <Link href={`/profile/edit/${user._id}`}
+                    <Link href={`/profile/edit`}
                         className='flex items-center mt-2 text-gray-200 hover:underline underline-offset-4'>
                         Update Profile <ExternalLink className='w-5 ml-1' />
                     </Link>
-
                 </div>
             }
 

@@ -39,13 +39,12 @@ const register = async (req, res) => {
 // UPDATE USER
 const updateDonor = async (req, res) => {
     // check if user already exists
-    const exist = await User.find({ _id: req.params.donordId });
-    if (exist.length < 0) {
-        return res.status(404).json({
-            success: false,
-            message: 'User does not exists',
-        });
-    }
+    const exist = await User.findById(req.user._id);
+
+    if (!exist) return res.status(404).json({
+        success: false,
+        message: 'User does not exists',
+    });
     try {
         const { name, phone, dob, area, isAvailable, type, gender } = req.body;
 
@@ -53,7 +52,7 @@ const updateDonor = async (req, res) => {
 
 
         // const user = await User.findOneAndUpdate({ _id: req.params.donorId }, { name, area, isAvailable, type, gender, dob, phone }, { new: true, }, "-password")
-        const user = await User.findByIdAndUpdate(req.params.donorId, { name, area, isAvailable, type, gender, dob, phone },)
+        const user = await User.findByIdAndUpdate(req.user._id, { name, area, isAvailable, type, gender, dob, phone },)
         // console.log(user);
 
         res.status(201).json({
@@ -102,6 +101,12 @@ const login = async (req, res) => {
         secure: true,
         maxAge: 24 * 60 * 60 * 1000 // 1 days 
     });
+    // save user in cookie
+    res.cookie('user_id', user._id, {
+        httpOnly: true,
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 days 
+    });
 
     // save user in cookie
     /*  res.cookie('user', { _id: user._id, name: user.name, email: user.email }, {
@@ -123,8 +128,11 @@ const login = async (req, res) => {
 const logout = (req, res) => {
 
     try {
-
         res.cookie('token', '', {
+            httpOnly: true,
+            expires: new Date(0)
+        });
+        res.cookie('_id', '', {
             httpOnly: true,
             expires: new Date(0)
         });

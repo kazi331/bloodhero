@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation';
 
 const SocialLogin = () => {
     const { push } = useRouter();
-    const loginWith = (provider: string) => {
-        window.open(`${serverURI}/api/auth/${provider}`, '_self')
+    const loginWith = async (provider: string) => {
+        const authWindow = window.open(`${serverURI}/api/auth/${provider}`, '_self')
     }
 
     return (

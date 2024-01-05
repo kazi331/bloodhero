@@ -95,7 +95,7 @@ const UpdateUserData = () => {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await axios.get(`/users/${userId}`);
+                const res = await axios.get(`/logged-user`);
                 setUser(res.data)
                 reset({ ...res.data, dob: moment(res.data.dob).format("YYYY-MM-DD") });
             } catch (err: any) {

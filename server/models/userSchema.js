@@ -58,7 +58,7 @@ const userSchema = new Schema({
 userSchema.methods.generateJWT = function () {
     // create token
     const token = jwt.sign({
-        id: this._id,
+        _id: this._id,
         provider: this.provider,
         email: this.email,
     }, process.env.JWT_SECRET,

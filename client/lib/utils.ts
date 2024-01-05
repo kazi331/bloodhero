@@ -1,3 +1,4 @@
+import axios from "axios";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -18,4 +19,11 @@ export const isAuthenticated = async (token: string) => {
   });
   const data = await res.json();
   return data;
+};
+
+export const logout = async () => {
+  // const res = await axios.get(`${serverURI}/api/auth/logout`);
+  const res = await axios.get(`http://localhost:5000/api/auth/logout`);
+  console.log(res.data);
+  localStorage.removeItem("user");
 };

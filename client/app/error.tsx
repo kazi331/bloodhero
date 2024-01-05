@@ -1,26 +1,35 @@
 'use client'
-import Link from 'next/link';
 
-const ErrorPage = ({ statusCode }: { statusCode: number }) => {
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
+export default function Component({ error, reset, }: { error: Error & { digest?: string }, reset: () => void }) {
+    const { push } = useRouter();
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-            <h1 className="text-9xl font-bold text-white mb-8">{statusCode}</h1>
-            {statusCode === 404 ? (
-                <p className="text-2xl font-medium text-white mb-16">Page not found</p>
-            ) : (
-                <p className="text-2xl font-medium text-white mb-16">An error occurred</p>
-            )}
-            <Link href="/" className="bg-white text-pink-500 px-6 py-3 rounded-lg font-medium hover:bg-pink-500 hover:text-white hover:shadow-lg transition duration-300 ease-in-out">
-                Go back home
+        <section className="w-full h-screen flex flex-col items-center justify-center gap-8 bg-red-50 dark:bg-red-900">
+            <h1 className="text-4xl font-bold text-red-600 dark:text-red-300">Oops! Something went wrong.</h1>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-md text-center">
+                We&apos;re sorry for the inconvenience. Your contribution is very important to us as every blood donation can save
+                lives. Please try again or return to the homepage.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+                <Button onClick={() => reset()} className="bg-red-600 text-white hover:bg-red-700 dark:bg-red-300 dark:text-red-900 dark:hover:bg-red-200">
+                    Try Again
+                </Button>
 
-            </Link>
-        </div>
-    );
-};
+                <Button onClick={() => push('/')} className="bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700">
+                    Home
+                </Button>
 
-ErrorPage.getInitialProps = ({ res, err }: { res: any, err: any }) => {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-    return { statusCode };
-};
+                <Button className="bg-green-500 text-white hover:bg-green-600 dark:bg-green-300 dark:text-green-900 dark:hover:bg-green-200">
+                    Contact Developer
+                </Button>
+            </div>
+            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-md text-center mt-4">
+                If you continue to experience issues, please click the &quot;Contact Developer&quot; button to send us a detailed report.
+                We appreciate your patience and understanding.
+            </p>
+        </section>
+    )
+}
 
-export default ErrorPage;

@@ -1,7 +1,7 @@
 import express from 'express';
 import { createDonation, getDonation, getDonations } from '../controllers/donationController.js';
 import { getDonor, getDonors } from '../controllers/donorController.js';
-import { deleteUser, getUser, getUsers, updateUser } from '../controllers/userController.js';
+import { deleteUser, getLoggedUser, getUser, getUsers, updateUser } from '../controllers/userController.js';
 import checkAdmin from '../middlewares/checkAdmin.js';
 import checkLogin from '../middlewares/checkLogin.js';
 
@@ -9,7 +9,8 @@ const router = express.Router();
 
 // USER RELATED ROUTES
 router.get('/users', getUsers);
-router.get('/users/:userId', getUser);
+router.get('/logged-user', getLoggedUser); // used
+router.get('/users/:userId', getUser); // unused
 router.delete('/users/:userId', checkLogin, checkAdmin, deleteUser)
 router.patch('/users/:userId', checkLogin, checkAdmin, updateUser)
 
