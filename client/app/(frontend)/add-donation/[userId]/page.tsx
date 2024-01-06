@@ -57,8 +57,6 @@ const AddDonation = () => {
 
 
     const onSubmit = async (fieldValues: donationData) => {
-        console.log(fieldValues)
-
         try {
             const res = await axios.post(`/donations`, fieldValues)
             if (res.data?.success) {

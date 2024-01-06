@@ -17,7 +17,7 @@ const ProfileArea = ({ user }: { user: userProps }) => {
                 <div className='text-xs mt-1 capitalize text-gray-300'>
                     <p className='info-item'>Location: {user.area}</p>
                     <p className='info-item'>DOB: {moment(user.dob).format("LL")} </p>
-                    <p className='info-item'>Last Donated:  {user.lastDonation ? moment(user.lastDonation).format("LL") : 'No Records Found!'}  </p>
+                    <p className='info-item'>Last Donated:  {user.lastDonation ? moment(user.lastDonation).format("ll") : 'No Records Found!'}  </p>
                     <div className="flex space-x-1">
                         <p className='info-item w-full'>Gender: {user?.gender}</p>
                         <p className='info-item w-full'>Age: {age}</p>

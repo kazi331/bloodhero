@@ -49,19 +49,15 @@ const DonorProfile = () => {
                     <div className="flex flex-col items-center gap-8 ">
                         <Image
                             alt="Donor Avatar"
-                            className="rounded-full ring-2 ring-sky-500 ring-offset-0  "
-                            height="100"
-                            src={donor?.image || "/images/avatars/avatar-1.jpg"}
-                            style={{
-                                aspectRatio: "100/100",
-                                objectFit: "cover",
-                            }}
-                            width="100"
+                            className="rounded-full ring-2 ring-sky-500 ring-offset-0 object-cover object-center aspect-square "
+                            height="150"
+                            src={donor?.image || "/images/user-round.png"}
+                            width="150"
                         />
                         <div className="space-y-4 ">
                             <h1 className="text-2xl font-bold text-gray-200">{donor.name}</h1>
                             <div className='flex items-center space-x-2 mt-2 '>
-                                <Badge className='capitalize rounded-md' >{donor.type} {donor.type?.split('')[1] === '-' ? 'Negative' : 'Positive'}</Badge>
+                                <Badge className='capitalize rounded-md' >{donor.type?.split('')[0]} {donor.type?.split('')[1] === '-' ? 'Negative' : 'Positive'}</Badge>
                                 <Badge variant={`${donor.isAvailable ? 'active_neon' : 'inactive_neon'}`} >
                                     {donor.isAvailable ? "Available" : "Unavailable"}
                                 </Badge>

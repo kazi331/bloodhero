@@ -5,7 +5,7 @@ import { coloredBlood } from '@/public/icons/randomSvg'
 import { Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import donorImg from 'public/images/user.jpg'
+import donorImg from 'public/images/user-round.png'
 
 const Donor = ({ donor }: { donor: donorType }) => {
     console.log(donor)
@@ -14,7 +14,7 @@ const Donor = ({ donor }: { donor: donorType }) => {
             <CardContent className="flex items-center space-x-4 p-2">
                 <div className='flex items-center justify-center flex-col w-1/4'>
                     <Link href={`/donor/${donor._id}`} >
-                        <Image src={donor.image || donorImg} alt="Profile Image" className='w-18 h-18 rounded-xl ring-2 object-cover ' width={80} height={80} />
+                        <Image src={donor.image || donorImg} alt="Profile Image" className='w-18 h-18 rounded-full ring-2 object-cover aspect-square ' width={80} height={80} />
                     </Link>
                 </div>
 

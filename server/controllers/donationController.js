@@ -18,7 +18,7 @@ const createDonation = async (req, res) => {
         await User.updateOne(
             { _id: req.user._id },
             {
-                lastDonation: Date.now(),
+                lastDonation: date,
                 $push: {
                     donations: newDonation._id
                 }
