@@ -23,7 +23,7 @@ export default function FrontLayout({ children, }: { children: React.ReactNode }
             console.log(err)
         }
     }, [login, setLoading])
-
+    console.log(user)
 
     return (
         <div className="bg-slate-700">

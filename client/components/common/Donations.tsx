@@ -1,4 +1,3 @@
-
 import { donationType } from '@/lib/types'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/ui/tabs'
 import dayjs from 'dayjs'
@@ -27,7 +26,7 @@ const Donations = ({ donations }: { donations: donationType[] | null }) => {
             </TabsContent>
             <TabsContent value="requests">
                 <div className='flex flex-col items-center justify-center mt-10'>
-                    <p className='capitalize'>Not Yet Ready!</p>
+                    <p className='capitalize'>No request found!</p>
                 </div>
             </TabsContent>
         </Tabs>

@@ -1,6 +1,7 @@
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { tokenConfig } from '../config/utils.js';
 import User from '../models/userSchema.js';
 
 // REGISTER USER
@@ -96,24 +97,9 @@ const login = async (req, res) => {
     // create token
     const token = await user.generateJWT();
     // save token in cookie
-    res.cookie('token', 'Bearer ' + token, {
-        httpOnly: true,
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000 // 1 days 
-    });
+    res.cookie('token', 'Bearer ' + token, tokenConfig);
     // save user in cookie
-    res.cookie('user_id', user._id, {
-        httpOnly: true,
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000 // 1 days 
-    });
-
-    // save user in cookie
-    /*  res.cookie('user', { _id: user._id, name: user.name, email: user.email }, {
-         // httpOnly: true,
-         maxAge: 24 * 60 * 60 * 1000 // 1 days
-     }); */
-
+    res.cookie('_id', user._id, tokenConfig);
     // return user
     res.status(200).json({
         success: true,

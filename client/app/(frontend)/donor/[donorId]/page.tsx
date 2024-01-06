@@ -15,20 +15,7 @@ import { useEffect, useState } from 'react';
 
 
 const DonorProfile = () => {
-    const [donor, setDonor] = useState<donorProfileType>({
-        _id: "",
-        name: "",
-        joined: "",
-        phone: 0,
-        gender: "male",
-        isAvailable: false,
-        image: null,
-        donations: [],
-        age: 0,
-        type: "a",
-        area: "",
-        lastDonation: null,
-    })
+    const [donor, setDonor] = useState<donorProfileType>({} as donorProfileType)
     const { back } = useRouter();
     const { donorId } = useParams();
 
@@ -44,7 +31,7 @@ const DonorProfile = () => {
         }
         fetchDonorProfile()
     }, [donorId])
-    console.log(donor)
+    console.log({ donor })
 
     return (
         <>
@@ -58,22 +45,20 @@ const DonorProfile = () => {
                     <Image src={toggleIcon} alt="Toggle button" className='w-5 h-5' />
                 </div>
                 {/* profile area  */}
-                <div className="w-full max-w-2xl mx-auto p-6 space-y-6 ">
-                    <div className="flex items-center space-x-10">
-                        <div className="rounded-full border-4 border-gray-300 dark:border-gray-700 overflow-hidden">
-                            <Image
-                                alt="Donor Avatar"
-                                className="rounded-full"
-                                height="100"
-                                src={donor?.image || "/images/avatars/avatar-1.jpg"}
-                                style={{
-                                    aspectRatio: "100/100",
-                                    objectFit: "cover",
-                                }}
-                                width="100"
-                            />
-                        </div>
-                        <div className="space-y-4">
+                <div className="w-full max-w-2xl mx-auto py-6 space-y-6 ">
+                    <div className="flex flex-col items-center gap-8 ">
+                        <Image
+                            alt="Donor Avatar"
+                            className="rounded-full ring-2 ring-sky-500 ring-offset-0  "
+                            height="100"
+                            src={donor?.image || "/images/avatars/avatar-1.jpg"}
+                            style={{
+                                aspectRatio: "100/100",
+                                objectFit: "cover",
+                            }}
+                            width="100"
+                        />
+                        <div className="space-y-4 ">
                             <h1 className="text-2xl font-bold text-gray-200">{donor.name}</h1>
                             <div className='flex items-center space-x-2 mt-2 '>
                                 <Badge className='capitalize rounded-md' >{donor.type} {donor.type?.split('')[1] === '-' ? 'Negative' : 'Positive'}</Badge>
@@ -85,10 +70,14 @@ const DonorProfile = () => {
                         </div>
                     </div>
                     <div className='w-full border-t-2 border-gray-200/10'></div>
-                    <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+                    <div className="grid gap-4 grid-cols-1 xs:grid-cols-2">
                         <div className="space-y-1">
                             <p className="text-sm text-gray-400">Last Donation</p>
-                            <p className="text-gray-200">{donor.lastDonation || 'No donations'}</p>
+                            <p className="text-gray-200">{donor.lastDonation ? moment(donor.lastDonation).format('LL') : 'No record found!'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Village</p>
+                            <p className="text-gray-200 capitalize">{donor.area || 'Not provided'}</p>
                         </div>
                         <div className="space-y-1">
                             <p className="text-sm text-gray-400">Date of Birth</p>

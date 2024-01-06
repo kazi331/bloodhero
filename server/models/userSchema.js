@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Schema, model } from 'mongoose';
+import { bloodTypes } from '../config/utils.js';
 
 const userSchema = new Schema({
     name: String,
@@ -20,7 +21,7 @@ const userSchema = new Schema({
     image: { type: String, default: null, },
     type: {
         type: String,
-        enum: ['a', 'a-', 'b', 'b-', 'ab', 'ab-', 'o', 'o-'],
+        enum: bloodTypes,
     },
     role: {
         type: String,

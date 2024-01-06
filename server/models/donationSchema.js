@@ -1,4 +1,5 @@
 import { Schema, Types, model } from 'mongoose';
+import { bloodTypes } from '../config/utils.js';
 const donationSchema = new Schema({
     patient: {
         type: String,
@@ -11,7 +12,7 @@ const donationSchema = new Schema({
     type: {
         type: String,
         required: true,
-        enum: ['a+', 'a-', 'b+', 'b-', 'ab+', 'ab-', 'o+', 'o-']
+        enum: bloodTypes,
     },
     date: {
         type: String,

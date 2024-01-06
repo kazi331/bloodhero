@@ -17,7 +17,6 @@ const getUser = async (req, res) => {
 }
 // get single user
 const getLoggedUser = async (req, res) => {
-    console.log(req.cookies.user_id)
     try {
         const user = await User.findById(req.cookies._id, "-password -role -__v").populate("donations", "-donor -__v");
         res.json(user);
