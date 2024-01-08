@@ -8,5 +8,5 @@ export const cookieConfig = {
     httpOnly: process.env.httpOnly,
     secure: process.env.secure,
     maxAge: process.env.maxAge,
-
+    sameSite: process.env.sameSite
 }
