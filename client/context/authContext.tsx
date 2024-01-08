@@ -1,12 +1,13 @@
 import axios from '@/lib/axios';
+import { userProps } from '@/lib/types';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-const AuthContext = createContext({ user: null, loading: false });
+const AuthContext = createContext<{ user: userProps, loading: boolean }>({ user: {} as userProps, loading: true });
 
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+    const [user, setUser] = useState<userProps>({} as userProps);
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState<boolean>(true)
     useEffect(() => {
         setLoading(true)
         const fetchUser = async () => {
