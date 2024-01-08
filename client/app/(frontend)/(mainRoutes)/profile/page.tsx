@@ -8,19 +8,6 @@ import ProfileArea from './ProfileArea'
 
 
 const Page = () => {
-    /*  const [user, setUser] = useState<userProps>({} as userProps);
-     useEffect(() => {
-         const fetchUser = async () => {
-             const res = await axios.get(`/logged-user`, { withCredentials: true })
-             // login(res.data)
-             setUser(res.data)
-         }
-         try {
-             fetchUser();
-         } catch (err: any) {
-             console.log(err)
-         }
-     }, []) */
     const { user, loading } = useAuth();
     if (loading) return <div className='min-h-[calc(100vh-4rem)]  bg-[#2d2d63]'>
         <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">

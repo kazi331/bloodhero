@@ -1,13 +1,14 @@
 import axios from '@/lib/axios';
 import { userProps } from '@/lib/types';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const AuthContext = createContext<{ user: userProps, loading: boolean }>({ user: {} as userProps, loading: true });
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<userProps>({} as userProps);
-
     const [loading, setLoading] = useState<boolean>(true)
+
     useEffect(() => {
         setLoading(true)
         const fetchUser = async () => {
@@ -19,9 +20,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             fetchUser();
         } catch (err) {
             console.log(err);
+            toast.error('Error loading user data.')
             setLoading(false)
         }
     }, [])
+
     return <AuthContext.Provider value={{ user, loading }}>
         {children}
     </AuthContext.Provider>

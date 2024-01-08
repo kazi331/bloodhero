@@ -52,7 +52,6 @@ const AddDonation = () => {
         // defaultValues: user,
     });
     const { user, loading } = useAuth();
-    console.log(user, loading)
 
     const onSubmit = async (fieldValues: donationData) => {
         try {
@@ -60,7 +59,7 @@ const AddDonation = () => {
             if (res.data?.success) {
                 // console.log(res.data)
                 toast.success(res.data.message, {
-                    description: 'Profile updated successfully!'
+                    description: 'Your donation has been added successfully!'
                 })
                 window.location.href = "/profile"
             }
@@ -68,7 +67,7 @@ const AddDonation = () => {
             console.log(err.message)
             if (err.response?.data) {
                 toast.error(err.response.data.message || err.message, {
-                    description: 'Please try again later!'
+                    description: err.response?.data?.error
 
                 })
             } else {
@@ -84,7 +83,6 @@ const AddDonation = () => {
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
         </div>
     </div>
-    if (!user) return <div className="flex items-center justify-center h-screen">Please login first</div>
 
     return (
         <div>

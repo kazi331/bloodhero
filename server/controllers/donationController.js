@@ -42,10 +42,27 @@ const createDonation = async (req, res) => {
         });
 
     } catch (err) {
+        let errMsg;
+
+        if (err.message.includes('type')) {
+            errMsg = `Invalid blood type`;
+        } else if (err.message.includes('hospital')) {
+            errMsg = `Invalid hospital`;
+        } else if (err.message.includes('patient')) {
+            errMsg = `Invalid patient name`;
+        } else if (err.message.includes('phone')) {
+            errMsg = `Invalid phone number`;
+        } else if (err.message.includes('date')) {
+            errMsg = `Invalid date`;
+        } else {
+            errMsg = `Invalid data`;
+        }
+
         console.log(err.message)
         res.status(500).json({
             success: false,
-            message: "Error in creating donation"
+            message: "Donation not added!",
+            error: errMsg
         });
     }
 };

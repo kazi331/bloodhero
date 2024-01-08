@@ -17,6 +17,8 @@ export default async function middleware(
         if (data.success) {
           return NextResponse.next();
         } else {
+          request.cookies.delete("token");
+          request.cookies.delete("_id");
           return NextResponse.redirect(new URL("/login", request.url));
         }
       } catch (err: any) {

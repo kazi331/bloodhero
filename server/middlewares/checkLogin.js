@@ -15,6 +15,8 @@ const checkLogin = async (req, res, next) => {
         next();
     } catch (err) {
         console.log(err.message);
+        res.clearCookie('token');
+        res.clearCookie('_id');
         res.status(401).json({
             success: false,
             message: 'Authentication failed',
