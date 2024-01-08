@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import passport from 'passport';
+import { connectDB } from './config/db.js';
 
 import './services/githubStrategy.js';
 import './services/googleStrategy.js';
@@ -45,14 +46,20 @@ app.get('/', (req, res) => {
 // require('./cron-jobs/test');
 
 // connect to database
-import './config/db.js';
+// import './config/db.js';
 
 
 
 // server listening
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-    console.log(`Server started => http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Server started => http://localhost:${port}`);
+// });
+
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log("listening for requests");
+    })
+})
 
 export default app;
