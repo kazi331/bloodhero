@@ -3,7 +3,7 @@ import { userProps } from '@/lib/types'
 import moment from 'moment'
 import Image from 'next/image'
 
-import profileImage from 'public/images/user.jpg'
+import profileImage from 'public/images/user-round.png'
 const ProfileArea = ({ user }: { user: userProps }) => {
     const age = moment().diff(moment(user.dob), 'years');
 

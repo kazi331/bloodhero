@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import { clientURI } from '../config/urls.js';
-import { tokenConfig } from '../config/utils.js';
+import { cookieConfig } from '../config/utils.js';
 import { checkToken, login, logout, register, updateDonor } from '../controllers/authController.js';
 import checkLogin from '../middlewares/checkLogin.js';
 const router = express.Router();
@@ -32,8 +32,8 @@ router.get('/google/callback',
     passport.authenticate('google', { session: false, failureRedirect: '/failed/google', }),
     (req, res) => {
         const token = req.user.generateJWT();
-        res.cookie('token', "Bearer " + token, tokenConfig);
-        res.cookie('_id', req.user._id, tokenConfig);
+        res.cookie('token', "Bearer " + token, cookieConfig);
+        res.cookie('_id', req.user._id, cookieConfig);
 
         res.redirect(clientURI + '/profile')
         // res.redirect(`${clientURI}/profile?_id=${extractedId(req.user._id)}`)
@@ -47,8 +47,8 @@ router.get('/facebook/callback',
     passport.authenticate('facebook', { session: false, failureRedirect: '/failed/facebook' }),
     function (req, res) {
         const token = req.user.generateJWT();
-        res.cookie('token', "Bearer " + token, tokenConfig);
-        res.cookie('_id', req.user._id, tokenConfig);
+        res.cookie('token', "Bearer " + token, cookieConfig);
+        res.cookie('_id', req.user._id, cookieConfig);
         res.redirect(clientURI + '/profile');
     });
 
@@ -61,8 +61,8 @@ router.get('/github/callback',
     passport.authenticate('github', { session: false, failureRedirect: '/failed/github' }),
     function (req, res) {
         const token = req.user.generateJWT();
-        res.cookie('token', "Bearer " + token, tokenConfig);
-        res.cookie('_id', req.user._id, tokenConfig);
+        res.cookie('token', "Bearer " + token, cookieConfig);
+        res.cookie('_id', req.user._id, cookieConfig);
         // res.redirect(`${clientURI}/profile?_id=${extractedId(req.user._id)}`)
         res.redirect(clientURI + '/profile');
     });

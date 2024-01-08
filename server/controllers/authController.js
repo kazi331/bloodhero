@@ -1,7 +1,7 @@
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { tokenConfig } from '../config/utils.js';
+import { cookieConfig } from '../config/utils.js';
 import User from '../models/userSchema.js';
 
 // REGISTER USER
@@ -77,16 +77,17 @@ const updateDonor = async (req, res) => {
 const login = async (req, res) => {
 
     // check if user exists
-    const exist = await User.find({ email: req.body.email });
-    if (exist.length < 1) {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
         return res.status(401).json({
             success: false,
             message: 'Authentication failed',
         });
     }
+
     // check password
-    const user = exist[0];
-    const match = bcrypt.compare(req.body.password, user.password);
+    const match = await bcrypt.compare(req.body.password, user.password);
+
     if (!match) {
         return res.status(401).json({
             success: false,
@@ -97,16 +98,15 @@ const login = async (req, res) => {
     // create token
     const token = await user.generateJWT();
     // save token in cookie
-    res.cookie('token', 'Bearer ' + token, tokenConfig);
+    res.cookie('token', 'Bearer ' + token, cookieConfig);
     // save user in cookie
-    res.cookie('_id', user._id, tokenConfig);
+    res.cookie('_id', user._id, cookieConfig);
     // return user
     res.status(200).json({
         success: true,
         message: 'Authentication successful',
         user: { _id: user._id, name: user.name, email: user.email }
     });
-
 }
 
 // LOGOUT USER

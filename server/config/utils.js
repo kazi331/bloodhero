@@ -4,10 +4,9 @@ export const extractedId = (objID) => {
 
 export const bloodTypes = ['a', 'a-', 'b', 'b-', 'ab', 'ab-', 'o', 'o-']
 
-export const tokenConfig = {
+export const cookieConfig = {
     httpOnly: true,
     secure: true,
-    // maxAge: 24 * 60 * 60 * 1000 // 1 days 
-    // maxAge: 60 * 1000,
-    expiresIn: 60 * 1000,
+    // maxAge: 1000 * 60 * 60 * 24, // 1 days 
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24) // 1 day
 }

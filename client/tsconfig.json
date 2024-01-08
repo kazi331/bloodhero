@@ -41,8 +41,7 @@
     "public/icons/randomSvg.js",
     "components/ui/dialog.jsx",
     "components/common/mySwitch.jsx",
-    "captcha.js",
-    "state/auth.js"
+    "captcha.js"
   ],
   "exclude": ["node_modules"]
 }

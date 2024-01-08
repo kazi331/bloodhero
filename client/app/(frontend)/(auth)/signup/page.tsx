@@ -1,4 +1,5 @@
 'use client'
+import Error from "@/components/common/Error"
 import Captcha from "@/components/common/captcha"
 import axios from "@/lib/axios"
 import { Button } from "@components/ui/button"
@@ -9,7 +10,6 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import Error from "./Error"
 
 const phoneRegExp = /^(\+88)?(01[3-9]\d{8})$/ // 14 characters or 11 characters
 const phoneRegExp2 = /^01[3-9]\d{8}$/; // 11 characters

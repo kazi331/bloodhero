@@ -1,12 +1,7 @@
 'use client'
-import { Tiro_Bangla } from 'next/font/google';
 import { useRouter, useSearchParams } from 'next/navigation';
 import unions from 'public/data/villages.json';
 
-const bengali = Tiro_Bangla({
-    subsets: ['bengali'],
-    weight: '400',
-});
 const FilterBarNative = () => {
     const router = useRouter();
     const params = useSearchParams().toString();

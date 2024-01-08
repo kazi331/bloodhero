@@ -40,7 +40,7 @@ const HeaderProfile = ({ userId }: { userId: string }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-gray-500/30 text-gray-200 backdrop-blur border-none rounded-lg shadow-2xl" >
                     <Link href={`/profile/edit`}> <DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded" >Edit Profile</DropdownMenuItem></Link>
-                    <Link href={`/add-donation/${userId}`}><DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded">Add Donation</DropdownMenuItem></Link>
+                    <Link href={`/profile/add-donation/${userId}`}><DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded">Add Donation</DropdownMenuItem></Link>
                     <Link href="/settings"><DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded">Settings</DropdownMenuItem></Link>
                     <DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded" onSelect={logout} >Logout</DropdownMenuItem>
                 </DropdownMenuContent>

@@ -63,4 +63,5 @@ export type formValues = {
   gender: "male" | "female";
   area?: string;
 };
+
 export type roleType = "admin" | "dev" | "moderator" | "volunteer";

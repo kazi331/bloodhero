@@ -12,9 +12,20 @@ const createDonation = async (req, res) => {
             type,
             date,
             isApproved: req.user.role === 'admin' ? true : false, // if admin, then approved
-            donor: req.user._id
+            donor: req.user.role === 'admin' ? req.body.donor_id : req.user._id // if admin, then donor_id, else user_id
         });
         // update user donations
+        if (req.user.role === 'admin') {
+            await User.updateOne(
+                { _id: req.body.donor_id },
+                {
+                    lastDonation: date,
+                    $push: {
+                        donations: newDonation._id
+                    }
+                }
+            )
+        }
         await User.updateOne(
             { _id: req.user._id },
             {
@@ -25,7 +36,8 @@ const createDonation = async (req, res) => {
             }
         )
         res.status(201).json({
-            success: true, message: 'New donation added',
+            success: true,
+            message: 'New donation added',
             data: newDonation
         });
 

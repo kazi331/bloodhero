@@ -1,3 +1,4 @@
+import Error from '@/components/common/Error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from '@/lib/axios';
@@ -53,7 +54,7 @@ const LoginForm = () => {
                     type="email" id="email" name="email" placeholder="rizwan2023@gmail.com" className="pl-10 " />
                 <Mail className="absolute h-full top-0 bottom-0 left-2 text-gray-400" />
             </label>
-            {errors.email && <p className="text-red-500 text-left text-sm mt-1"> Enter a valid email address. </p>}
+            {errors.email ? <Error>Enter a valid email address.</Error> : null}
             <label htmlFor="password" className="flex relative mt-2">
                 <Input
                     {...register('password', { required: true })}
@@ -63,7 +64,8 @@ const LoginForm = () => {
                     {show ? <Eye /> : <EyeOff />}
                 </button>
             </label>
-            {errors.password && <p className="text-red-500 text-left text-sm mt-1"> Enter your password. </p>}
+
+            {errors.password ? <Error>Enter your password.</Error> : null}
             <Button disabled={isSubmitting} className="mt-4 w-full">{isSubmitting ? 'Signing in...' : 'Sign in'}</Button>
         </form>
 

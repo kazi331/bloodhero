@@ -1,15 +1,14 @@
 'use client'
+import Error from '@/components/common/Error'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useAuth } from '@/context/authContext'
 import axios from '@/lib/axios'
 import { blood } from '@/lib/types'
-import useAuthStore from '@/state/auth'
 import { ArrowLeftCircle, Building, Calendar, Phone, User } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import Error from '../../(auth)/signup/Error'
 
 
 
@@ -49,12 +48,11 @@ const validation = {
 }
 
 const AddDonation = () => {
-    const { user, loading } = useAuthStore();
     const { register, formState: { errors, isSubmitting, isValid }, reset, handleSubmit } = useForm<donationData>({
         // defaultValues: user,
     });
-    if (loading) return <div className='flex items-center justify-center h-screen'>Loading...</div>
-
+    const { user, loading } = useAuth();
+    console.log(user, loading)
 
     const onSubmit = async (fieldValues: donationData) => {
         try {
@@ -80,7 +78,14 @@ const AddDonation = () => {
             }
         }
     }
-    if (loading) return <div className='flex items-center justify-center h-screen font-bold text-3xl'>Loading...</div>
+
+    if (loading) return <div className='min-h-[calc(100vh-4rem)]  bg-[#2d2d63]'>
+        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+        </div>
+    </div>
+    if (!user) return <div className="flex items-center justify-center h-screen">Please login first</div>
+
     return (
         <div>
             <div className="p-10 rounded-tr-3xl rounded-tl-3xl text-center" style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px -10px 22px 0px' }}>
