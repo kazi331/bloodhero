@@ -1,5 +1,6 @@
 'use client'
 import Donations from '@/components/common/Donations'
+import FullPageLoading from '@/components/common/FullPageLoading'
 import { useAuth } from '@/context/authContext'
 import { ExternalLink, Info } from 'lucide-react'
 import Link from 'next/link'
@@ -9,16 +10,7 @@ import ProfileArea from './ProfileArea'
 
 const Page = () => {
     const { user, loading } = useAuth();
-    if (loading) return <div className='min-h-[calc(100vh-4rem)]  bg-[#2d2d63]'>
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
-        </div>
-    </div>
-    if (!user) return <div className='min-h-[calc(100vh-4rem)]  bg-[#2d2d63]'>
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
-        </div>
-    </div>
+    if (loading || !user) return <FullPageLoading />
     return (
         <div className='px-6 bg-[#2d2d63] profile-bg h-full min-h-[calc(100vh-4rem)]'>
             <HeaderProfile userId={user?._id} />
