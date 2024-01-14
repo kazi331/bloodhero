@@ -10,7 +10,7 @@ export default function FrontLayout({ children, }: { children: React.ReactNode }
 
     return (
         <AuthProvider>
-            <div className="bg-slate-700">
+            <div className="bg-[#0e1117]">
                 <div className="container w-full max-w-[30rem]" >
                     <div className='h-full min-h-[calc(100vh-4rem)] bg-white'>
                         {children}
