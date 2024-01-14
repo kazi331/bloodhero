@@ -8,7 +8,6 @@ import Link from 'next/link'
 import donorImg from 'public/images/user-round.png'
 
 const Donor = ({ donor }: { donor: donorType }) => {
-    console.log(donor)
     return (
         <Card className='mt-5 shadow donor-card'>
             <CardContent className="flex items-center space-x-4 p-2">

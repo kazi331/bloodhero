@@ -31,7 +31,6 @@ const DonorProfile = () => {
         }
         fetchDonorProfile()
     }, [donorId])
-    console.log({ donor })
 
     return (
         <>
