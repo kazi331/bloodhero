@@ -1,6 +1,5 @@
 "use client"
 import axios from '@/lib/axios';
-import { userProps } from '@/lib/types';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -19,7 +18,6 @@ const DashboardContext = createContext({
 });
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<userProps>({} as userProps);
     const [loading, setLoading] = useState<boolean>(false)
     const [expandSidebar, setExpandSidebar] = useState<boolean>(false)
     const [showModal, setShowModal] = useState<boolean>(false)

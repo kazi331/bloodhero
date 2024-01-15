@@ -14,9 +14,7 @@ export default function DashboardLayout({ children, }: { children: React.ReactNo
                     <DashboardSideBar />
                     <main className="w-full md:w-5/6">
                         <Topbar />
-                        <div className='p-4'>
-                            {children}
-                        </div>
+                        {children}
                     </main>
                 </div>
             </div>
