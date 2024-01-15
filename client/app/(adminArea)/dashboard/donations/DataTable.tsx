@@ -1,9 +1,6 @@
 "use client"
 
 import {
-    ChevronDownIcon
-} from "@radix-ui/react-icons"
-import {
     ColumnDef,
     ColumnFiltersState,
     SortingState,
@@ -17,6 +14,7 @@ import {
 } from "@tanstack/react-table"
 import * as React from "react"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -25,7 +23,6 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import {
     Table,
     TableBody,
@@ -34,6 +31,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { ChevronDownIcon } from "lucide-react"
 
 export type donation = {
     _id: string,
@@ -75,6 +73,15 @@ export const columns: ColumnDef<donation>[] = [
         cell: ({ row }) => (
             <div className="capitalize">{row.getValue("patient")}</div>
         ),
+        enableSorting: true,
+    },
+    {
+        accessorKey: "phone",
+        header: "Phone",
+        cell: ({ row }) => (
+            <a href={`tel:${row.getValue('phone')}`} className="capitalize">{row.getValue("phone")}</a>
+        ),
+        enableSorting: true,
     },
     {
         accessorKey: "date",
@@ -84,24 +91,30 @@ export const columns: ColumnDef<donation>[] = [
         ),
     },
     {
+        accessorKey: "type",
+        header: "Type",
+        cell: ({ row }) => (
+            <div className="capitalize">{row.getValue("type")}</div>
+        ),
+    },
+    {
         accessorKey: "isApproved",
         header: "Status",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("isApproved") ? 'Approved' : 'Pending'}</div>
+            <div className="capitalize">{row.getValue("isApproved") ? <Badge variant="active_neon">Approved</Badge> : <Badge variant="inactive_neon">Pending</Badge>}</div>
         ),
     },
     {
         accessorKey: "action",
         header: "Action",
         cell: ({ row }) => (
-            <div className="capitalize"><Button>View</Button></div>
-
+            <div className="capitalize"><Button onClick={() => console.log(row.original)}>View Donor</Button></div>
         ),
     },
 
 ]
 
-export function Approved({ donations }: { donations: any }) {
+export function DataTable({ donations }: { donations: any }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
@@ -131,14 +144,20 @@ export function Approved({ donations }: { donations: any }) {
 
     return (
         <div className="w-full">
-            <div className="flex items-center py-4">
+            <div className="flex items-center py-2 pl-4">
+                <div className="flex-1 text-sm text-muted-foreground">
+                    {table.getSelectedRowModel().rows.length > 0 ? <Button variant="destructive" onClick={() => {
+                        const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)
+                        console.log(selected)
+                    }}>Delete Selected</Button> : null}
+                </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
-                            Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+                        <Button className="ml-auto">
+                            Columns <ChevronDownIcon className="ml-2 h-4 w-4 " />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
+                    <DropdownMenuContent align="end" className="bg-gray-800 text-white border-gray-500/20">
                         {table
                             .getAllColumns()
                             .filter((column) => column.getCanHide())
@@ -146,7 +165,7 @@ export function Approved({ donations }: { donations: any }) {
                                 return (
                                     <DropdownMenuCheckboxItem
                                         key={column.id}
-                                        className="capitalize"
+                                        className="capitalize hover:!bg-gray-200/20 hover:!text-white "
                                         checked={column.getIsVisible()}
                                         onCheckedChange={(value) =>
                                             column.toggleVisibility(!!value)
@@ -163,10 +182,10 @@ export function Approved({ donations }: { donations: any }) {
                 <Table >
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
+                            <TableRow key={headerGroup.id} className="hover:bg- bg-gray-800 border-b-gray-500/20">
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead key={header.id} className="text-gray-300">
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
@@ -182,7 +201,8 @@ export function Approved({ donations }: { donations: any }) {
                     <TableBody >
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
-                                <TableRow className=" hover:bg-gray-500/20 border-none"
+                                <TableRow
+                                    className=" hover:bg-gray-500/10 border-none data-[state=selected]:bg-gray-500/30"
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
                                 >
@@ -216,7 +236,7 @@ export function Approved({ donations }: { donations: any }) {
                 </div>
                 <div className="space-x-2">
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="sm"
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
@@ -224,7 +244,7 @@ export function Approved({ donations }: { donations: any }) {
                         Previous
                     </Button>
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="sm"
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
@@ -233,6 +253,6 @@ export function Approved({ donations }: { donations: any }) {
                     </Button>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
