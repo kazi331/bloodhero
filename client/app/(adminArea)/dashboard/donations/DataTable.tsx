@@ -1,6 +1,17 @@
 "use client"
 
 import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger
+} from "@/components/ui/drawer"
+
+import {
     ColumnDef,
     ColumnFiltersState,
     SortingState,
@@ -31,7 +42,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { ChevronDownIcon } from "lucide-react"
+import { ArrowUpDown, ChevronDownIcon } from "lucide-react"
 import moment from "moment"
 
 export type donation = {
@@ -70,58 +81,67 @@ export const columns: ColumnDef<donation>[] = [
     },
     {
         accessorKey: "patient",
-        header: "Patient",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("patient")}</div>
-        ),
-        enableSorting: true,
+        // header: "Patient",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-gray-700 hover:text-gray-200"
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Patient
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => (<div className="capitalize">{row.getValue("patient")}</div>),
+
     },
     {
         accessorKey: "phone",
         header: "Phone",
-        cell: ({ row }) => (
-            <a href={`tel:${row.getValue('phone')}`} className="capitalize">{row.getValue("phone")}</a>
-        ),
-        enableSorting: true,
+        cell: ({ row }) => (<a href={`tel:${row.getValue('phone')}`} className="capitalize">{row.getValue("phone")}</a>),
     },
     {
         accessorKey: "date",
-        header: "Date",
-        cell: ({ row }) => (
-            <div className="capitalize whitespace-nowrap">{moment(row.getValue("date")).format('ll')}</div>
-        ),
+        // header: "Date",
+        header: ({ column }) => {
+            return (
+                <Button
+                    className="hover:bg-gray-700 hover:text-gray-200"
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Date
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => (<div className="capitalize">{moment(row.getValue("date")).format('ll')}</div>),
     },
     {
         accessorKey: "type",
         header: "Type",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("type")}</div>
-        ),
+        cell: ({ row }) => (<div className="capitalize">{row.getValue("type")}</div>),
     },
     {
         accessorKey: "isApproved",
         header: "Status",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("isApproved") ? <Badge variant="active_neon">Approved</Badge> : <Badge variant="inactive_neon">Pending</Badge>}</div>
-        ),
+        cell: ({ row }) => (<div className="capitalize">{row.getValue("isApproved") ?
+            <Badge variant="active_neon">Approved</Badge> : <Badge variant="inactive_neon">Pending</Badge>}</div>),
     },
     {
         accessorKey: "action",
         header: "Action",
-        cell: ({ row }) => (
-            <div className="capitalize whitespace-nowrap"><Button onClick={() => console.log(row.original)}>View Donor</Button></div>
-        ),
+        cell: ({ row }) => (<DrawerTrigger asChild><Button size="sm">View Donor</Button></DrawerTrigger>),
     },
 
 ]
 
 export function DataTable({ donations }: { donations: any }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-        []
-    )
-    const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = React.useState({})
 
     const table = useReactTable({
@@ -143,7 +163,7 @@ export function DataTable({ donations }: { donations: any }) {
         },
     })
 
-    return (
+    return (<Drawer>
         <div className="w-full">
             <div className="flex items-center py-2 pl-4">
                 <div className="flex-1 text-sm text-muted-foreground">
@@ -203,7 +223,7 @@ export function DataTable({ donations }: { donations: any }) {
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
-                                    className=" hover:bg-gray-500/10 border-none data-[state=selected]:bg-gray-500/30"
+                                    className=" hover:bg-gray-500/10 border-none data-[state=selected]:bg-gray-500/30 whitespace-nowrap"
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
                                 >
@@ -254,6 +274,24 @@ export function DataTable({ donations }: { donations: any }) {
                     </Button>
                 </div>
             </div>
-        </div >
+        </div>
+
+        {/* Drawser area */}
+        <DrawerContent className="bg-gray-700  border-none">
+            <DrawerHeader className="text-gray-200">
+                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                <DrawerDescription className="text-gray-200">
+                    This action cannot be undone. This will permanently delete the
+                    selected items.
+                </DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+                <Button>Submit</Button>
+                <DrawerClose asChild>
+                    <Button variant="outline" className="text-gray-800">Close</Button>
+                </DrawerClose>
+            </DrawerFooter>
+        </DrawerContent>
+    </Drawer>
     )
 }

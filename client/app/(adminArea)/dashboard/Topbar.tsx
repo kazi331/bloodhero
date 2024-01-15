@@ -17,7 +17,7 @@ const Topbar = () => {
                     </label>
                 </div>
                 {/* view style */}
-                <div className="text-gray-500 flex items-center gap-2">
+                {/*   <div className="text-gray-500 flex items-center gap-2">
                     <Button className="flex gap-2 bg-transparent text-gray-400 hover:text-white hover:bg-gray-700">
                         <List /> <span>List</span>
                     </Button>
@@ -25,7 +25,7 @@ const Topbar = () => {
                     <Button className="flex gap-2 bg-transparent text-gray-400 hover:text-white hover:bg-gray-700">
                         <Grid2X2Icon /> <span>Grid</span>
                     </Button>
-                </div>
+                </div> */}
 
                 {/* filter and new donor */}
                 <div className="text-gray-500 flex items-center gap-2 whitespace-nowrap">
