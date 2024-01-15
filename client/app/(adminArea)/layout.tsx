@@ -10,12 +10,9 @@ export default function DashboardLayout({ children, }: { children: React.ReactNo
     return (
         <DashboardProvider>
             <div className=" bg-[#0e1117] text-gray-200 min-h-screen">
-                <div className=" md:container flex ">
-                    <DashboardSideBar className="w-full min-w-max md:w-2/12" />
-                    <main className="w-full md:10/12">
-                        <Topbar />
-                        {children}
-                    </main>
+                <div className="grid grid-cols-12">
+                    <DashboardSideBar className="col-auto min-w-min md:col-span-2" />
+                    <main className="col-span-10"><Topbar />{children}</main>
                 </div>
             </div>
         </DashboardProvider>
