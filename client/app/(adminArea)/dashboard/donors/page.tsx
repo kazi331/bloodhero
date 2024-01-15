@@ -1,10 +1,19 @@
+'use client'
+
+import { useDash } from "@/context/dashboardContext";
 
 const page = () => {
+    const { donors, loading } = useDash();
+    console.log(donors, loading)
     return (
-        <div className="w-full">
-            {/* <div className=""></div> */}
-            donors
-        </div>
+        <>
+            <title>Donors | Blood Hero</title>
+            <div className="w-full">
+
+                {/* <div className=""></div> */}
+                donors
+            </div>
+        </>
     )
 }
 

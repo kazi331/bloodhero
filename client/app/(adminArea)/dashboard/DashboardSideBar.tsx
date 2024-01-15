@@ -1,5 +1,5 @@
 "use client"
-import { Droplets, User, Users } from 'lucide-react'
+import { Droplet, Droplets, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSelectedLayoutSegments } from 'next/navigation'
@@ -9,7 +9,7 @@ import { ReactNode } from 'react'
 const menus = [
     { id: 1, label: 'donors', url: 'donors', icon: <Users /> },
     { id: 2, label: 'donations', url: 'donations', icon: <Droplets /> },
-    { id: 3, label: 'requests', url: 'requests', icon: <User /> },
+    { id: 3, label: 'requests', url: 'requests', icon: <Droplet /> },
 ]
 
 

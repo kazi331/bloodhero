@@ -71,7 +71,7 @@ const createDonation = async (req, res) => {
 const getDonations = async (req, res) => {
     try {
         const donations = await Donation.find();
-        res.status(200).json({ success: true, data: donations });
+        res.status(200).json(donations);
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }

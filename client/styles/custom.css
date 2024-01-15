@@ -71,5 +71,5 @@
   @apply flex items-center px-4 py-2 md:py-4 md:pl-8 text-[#606885] hover:text-gray-200 hover:bg-gradient-to-tr from-[#363a4f] transition-colors cursor-pointer;
 }
 .nav-active {
-  @apply !text-gray-200 bg-gradient-to-tr from-[#363a4f] before:block before:absolute before:inset-0 before:w-1 md:before:w-2 before:bg-[#fa6393] shadow-lg;
+  @apply !text-gray-200 bg-gradient-to-tr from-[#363a4f] before:block before:absolute before:inset-0 before:w-1 before:bg-[#fa6393] shadow-lg;
 }

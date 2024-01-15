@@ -3,11 +3,11 @@ import { userProps } from '@/lib/types';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-const AuthContext = createContext<{ user: userProps, loading: boolean }>({ user: {} as userProps, loading: true });
+const AuthContext = createContext<{ user: userProps, loading: boolean }>({ user: {} as userProps, loading: false });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<userProps>({} as userProps);
-    const [loading, setLoading] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         setLoading(true)

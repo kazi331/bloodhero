@@ -5,7 +5,7 @@ import { useSelectedLayoutSegments } from "next/navigation";
 
 const Topbar = () => {
     const segment = useSelectedLayoutSegments();
-    return (
+    return (<>
         <div className="w-full">
             <div className="flex items-center justify-between gap-4 bg-[#1e2030] mb-4 p-4 sticky top-0 overflow-auto w-full  ">
                 {/* title */}
@@ -34,6 +34,7 @@ const Topbar = () => {
                 </div>
             </div>
         </div>
+    </>
     )
 }
 
