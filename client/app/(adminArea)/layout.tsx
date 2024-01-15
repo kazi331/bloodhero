@@ -9,10 +9,10 @@ export default function DashboardLayout({ children, }: { children: React.ReactNo
 
     return (
         <DashboardProvider>
-            <div className="w-full bg-[#0e1117] text-gray-200 min-h-screen">
-                <div className=" md:container flex">
-                    <DashboardSideBar />
-                    <main className="w-full md:w-5/6">
+            <div className=" bg-[#0e1117] text-gray-200 min-h-screen">
+                <div className=" md:container flex ">
+                    <DashboardSideBar className="w-full min-w-max md:w-2/12" />
+                    <main className="w-full md:10/12">
                         <Topbar />
                         {children}
                     </main>

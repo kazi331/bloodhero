@@ -14,9 +14,9 @@ const menus = [
 
 
 
-const DashboardSideBar = () => {
+const DashboardSideBar = ({ className }: { className: string }) => {
     return (
-        <aside className=' py-10 h-screen overflow-y-scroll min-w-min md:w-1/6 sticky top-0 bg-[#24273a]'>
+        <aside className={`py-10 h-screen overflow-y-scroll sticky top-0 bg-[#24273a] ${className}`}>
             {/* sidebar logo */}
             <div className='flex flex-col items-center md:p-4 mb-8 '>
                 <Image src={logo} alt="logo" property="true" className="w-8" />

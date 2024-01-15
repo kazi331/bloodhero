@@ -32,6 +32,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { ChevronDownIcon } from "lucide-react"
+import moment from "moment"
 
 export type donation = {
     _id: string,
@@ -87,7 +88,7 @@ export const columns: ColumnDef<donation>[] = [
         accessorKey: "date",
         header: "Date",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("date")}</div>
+            <div className="capitalize whitespace-nowrap">{moment(row.getValue("date")).format('ll')}</div>
         ),
     },
     {
@@ -108,7 +109,7 @@ export const columns: ColumnDef<donation>[] = [
         accessorKey: "action",
         header: "Action",
         cell: ({ row }) => (
-            <div className="capitalize"><Button onClick={() => console.log(row.original)}>View Donor</Button></div>
+            <div className="capitalize whitespace-nowrap"><Button onClick={() => console.log(row.original)}>View Donor</Button></div>
         ),
     },
 
