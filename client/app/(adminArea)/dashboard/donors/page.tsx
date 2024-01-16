@@ -8,7 +8,7 @@ const page = () => {
     return (
         <>
             <title>Donors | Blood Hero</title>
-            <div className="w-full">
+            <div className="">
 
                 {/* <div className=""></div> */}
                 donors

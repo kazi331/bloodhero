@@ -3,6 +3,23 @@ import axios from '@/lib/axios';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
+
+const Donor = {
+    _id: "659c20183d2190b0c0a37d53",
+    name: "Shariful Islam",
+    provider: "google",
+    googleId: "102628776680461221475",
+    isAvailable: false,
+    image: "https://lh3.googleusercontent.com/a/ACg8ocLkxJturE9xJnuHCVs_466WKUTCXdf8xHcaQs3Uw5T42w=s96-c",
+    lastDonation: "1971-09-02T00:00:00.000Z",
+    donations: [{ _id: "5fdaa1b0e9b7b5b0c0a37d5a", date: "2020-12-16T00:00:00.000Z", isApproved: true, donor: "659c20183d2190b0c0a37d53", __v: 0 }],
+    joined: "2024-01-08T16:17:28.562Z",
+    area: "dagra para",
+    gender: "male",
+    phone: 1612178331,
+    type: "b",
+}
+
 // const DashboardContext = createContext<{ user: userProps, loading: boolean }>({ user: {} as userProps, loading: false });
 const DashboardContext = createContext({
     loading: false,
@@ -15,6 +32,10 @@ const DashboardContext = createContext({
     loadRequests: () => { },
     showModal: false,
     setShowModal: (value: boolean) => { },
+    donation: {},
+    setDonation: (value: any) => { },
+    donor: {},
+    setDonor: (value: any) => { }
 });
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
@@ -24,7 +45,8 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [donors, setDonors] = useState([])
     const [donations, setDonations] = useState([])
     const [requests, setRequests] = useState([])
-
+    const [donation, setDonation] = useState({})
+    const [donor, setDonor] = useState({})
     const loadDonations = async () => {
         setLoading(true);
         try {
@@ -79,6 +101,10 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         loadRequests,
         showModal,
         setShowModal,
+        donation,
+        setDonation,
+        donor,
+        setDonor
     }}>
         {children}
     </DashboardContext.Provider>

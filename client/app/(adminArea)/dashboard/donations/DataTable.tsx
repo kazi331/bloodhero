@@ -4,7 +4,6 @@ import {
     Drawer,
     DrawerClose,
     DrawerContent,
-    DrawerDescription,
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
@@ -42,8 +41,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { useDash } from "@/context/dashboardContext"
+import axios from "@/lib/axios"
 import { ArrowUpDown, ChevronDownIcon } from "lucide-react"
 import moment from "moment"
+import { toast } from "sonner"
 
 export type donation = {
     _id: string,
@@ -133,7 +135,28 @@ export const columns: ColumnDef<donation>[] = [
     {
         accessorKey: "action",
         header: "Action",
-        cell: ({ row }) => (<DrawerTrigger asChild><Button size="sm">View Donor</Button></DrawerTrigger>),
+        cell: ({ row }) => {
+            const { setDonation, setDonor } = useDash();
+
+            const fetchDonor = async () => {
+                try {
+                    const res = await axios.get(`/donors/${row.original.donor}`)
+                    setDonor(res.data)
+                    console.log(res.data)
+                } catch (err: any) {
+                    console.log(err.message)
+                    if (err.response) toast.error(err.response?.data?.message)
+                }
+            }
+
+
+
+
+            return <DrawerTrigger asChild onClick={() => {
+                setDonation(row.original)
+                fetchDonor()
+            }}><Button size="sm">View Donor</Button></DrawerTrigger>
+        },
     },
 
 ]
@@ -143,6 +166,7 @@ export function DataTable({ donations }: { donations: any }) {
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = React.useState({})
+    const { donation, setDonation, donor, setDonor } = useDash();
 
     const table = useReactTable({
         data: donations,
@@ -163,7 +187,7 @@ export function DataTable({ donations }: { donations: any }) {
         },
     })
 
-    return (<Drawer>
+    return (<Drawer onClose={() => setDonation({})} >
         <div className="w-full">
             <div className="flex items-center py-2 pl-4">
                 <div className="flex-1 text-sm text-muted-foreground">
@@ -277,13 +301,45 @@ export function DataTable({ donations }: { donations: any }) {
         </div>
 
         {/* Drawser area */}
-        <DrawerContent className="bg-gray-700  border-none">
+        <DrawerContent className="bg-gray-700  border-none mx-auto max-w-2xl">
             <DrawerHeader className="text-gray-200">
                 <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                <DrawerDescription className="text-gray-200">
-                    This action cannot be undone. This will permanently delete the
-                    selected items.
-                </DrawerDescription>
+
+                <div className="text-sm overflow-hidden">
+                    <div className="fixed inset-0 overflow-hidden z-50">
+                        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                            {/* Overlay */}
+                            <div className="fixed inset-0 transition-opacity">
+                                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                            </div>
+
+                            {/* Drawer */}
+                            <div className=" p-6 rounded-lg shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+                                {/* Donor Information */}
+                                <div className="mt-6">
+                                    <h2 className="text-2xl font-semibold mb-4">Donor Information</h2>
+                                    <div className="flex items-center mb-4">
+                                        <img
+                                            src={donor.image}
+                                            alt={donor.name}
+                                            className="w-10 h-10 rounded-full mr-2"
+                                        />
+                                        <div>
+                                            <p className="font-semibold">{donor.name}</p>
+                                            <p className="text-gray-500">{donor.area}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <span className="font-semibold mr-2">Phone:</span>
+                                        <span>{donor.phone}</span>
+                                    </div>
+                                    {/* Add other donor information as needed */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </DrawerHeader>
             <DrawerFooter>
                 <Button>Submit</Button>

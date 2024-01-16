@@ -15,7 +15,7 @@ const donations = () => {
     return (
         <>
             <title>Donations | Blood Hero</title>
-            <Tabs defaultValue="all" className="w-full">
+            <Tabs defaultValue="all" className="">
                 <TabsList className="bg-gray-700/20 w-full flex justify-start px-4 py-6 ">
                     <TabsTrigger value="all" className="data-[state=active]:bg-transparent border-b border-b-transparent data-[state=active]:border-b-primary text-gray-400 data-[state=active]:text-white ">All</TabsTrigger>
                     <TabsTrigger value="approved" className="data-[state=active]:bg-transparent border-b border-b-transparent data-[state=active]:border-b-primary text-gray-400 data-[state=active]:text-white ">Approved</TabsTrigger>
