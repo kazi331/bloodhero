@@ -18,7 +18,7 @@ const userSchema = new Schema({
     joined: { type: Date, default: Date.now, },
     area: String,
     isAvailable: { type: Boolean, default: false },
-    image: { type: String, default: null, },
+    image: String,
     type: {
         type: String,
         enum: bloodTypes,

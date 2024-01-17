@@ -1,4 +1,5 @@
 export type blood = "a" | "a-" | "b" | "b-" | "ab" | "ab-" | "o" | "o-";
+export type genderType = "male" | "female";
 
 export type donationType = {
   isApproved: boolean;
@@ -33,7 +34,10 @@ export type donorType = {
   phone: number;
   donations?: donationType[];
   isAvailable: boolean;
-  image: string | null;
+  image?: string;
+  lastDonation: string | null;
+  joined: string;
+  gender: genderType;
 };
 
 export type donorProfileType = {
@@ -42,11 +46,11 @@ export type donorProfileType = {
   type: blood;
   donations?: donationType[];
   isAvailable: boolean;
-  image: string | null;
+  image?: string;
   lastDonation: string | null;
   joined: string;
   phone: Number;
-  gender: "male" | "female";
+  gender: genderType;
   age: Number;
   area: string;
 };
@@ -60,7 +64,7 @@ export type formValues = {
   isAvailable?: boolean;
   image?: string | null;
   joined?: string;
-  gender: "male" | "female";
+  gender: genderType;
   area?: string;
 };
 

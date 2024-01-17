@@ -1,6 +1,14 @@
 "use client"
 
 import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from "@/components/ui/selectDark"
+
+import {
     Drawer,
     DrawerClose,
     DrawerContent,
@@ -24,7 +32,6 @@ import {
 } from "@tanstack/react-table"
 import * as React from "react"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -43,11 +50,11 @@ import {
 } from "@/components/ui/table"
 import { useDash } from "@/context/dashboardContext"
 import axios from "@/lib/axios"
-import { ArrowUpDown, ChevronDownIcon } from "lucide-react"
+import { ArrowUpDown, ChevronDownIcon, Trash } from "lucide-react"
 import moment from "moment"
 import { toast } from "sonner"
 
-export type donation = {
+type donationType = {
     _id: string,
     date: string | Date,
     donor: string,
@@ -58,7 +65,7 @@ export type donation = {
     type: string,
 }
 
-export const columns: ColumnDef<donation>[] = [
+export const columns: ColumnDef<donationType>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -129,8 +136,21 @@ export const columns: ColumnDef<donation>[] = [
     {
         accessorKey: "isApproved",
         header: "Status",
-        cell: ({ row }) => (<div className="capitalize">{row.getValue("isApproved") ?
-            <Badge variant="active_neon">Approved</Badge> : <Badge variant="inactive_neon">Pending</Badge>}</div>),
+        /*    cell: ({ row }) => (<div className="capitalize">{row.getValue("isApproved") ?
+               <Badge variant="active_neon">Approved</Badge> : <Badge variant="inactive_neon">Pending</Badge>}</div>), */
+        cell: ({ row }) => (<Select
+            defaultValue={row.getValue('isApproved') ? 'approved' : 'pending'}
+            onValueChange={(value) => console.log(value)}
+        >
+            <SelectTrigger className={`w-28 ${row.getValue('isApproved') ? 'bg-green-600/20 text-green-500' : 'bg-yellow-600/20 text-yellow-500'} `}>
+                <SelectValue placeholder={row.getValue('isApproved') ? 'Approved' : 'Pending'} />
+            </SelectTrigger>
+
+            <SelectContent>
+                <SelectItem defaultChecked value="approved">Approved</SelectItem>
+                <SelectItem value="pending">Pending</SelectItem>
+            </SelectContent>
+        </Select>),
     },
     {
         accessorKey: "action",
@@ -148,9 +168,6 @@ export const columns: ColumnDef<donation>[] = [
                     if (err.response) toast.error(err.response?.data?.message)
                 }
             }
-
-
-
 
             return <DrawerTrigger asChild onClick={() => {
                 setDonation(row.original)
@@ -187,18 +204,26 @@ export function DataTable({ donations }: { donations: any }) {
         },
     })
 
+    const deleteSelected = () => {
+        const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)
+        console.log(selected)
+    }
+    const approveSelected = () => {
+        const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)
+        console.log(selected)
+    }
+    const pendingSelected = () => {
+        const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)
+        console.log(selected)
+    }
+
     return (<Drawer onClose={() => setDonation({})} >
         <div className="w-full">
-            <div className="flex items-center py-2 pl-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getSelectedRowModel().rows.length > 0 ? <Button variant="destructive" onClick={() => {
-                        const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)
-                        console.log(selected)
-                    }}>Delete Selected</Button> : null}
-                </div>
+            <div className="flex items-center py-2">
+                {table.getSelectedRowModel().rows.length > 0 ? <Button variant="destructive_neon" size="sm" className="flex gap-1 ml-0" onClick={deleteSelected}><Trash size={16} />Delete</Button> : null}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button className="ml-auto">
+                        <Button className="ml-auto" size="sm">
                             Columns <ChevronDownIcon className="ml-2 h-4 w-4 " />
                         </Button>
                     </DropdownMenuTrigger>
@@ -320,7 +345,7 @@ export function DataTable({ donations }: { donations: any }) {
                                     <h2 className="text-2xl font-semibold mb-4">Donor Information</h2>
                                     <div className="flex items-center mb-4">
                                         <img
-                                            src={donor.image}
+                                            src={donor?.image}
                                             alt={donor.name}
                                             className="w-10 h-10 rounded-full mr-2"
                                         />

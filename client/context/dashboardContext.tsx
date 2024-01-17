@@ -1,27 +1,28 @@
 "use client"
 import axios from '@/lib/axios';
+import { donorType } from '@/lib/types';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 
-const Donor = {
-    _id: "659c20183d2190b0c0a37d53",
-    name: "Shariful Islam",
-    provider: "google",
-    googleId: "102628776680461221475",
-    isAvailable: false,
-    image: "https://lh3.googleusercontent.com/a/ACg8ocLkxJturE9xJnuHCVs_466WKUTCXdf8xHcaQs3Uw5T42w=s96-c",
-    lastDonation: "1971-09-02T00:00:00.000Z",
-    donations: [{ _id: "5fdaa1b0e9b7b5b0c0a37d5a", date: "2020-12-16T00:00:00.000Z", isApproved: true, donor: "659c20183d2190b0c0a37d53", __v: 0 }],
-    joined: "2024-01-08T16:17:28.562Z",
-    area: "dagra para",
-    gender: "male",
-    phone: 1612178331,
-    type: "b",
-}
-
 // const DashboardContext = createContext<{ user: userProps, loading: boolean }>({ user: {} as userProps, loading: false });
-const DashboardContext = createContext({
+const DashboardContext = createContext<{
+    loading: boolean,
+    expandSidebar: boolean,
+    setExpandSidebar: (value: boolean) => void,
+    donors: any[],
+    donations: any[],
+    loadDonations: () => void,
+    requests: any[],
+    loadRequests: () => void,
+    showModal: boolean,
+    setShowModal: (value: boolean) => void,
+    donation: any,
+    setDonation: (value: any) => void,
+    donor: donorType,
+    setDonor: (value: any) => void
+
+}>({
     loading: false,
     expandSidebar: false,
     setExpandSidebar: (value: boolean) => { },
@@ -34,7 +35,19 @@ const DashboardContext = createContext({
     setShowModal: (value: boolean) => { },
     donation: {},
     setDonation: (value: any) => { },
-    donor: {},
+    donor: {
+        _id: "",
+        name: "",
+        isAvailable: false,
+        image: "",
+        lastDonation: "",
+        donations: [],
+        joined: "",
+        area: "",
+        gender: "male",
+        phone: 0,
+        type: "a",
+    },
     setDonor: (value: any) => { }
 });
 
@@ -46,7 +59,7 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [donations, setDonations] = useState([])
     const [requests, setRequests] = useState([])
     const [donation, setDonation] = useState({})
-    const [donor, setDonor] = useState({})
+    const [donor, setDonor] = useState({} as donorType)
     const loadDonations = async () => {
         setLoading(true);
         try {
