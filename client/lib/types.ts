@@ -1,4 +1,4 @@
-export type blood = "a" | "a-" | "b" | "b-" | "ab" | "ab-" | "o" | "o-";
+export type bloodType = "a" | "a-" | "b" | "b-" | "ab" | "ab-" | "o" | "o-";
 export type genderType = "male" | "female";
 
 export type donationType = {
@@ -6,7 +6,7 @@ export type donationType = {
   _id: string;
   patient: string;
   hospital: string;
-  type?: blood;
+  type?: bloodType;
   date: string;
 };
 
@@ -19,7 +19,7 @@ export type userProps = {
   phone?: number;
   gender?: string;
   area?: string;
-  type?: blood;
+  type?: bloodType;
   isAvailable?: boolean;
   image?: string | null;
   donations: donationType[] | null;
@@ -30,7 +30,8 @@ export type donorType = {
   _id: string;
   name: string;
   area: string;
-  type: blood;
+  dob: Date | string;
+  type: bloodType;
   phone: number;
   donations?: donationType[];
   isAvailable: boolean;
@@ -43,7 +44,7 @@ export type donorType = {
 export type donorProfileType = {
   _id: string;
   name: string;
-  type: blood;
+  type: bloodType;
   donations?: donationType[];
   isAvailable: boolean;
   image?: string;
@@ -51,7 +52,7 @@ export type donorProfileType = {
   joined: string;
   phone: Number;
   gender: genderType;
-  age: Number;
+  dob: Date | string;
   area: string;
 };
 

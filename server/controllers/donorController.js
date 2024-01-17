@@ -25,7 +25,7 @@ const getDonors = async (req, res) => {
 // GET SINGLE DONOR
 const getDonor = async (req, res) => {
     try {
-        const user = await User.findById(req.params.donorId, "-dob -password -email -role -__v")
+        const user = await User.findById(req.params.donorId, "-password -email -role -__v")
             .populate("donations", "-donor -isApproved -__v", { isApproved: true });
         res.json(user);
     } catch (err) {

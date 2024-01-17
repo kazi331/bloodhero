@@ -38,6 +38,7 @@ const DashboardContext = createContext<{
     donor: {
         _id: "",
         name: "",
+        dob: "",
         isAvailable: false,
         image: "",
         lastDonation: "",

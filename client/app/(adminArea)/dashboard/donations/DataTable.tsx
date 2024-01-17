@@ -1,57 +1,24 @@
 "use client"
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from "@/components/ui/selectDark"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/selectDark"
 
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerTrigger
-} from "@/components/ui/drawer"
-
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
+    ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable,
 } from "@tanstack/react-table"
 import * as React from "react"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { useDash } from "@/context/dashboardContext"
 import axios from "@/lib/axios"
-import { ArrowUpDown, ChevronDownIcon, Trash } from "lucide-react"
+import { bloodType } from "@/lib/types"
+import { ArrowUpDown, ChevronDownIcon, Phone, Trash } from "lucide-react"
 import moment from "moment"
+import Image from "next/image"
 import { toast } from "sonner"
 
 type donationType = {
@@ -62,28 +29,26 @@ type donationType = {
     isApproved: boolean,
     patient: string,
     phone: string,
-    type: string,
+    type: bloodType,
 }
 
 export const columns: ColumnDef<donationType>[] = [
     {
         id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
+        header: ({ table }) => (<Checkbox
+            checked={
+                table.getIsAllPageRowsSelected() ||
+                (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+            aria-label="Select all"
+        />
         ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
+        cell: ({ row }) => (<Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+        />
         ),
         enableSorting: false,
         enableHiding: false,
@@ -91,18 +56,16 @@ export const columns: ColumnDef<donationType>[] = [
     {
         accessorKey: "patient",
         // header: "Patient",
-        header: ({ column }) => {
-            return (
-                <Button
-                    className="hover:bg-gray-700 hover:text-gray-200"
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Patient
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
+        header: ({ column }) => (<Button
+            className="hover:bg-gray-700 hover:text-gray-200"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+            Patient
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+        )
+        ,
         cell: ({ row }) => (<div className="capitalize">{row.getValue("patient")}</div>),
 
     },
@@ -114,18 +77,15 @@ export const columns: ColumnDef<donationType>[] = [
     {
         accessorKey: "date",
         // header: "Date",
-        header: ({ column }) => {
-            return (
-                <Button
-                    className="hover:bg-gray-700 hover:text-gray-200"
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Date
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
+        header: ({ column }) => (<Button
+            className="hover:bg-gray-700 hover:text-gray-200"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+            Date
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+        ),
         cell: ({ row }) => (<div className="capitalize">{moment(row.getValue("date")).format('ll')}</div>),
     },
     {
@@ -136,8 +96,6 @@ export const columns: ColumnDef<donationType>[] = [
     {
         accessorKey: "isApproved",
         header: "Status",
-        /*    cell: ({ row }) => (<div className="capitalize">{row.getValue("isApproved") ?
-               <Badge variant="active_neon">Approved</Badge> : <Badge variant="inactive_neon">Pending</Badge>}</div>), */
         cell: ({ row }) => (<Select
             defaultValue={row.getValue('isApproved') ? 'approved' : 'pending'}
             onValueChange={(value) => console.log(value)}
@@ -156,6 +114,7 @@ export const columns: ColumnDef<donationType>[] = [
         accessorKey: "action",
         header: "Action",
         cell: ({ row }) => {
+
             const { setDonation, setDonor } = useDash();
 
             const fetchDonor = async () => {
@@ -169,10 +128,7 @@ export const columns: ColumnDef<donationType>[] = [
                 }
             }
 
-            return <DrawerTrigger asChild onClick={() => {
-                setDonation(row.original)
-                fetchDonor()
-            }}><Button size="sm">View Donor</Button></DrawerTrigger>
+            return <DrawerTrigger asChild onClick={() => fetchDonor()}><Button size="sm">View Donor</Button></DrawerTrigger>
         },
     },
 
@@ -184,6 +140,7 @@ export function DataTable({ donations }: { donations: any }) {
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = React.useState({})
     const { donation, setDonation, donor, setDonor } = useDash();
+
 
     const table = useReactTable({
         data: donations,
@@ -327,47 +284,55 @@ export function DataTable({ donations }: { donations: any }) {
 
         {/* Drawser area */}
         <DrawerContent className="bg-gray-700  border-none mx-auto max-w-2xl">
-            <DrawerHeader className="text-gray-200">
-                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-
-                <div className="text-sm overflow-hidden">
-                    <div className="fixed inset-0 overflow-hidden z-50">
-                        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                            {/* Overlay */}
-                            <div className="fixed inset-0 transition-opacity">
-                                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-                            </div>
-
-                            {/* Drawer */}
-                            <div className=" p-6 rounded-lg shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                                {/* Donor Information */}
-                                <div className="mt-6">
-                                    <h2 className="text-2xl font-semibold mb-4">Donor Information</h2>
-                                    <div className="flex items-center mb-4">
-                                        <img
-                                            src={donor?.image}
-                                            alt={donor.name}
-                                            className="w-10 h-10 rounded-full mr-2"
-                                        />
-                                        <div>
-                                            <p className="font-semibold">{donor.name}</p>
-                                            <p className="text-gray-500">{donor.area}</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <span className="font-semibold mr-2">Phone:</span>
-                                        <span>{donor.phone}</span>
-                                    </div>
-                                    {/* Add other donor information as needed */}
-                                </div>
+            <DrawerHeader className="text-gray-200 items-center">
+                <DrawerTitle>Donor Profile</DrawerTitle>
+                <div className="w-full max-w-2xl mx-auto py-6 space-y-6 ">
+                    <div className="flex items-center justify-center gap-8 ">
+                        <Image
+                            alt="Donor Avatar"
+                            className="rounded-full ring-2 ring-sky-500 ring-offset-0 object-cover object-center aspect-square "
+                            height="80"
+                            width="80"
+                            src={donor?.image || "/images/user-round.png"}
+                        />
+                        <div className="space-y-4 ">
+                            <h1 className="text-2xl font-bold text-gray-200">{donor.name}</h1>
+                            <div className='flex items-center space-x-2 mt-2 '>
+                                <Badge className='capitalize rounded-md' >{donor.type?.split('')[0]} {donor.type?.split('')[1] === '-' ? 'Negative' : 'Positive'}</Badge>
+                                <Badge variant={`${donor.isAvailable ? 'active_neon' : 'inactive_neon'}`} >
+                                    {donor.isAvailable ? "Available" : "Unavailable"}
+                                </Badge>
+                                <a href={`tel:${donor.phone}`} ><Phone className={`ml-2 ${donor.isAvailable ? 'text-green-600' : 'text-yellow-500'}`} size={20} /></a>
                             </div>
                         </div>
                     </div>
+                    <div className='w-full border-t-2 border-gray-200/10'></div>
+                    <div className="grid gap-4 grid-cols-1 xs:grid-cols-2">
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Last Donation</p>
+                            <p className="text-gray-200">{donor.lastDonation ? moment(donor.lastDonation).format('LL') : 'No record found!'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Village</p>
+                            <p className="text-gray-200 capitalize">{donor.area || 'Not provided'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Date of Birth</p>
+                            <p className="text-gray-200">{donor.dob ? moment(donor.dob).format('ll') : 'Not provided'}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Joined Date</p>
+                            <p className="text-gray-200">{moment(donor.joined).format('LL')}</p>
+                        </div>
+                        <div className="space-y-1">
+                            <p className="text-sm text-gray-400">Phone Number</p>
+                            <p className="text-gray-200">{String(donor.phone) || 'not provided'}</p>
+                        </div>
+                    </div>
                 </div>
-
             </DrawerHeader>
             <DrawerFooter>
-                <Button>Submit</Button>
+                <Button variant="destructive">Delete This Donation</Button>
                 <DrawerClose asChild>
                     <Button variant="outline" className="text-gray-800">Close</Button>
                 </DrawerClose>
