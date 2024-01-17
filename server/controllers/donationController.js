@@ -102,6 +102,22 @@ const updateDonation = async (req, res) => {
     }
 }
 
+// UPDATE DONATION STATUS
+const toggleDonationStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const newStatus = req.query.status;
+        const donation = await Donation.findById(id);
+        if (!donation) {
+            return res.status(404).json({ success: false, message: 'Donation not found' });
+        }
+        const updatedDonation = await Donation.findByIdAndUpdate(id, { isApproved: newStatus });
+        res.status(200).json({ success: true, data: updatedDonation });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Donation Update Failed", error: err.message });
+    }
+}
 export {
-    createDonation, getDonation, getDonations, updateDonation
+    createDonation, getDonation, getDonations, toggleDonationStatus, updateDonation
 };
+

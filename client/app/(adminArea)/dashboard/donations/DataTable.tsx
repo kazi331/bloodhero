@@ -96,19 +96,32 @@ export const columns: ColumnDef<donationType>[] = [
     {
         accessorKey: "isApproved",
         header: "Status",
-        cell: ({ row }) => (<Select
-            defaultValue={row.getValue('isApproved') ? 'approved' : 'pending'}
-            onValueChange={(value) => console.log(value)}
-        >
-            <SelectTrigger className={`w-28 ${row.getValue('isApproved') ? 'bg-green-600/20 text-green-500' : 'bg-yellow-600/20 text-yellow-500'} `}>
-                <SelectValue placeholder={row.getValue('isApproved') ? 'Approved' : 'Pending'} />
-            </SelectTrigger>
+        cell: ({ row }) => {
+            const { loadDonations } = useDash();
+            return (<Select
+                defaultValue={row.getValue('isApproved') ? 'approved' : 'pending'}
+                onValueChange={async (value) => {
+                    const status = value === 'approved' ? true : false;
+                    try {
+                        const res = await axios.patch(`/donations/${row.original._id}?status=${status}`)
+                        if (res.data) toast.success('Status updated successfully!')
+                        loadDonations();
+                    } catch (err: any) {
+                        console.log(err.message)
+                        if (err.response) toast.error(err.response?.data?.message)
+                    }
+                }}
+            >
+                <SelectTrigger className={`w-28 ${row.getValue('isApproved') ? 'bg-green-600/20 text-green-500' : 'bg-yellow-600/20 text-yellow-500'} `}>
+                    <SelectValue placeholder={row.getValue('isApproved') ? 'Approved' : 'Pending'} />
+                </SelectTrigger>
 
-            <SelectContent>
-                <SelectItem defaultChecked value="approved">Approved</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-            </SelectContent>
-        </Select>),
+                <SelectContent>
+                    <SelectItem defaultChecked value="approved">Approved</SelectItem>
+                    <SelectItem value="pending">Pending</SelectItem>
+                </SelectContent>
+            </Select>)
+        },
     },
     {
         accessorKey: "action",
@@ -134,7 +147,7 @@ export const columns: ColumnDef<donationType>[] = [
 
 ]
 
-export function DataTable({ donations }: { donations: any }) {
+export function DataTable({ donations }: { donations: donationType[] }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})

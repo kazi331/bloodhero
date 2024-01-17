@@ -1,5 +1,5 @@
 import express from 'express';
-import { createDonation, getDonation, getDonations } from '../controllers/donationController.js';
+import { createDonation, getDonation, getDonations, toggleDonationStatus, } from '../controllers/donationController.js';
 import { getDonor, getDonors } from '../controllers/donorController.js';
 import { deleteUser, getLoggedUser, getUser, getUsers, updateUser } from '../controllers/userController.js';
 import checkAdmin from '../middlewares/checkAdmin.js';
@@ -23,6 +23,12 @@ router.get('/donors/:donorId', getDonor);
 router.post('/donations', checkLogin, createDonation) // for logged in users only
 router.post('/donations', checkLogin, checkAdmin, createDonation) // for admin only
 router.get('/donations', getDonations)
-router.get('/donations/:id', getDonation)
+router.get('/donations/:id', getDonation);
+
+// admin only
+// change donation status
+router.patch('/donations/:id', checkLogin, toggleDonationStatus);
+
+
 
 export default router;
