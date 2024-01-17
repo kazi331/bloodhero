@@ -20,7 +20,10 @@ const DashboardContext = createContext<{
     donation: any,
     setDonation: (value: any) => void,
     donor: donorType,
-    setDonor: (value: any) => void
+    setDonor: (value: any) => void,
+    donationId: string | null,
+    setDonationId: (value: any) => void,
+
 
 }>({
     loading: false,
@@ -49,7 +52,9 @@ const DashboardContext = createContext<{
         phone: 0,
         type: "a",
     },
-    setDonor: (value: any) => { }
+    setDonor: (value: any) => { },
+    donationId: null,
+    setDonationId: (value: any) => { },
 });
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
@@ -60,6 +65,7 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [donations, setDonations] = useState([])
     const [requests, setRequests] = useState([])
     const [donation, setDonation] = useState({})
+    const [donationId, setDonationId] = useState(null)
     const [donor, setDonor] = useState({} as donorType)
     const loadDonations = async () => {
         setLoading(true);
@@ -118,7 +124,9 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         donation,
         setDonation,
         donor,
-        setDonor
+        setDonor,
+        donationId,
+        setDonationId
     }}>
         {children}
     </DashboardContext.Provider>

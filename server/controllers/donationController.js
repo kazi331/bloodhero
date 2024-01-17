@@ -117,7 +117,19 @@ const toggleDonationStatus = async (req, res) => {
         res.status(500).json({ success: false, message: "Donation Update Failed", error: err.message });
     }
 }
+
+// Delte Single DONATION STATUS
+const deleteSingleDonation = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const donation = await Donation.findByIdAndDelete(id);
+        console.log(donation);
+        res.status(200).json({ success: true, message: 'Donation deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Failed to delete donation!", error: err.message });
+    }
+}
 export {
-    createDonation, getDonation, getDonations, toggleDonationStatus, updateDonation
+    createDonation, deleteSingleDonation, getDonation, getDonations, toggleDonationStatus, updateDonation
 };
 

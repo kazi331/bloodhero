@@ -127,21 +127,21 @@ export const columns: ColumnDef<donationType>[] = [
         accessorKey: "action",
         header: "Action",
         cell: ({ row }) => {
-
-            const { setDonation, setDonor } = useDash();
-
+            const { setDonationId, setDonor } = useDash();
             const fetchDonor = async () => {
                 try {
                     const res = await axios.get(`/donors/${row.original.donor}`)
                     setDonor(res.data)
-                    console.log(res.data)
                 } catch (err: any) {
                     console.log(err.message)
                     if (err.response) toast.error(err.response?.data?.message)
                 }
             }
-
-            return <DrawerTrigger asChild onClick={() => fetchDonor()}><Button size="sm">View Donor</Button></DrawerTrigger>
+            return <DrawerTrigger asChild onClick={() => {
+                console.log(row.original._id)
+                setDonationId(row.original._id)
+                fetchDonor()
+            }}><Button size="sm">View Donor</Button></DrawerTrigger>
         },
     },
 
@@ -152,7 +152,7 @@ export function DataTable({ donations }: { donations: donationType[] }) {
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = React.useState({})
-    const { donation, setDonation, donor, setDonor } = useDash();
+    const { donation, loadDonations, setDonation, donationId, setDonationId, donor, setDonor } = useDash();
 
 
     const table = useReactTable({
@@ -345,7 +345,19 @@ export function DataTable({ donations }: { donations: donationType[] }) {
                 </div>
             </DrawerHeader>
             <DrawerFooter>
-                <Button variant="destructive">Delete This Donation</Button>
+                <Button variant="destructive" onClick={() => {
+                    console.log(donationId)
+                    axios.delete(`/donations/${donationId}`)
+                        .then(res => {
+                            if (res.data?.success) toast.success('Donation deleted successfully!')
+                            setDonationId(null);
+                            loadDonations();
+                        })
+                        .catch(err => {
+                            console.log(err.message)
+                            if (err.response) toast.error(err.response?.data?.message)
+                        })
+                }}>Delete This Donation</Button>
                 <DrawerClose asChild>
                     <Button variant="outline" className="text-gray-800">Close</Button>
                 </DrawerClose>
