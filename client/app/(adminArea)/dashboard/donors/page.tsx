@@ -9,8 +9,6 @@ const page = () => {
         <>
             <title>Donors | Blood Hero</title>
             <div className="">
-
-                {/* <div className=""></div> */}
                 donors
             </div>
         </>

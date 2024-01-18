@@ -1,4 +1,5 @@
 "use client"
+import { useDash } from '@/context/dashboardContext'
 import { Droplet, Droplets, Users } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,8 +16,10 @@ const menus = [
 
 
 const DashboardSideBar = ({ className }: { className: string }) => {
+    const { showSidebar } = useDash();
+    console.log({ showSidebar })
     return (
-        <aside className={`py-10 h-screen overflow-y-scroll sticky top-0 bg-[#24273a] ${className}`}>
+        <aside className={` ${showSidebar ? 'min-w-min' : 'w-0 overflow-hidden '} py-10 h-screen overflow-y-scroll sticky top-0 bg-[#24273a] ${className}`}>
             {/* sidebar logo */}
             <div className='flex flex-col items-center md:p-4 mb-8 '>
                 <Image src={logo} alt="logo" property="true" className="w-8" />

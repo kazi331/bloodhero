@@ -23,8 +23,8 @@ const DashboardContext = createContext<{
     setDonor: (value: any) => void,
     donationId: string | null,
     setDonationId: (value: any) => void,
-
-
+    showSidebar: boolean,
+    setShowSidebar: (value: boolean) => void,
 }>({
     loading: false,
     expandSidebar: false,
@@ -55,6 +55,8 @@ const DashboardContext = createContext<{
     setDonor: (value: any) => { },
     donationId: null,
     setDonationId: (value: any) => { },
+    showSidebar: true,
+    setShowSidebar: (value: boolean) => { },
 });
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
@@ -67,6 +69,8 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [donationId, setDonationId] = useState(null)
     const [donor, setDonor] = useState({} as donorType)
     const [modal, setModal] = useState<undefined | boolean>(false);
+    const [showSidebar, setShowSidebar] = useState<boolean>(true);
+
 
     const loadDonations = async () => {
         setLoading(true);
@@ -124,7 +128,8 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         donor, setDonor,
         donationId,
         setDonationId,
-        modal, setModal
+        modal, setModal,
+        showSidebar, setShowSidebar
     }}>
         {children}
     </DashboardContext.Provider>
