@@ -122,14 +122,22 @@ const toggleDonationStatus = async (req, res) => {
 const deleteSingleDonation = async (req, res) => {
     try {
         const { id } = req.params;
-        const donation = await Donation.findByIdAndDelete(id);
-        console.log(donation);
+        await Donation.findByIdAndDelete(id);
         res.status(200).json({ success: true, message: 'Donation deleted successfully' });
     } catch (err) {
         res.status(500).json({ success: false, message: "Failed to delete donation!", error: err.message });
     }
 }
+// Delte Single DONATION STATUS
+const deleteMultipleDonation = async (req, res) => {
+    try {
+        await Donation.deleteMany({ _id: req.body.ids });
+        res.status(200).json({ success: true, message: 'Donations deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Failed to delete donations!", error: err.message });
+    }
+}
 export {
-    createDonation, deleteSingleDonation, getDonation, getDonations, toggleDonationStatus, updateDonation
+    createDonation, deleteMultipleDonation, deleteSingleDonation, getDonation, getDonations, toggleDonationStatus, updateDonation
 };
 

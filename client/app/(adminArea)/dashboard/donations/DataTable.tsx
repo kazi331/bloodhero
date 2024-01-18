@@ -176,9 +176,16 @@ export function DataTable({ donations }: { donations: donationType[] }) {
         },
     })
 
-    const deleteSelected = () => {
-        const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)
-        console.log(selected)
+    const deleteSelected = async () => {
+        try {
+            const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)
+            const res = await axios.delete('/donations-delete-multiple', { data: { ids: selected } })
+            if (res.data?.success) toast.success('Donations deleted successfully!')
+            loadDonations();
+        } catch (err: any) {
+            console.log(err.message);
+            if (err.response) toast.error(err.response?.data?.message)
+        }
     }
     const approveSelected = () => {
         const selected = table.getSelectedRowModel().rows.map((row) => row.original._id)

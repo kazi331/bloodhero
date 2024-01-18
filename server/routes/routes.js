@@ -1,5 +1,5 @@
 import express from 'express';
-import { createDonation, deleteSingleDonation, getDonation, getDonations, toggleDonationStatus, } from '../controllers/donationController.js';
+import { createDonation, deleteMultipleDonation, deleteSingleDonation, getDonation, getDonations, toggleDonationStatus } from '../controllers/donationController.js';
 import { getDonor, getDonors } from '../controllers/donorController.js';
 import { deleteUser, getLoggedUser, getUser, getUsers, updateUser } from '../controllers/userController.js';
 import checkAdmin from '../middlewares/checkAdmin.js';
@@ -28,8 +28,10 @@ router.get('/donations/:id', getDonation);
 // admin only
 // change donation status
 router.patch('/donations/:id', checkLogin, checkAdmin, toggleDonationStatus);
-// delete donation
+// delete single donation
 router.delete('/donations/:id', checkLogin, checkAdmin, deleteSingleDonation);
+// delete multiple donation
+router.delete('/donations-delete-multiple', checkLogin, checkAdmin, deleteMultipleDonation);
 
 
 
