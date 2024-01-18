@@ -2,7 +2,7 @@
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/selectDark"
 
-import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer"
 import {
     ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable,
 } from "@tanstack/react-table"
@@ -127,7 +127,7 @@ export const columns: ColumnDef<donationType>[] = [
         accessorKey: "action",
         header: "Action",
         cell: ({ row }) => {
-            const { setDonationId, setDonor } = useDash();
+            const { setDonationId, setDonor, modal, setModal } = useDash();
             const fetchDonor = async () => {
                 try {
                     const res = await axios.get(`/donors/${row.original.donor}`)
@@ -140,7 +140,9 @@ export const columns: ColumnDef<donationType>[] = [
             return <DrawerTrigger asChild onClick={() => {
                 console.log(row.original._id)
                 setDonationId(row.original._id)
-                fetchDonor()
+                console.log(modal)
+                fetchDonor();
+                setModal(true);
             }}><Button size="sm">View Donor</Button></DrawerTrigger>
         },
     },
@@ -152,7 +154,7 @@ export function DataTable({ donations }: { donations: donationType[] }) {
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = React.useState({})
-    const { donation, loadDonations, setDonation, donationId, setDonationId, donor, setDonor } = useDash();
+    const { donation, loadDonations, setDonation, donationId, setDonationId, donor, setDonor, modal, setModal } = useDash();
 
 
     const table = useReactTable({
@@ -187,7 +189,10 @@ export function DataTable({ donations }: { donations: donationType[] }) {
         console.log(selected)
     }
 
-    return (<Drawer onClose={() => setDonation({})} >
+    return (<Drawer onClose={() => {
+        setModal(false);
+        setDonation({})
+    }} shouldScaleBackground open={modal}>
         <div className="w-full">
             <div className="flex items-center py-2">
                 {table.getSelectedRowModel().rows.length > 0 ? <Button variant="destructive_neon" size="sm" className="flex gap-1 ml-0" onClick={deleteSelected}><Trash size={16} />Delete</Button> : null}
@@ -296,18 +301,13 @@ export function DataTable({ donations }: { donations: donationType[] }) {
         </div>
 
         {/* Drawser area */}
-        <DrawerContent className="bg-gray-700  border-none mx-auto max-w-2xl">
+        <DrawerContent className="bg-gray-700  border-none mx-auto" >
             <DrawerHeader className="text-gray-200 items-center">
-                <DrawerTitle>Donor Profile</DrawerTitle>
-                <div className="w-full max-w-2xl mx-auto py-6 space-y-6 ">
+                <div className="w-full  max-w-2xl mx-auto py-6 space-y-6 ">
                     <div className="flex items-center justify-center gap-8 ">
-                        <Image
-                            alt="Donor Avatar"
+                        <Image alt="Donor Avatar"
                             className="rounded-full ring-2 ring-sky-500 ring-offset-0 object-cover object-center aspect-square "
-                            height="80"
-                            width="80"
-                            src={donor?.image || "/images/user-round.png"}
-                        />
+                            height="80" width="80" src={donor?.image || "/images/user-round.png"} />
                         <div className="space-y-4 ">
                             <h1 className="text-2xl font-bold text-gray-200">{donor.name}</h1>
                             <div className='flex items-center space-x-2 mt-2 '>
@@ -343,24 +343,29 @@ export function DataTable({ donations }: { donations: donationType[] }) {
                         </div>
                     </div>
                 </div>
+
             </DrawerHeader>
             <DrawerFooter>
-                <Button variant="destructive" onClick={() => {
-                    console.log(donationId)
-                    axios.delete(`/donations/${donationId}`)
-                        .then(res => {
-                            if (res.data?.success) toast.success('Donation deleted successfully!')
-                            setDonationId(null);
-                            loadDonations();
-                        })
-                        .catch(err => {
-                            console.log(err.message)
-                            if (err.response) toast.error(err.response?.data?.message)
-                        })
-                }}>Delete This Donation</Button>
-                <DrawerClose asChild>
-                    <Button variant="outline" className="text-gray-800">Close</Button>
-                </DrawerClose>
+                <div className="max-w-2xl mx-auto flex flex-col gap-2 w-full">
+                    <Button variant="destructive_neon" className="hover:bg-red-500/40" onClick={() => {
+                        axios.delete(`/donations/${donationId}`)
+                            .then(res => {
+                                if (res.data?.success) toast.success('Donation deleted successfully!')
+                                setDonationId(null);
+                                setModal(false);
+                                loadDonations();
+                            })
+                            .catch(err => {
+                                console.log(err.message)
+                                if (err.response) toast.error(err.response?.data?.message)
+                            })
+                    }}>
+                        Delete This Donation
+                    </Button>
+                    <DrawerClose asChild>
+                        <Button variant="outline" className="text-gray-800" onClick={() => setModal(false)}>Close</Button>
+                    </DrawerClose>
+                </div>
             </DrawerFooter>
         </DrawerContent>
     </Drawer>

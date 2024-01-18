@@ -15,8 +15,8 @@ const DashboardContext = createContext<{
     loadDonations: () => void,
     requests: any[],
     loadRequests: () => void,
-    showModal: boolean,
-    setShowModal: (value: boolean) => void,
+    modal: boolean | undefined,
+    setModal: (value: boolean) => void,
     donation: any,
     setDonation: (value: any) => void,
     donor: donorType,
@@ -34,8 +34,8 @@ const DashboardContext = createContext<{
     loadDonations: () => { },
     requests: [],
     loadRequests: () => { },
-    showModal: false,
-    setShowModal: (value: boolean) => { },
+    modal: undefined,
+    setModal: (value: boolean) => { },
     donation: {},
     setDonation: (value: any) => { },
     donor: {
@@ -60,13 +60,14 @@ const DashboardContext = createContext<{
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [expandSidebar, setExpandSidebar] = useState<boolean>(false)
-    const [showModal, setShowModal] = useState<boolean>(false)
     const [donors, setDonors] = useState([])
     const [donations, setDonations] = useState([])
     const [requests, setRequests] = useState([])
     const [donation, setDonation] = useState({})
     const [donationId, setDonationId] = useState(null)
     const [donor, setDonor] = useState({} as donorType)
+    const [modal, setModal] = useState<undefined | boolean>(false);
+
     const loadDonations = async () => {
         setLoading(true);
         try {
@@ -119,14 +120,11 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         loadDonations,
         requests,
         loadRequests,
-        showModal,
-        setShowModal,
-        donation,
-        setDonation,
-        donor,
-        setDonor,
+        donation, setDonation,
+        donor, setDonor,
         donationId,
-        setDonationId
+        setDonationId,
+        modal, setModal
     }}>
         {children}
     </DashboardContext.Provider>
