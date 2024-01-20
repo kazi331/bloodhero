@@ -21,7 +21,7 @@ app.use(cors(
     {
         origin: ['http://localhost:3000', 'https://bloodhero.vercel.app'],
         credentials: true,
-        "Access-Control-Allow-Credentials": true
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'x-auth-token', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
     }
 ))
 
