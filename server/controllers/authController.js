@@ -98,6 +98,9 @@ const login = async (req, res) => {
 
         // create token
         const token = await user.generateJWT();
+        // set header
+        res.header('Access-Control-Allow-Credentials', true);
+        // res.setHeader('Content-Type', 'text/html'); // nextjs 
         // save token in cookie
         res.cookie('token', 'Bearer ' + token, cookieConfig);
         // save user in cookie
