@@ -63,7 +63,7 @@ userSchema.methods.generateJWT = function () {
         provider: this.provider,
         email: this.email,
     }, process.env.JWT_SECRET,
-        { expiresIn: '1d' }
+        { expiresIn: '7d' }
     );
     return token;
 }
