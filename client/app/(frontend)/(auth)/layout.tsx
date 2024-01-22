@@ -1,4 +1,4 @@
-import Header from "@/components/common/Header"
+import Header from "./Header"
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (

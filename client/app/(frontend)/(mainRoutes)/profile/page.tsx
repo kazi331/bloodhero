@@ -7,7 +7,6 @@ import Link from 'next/link'
 import HeaderProfile from './HeaderProfile'
 import ProfileArea from './ProfileArea'
 
-
 const Page = () => {
     const { user, loading } = useAuth();
     if (loading || !user) return <FullPageLoading />

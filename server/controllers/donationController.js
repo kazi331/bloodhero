@@ -71,7 +71,7 @@ const createDonation = async (req, res) => {
 const getDonations = async (req, res) => {
     try {
         const donations = await Donation.find();
-        res.status(200).json({ success: true, data: donations });
+        res.status(200).json(donations);
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }
@@ -102,6 +102,42 @@ const updateDonation = async (req, res) => {
     }
 }
 
+// UPDATE DONATION STATUS
+const toggleDonationStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const newStatus = req.query.status;
+        const donation = await Donation.findById(id);
+        if (!donation) {
+            return res.status(404).json({ success: false, message: 'Donation not found' });
+        }
+        const updatedDonation = await Donation.findByIdAndUpdate(id, { isApproved: newStatus });
+        res.status(200).json({ success: true, data: updatedDonation });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Donation Update Failed", error: err.message });
+    }
+}
+
+// Delte Single DONATION STATUS
+const deleteSingleDonation = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Donation.findByIdAndDelete(id);
+        res.status(200).json({ success: true, message: 'Donation deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Failed to delete donation!", error: err.message });
+    }
+}
+// Delte Single DONATION STATUS
+const deleteMultipleDonation = async (req, res) => {
+    try {
+        await Donation.deleteMany({ _id: req.body.ids });
+        res.status(200).json({ success: true, message: 'Donations deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ success: false, message: "Failed to delete donations!", error: err.message });
+    }
+}
 export {
-    createDonation, getDonation, getDonations, updateDonation
+    createDonation, deleteMultipleDonation, deleteSingleDonation, getDonation, getDonations, toggleDonationStatus, updateDonation
 };
+

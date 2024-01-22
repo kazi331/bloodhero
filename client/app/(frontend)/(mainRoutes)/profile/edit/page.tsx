@@ -1,7 +1,7 @@
 'use client'
 import { Input } from "@/components/ui/input"
 import axios from "@/lib/axios"
-import { blood } from "@/lib/types"
+import { bloodType } from "@/lib/types"
 import { Button } from "@components/ui/button"
 import { ArrowLeftCircle, Calendar, Droplet, LocateIcon, Phone, User } from "lucide-react"
 import moment from "moment"
@@ -20,7 +20,7 @@ type updateData = {
     name: string,
     phone: number,
     area: string,
-    type: blood,
+    type: bloodType,
     isAvailable: boolean,
     gender: 'male' | 'female',
     dob: Date | string,

@@ -1,6 +1,6 @@
-import DonorsGrid from "./c/DonorsGrid";
-import FilterBarNative from "./c/FilterBarNative";
-import HeaderSearch from "./c/HeaderSearch";
+import DonorsGrid from "./DonorsGrid";
+import FilterBarNative from "./FilterBarNative";
+import HeaderSearch from "./HeaderSearch";
 
 const Page = () => {
     return (

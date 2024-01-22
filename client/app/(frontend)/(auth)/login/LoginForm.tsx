@@ -28,9 +28,10 @@ const LoginForm = () => {
     const onSubmit = async (fieldValues: loginData) => {
         try {
             const res = await axios.post('/auth/login', { ...fieldValues, email: fieldValues.email.toLowerCase() })
+            console.log(res.status)
             if (res.data.success) {
                 // push('/profile')
-                localStorage.setItem('user', JSON.stringify(res.data?.user));
+                // localStorage.setItem('user', JSON.stringify(res.data?.user));
                 toast.success(res.data.message, {
                     description: "You are being redirected to your profile..."
                 })
@@ -40,6 +41,12 @@ const LoginForm = () => {
             }
         } catch (err: any) {
             console.log(err.message)
+            if (err.response.status === 401) {
+                toast.error('Unauthorized', {
+                    description: "Check your email and password"
+                })
+                return;
+            }
             toast.error(err.response?.data.message, {
                 description: "Check your email and password"
             })

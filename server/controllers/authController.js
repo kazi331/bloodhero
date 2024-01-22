@@ -39,14 +39,14 @@ const register = async (req, res) => {
 
 // UPDATE USER
 const updateDonor = async (req, res) => {
-    // check if user already exists
-    const exist = await User.findById(req.user._id);
-
-    if (!exist) return res.status(404).json({
-        success: false,
-        message: 'User does not exists',
-    });
     try {
+        // check if user already exists
+        const exist = await User.findById(req.user._id);
+
+        if (!exist) return res.status(404).json({
+            success: false,
+            message: 'User does not exists',
+        });
         const { name, phone, dob, area, isAvailable, type, gender } = req.body;
 
         // update the user with the given data in the body;
@@ -75,39 +75,46 @@ const updateDonor = async (req, res) => {
 
 // LOGIN USER 
 const login = async (req, res) => {
+    try {
+        // check if user exists
+        const user = await User.findOne({ email: req.body.email });
 
-    // check if user exists
-    const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: 'Authentication failed',
+            });
+        }
 
-    if (!user) {
-        return res.status(401).json({
+        // check password
+        const match = await bcrypt.compare(req.body.password, user.password);
+
+        if (!match) {
+            return res.status(401).json({
+                success: false,
+                message: 'Authentication failed',
+            });
+        }
+
+        // create token
+        const token = await user.generateJWT();
+        // save token in cookie
+        res.cookie('token', 'Bearer ' + token, cookieConfig);
+        // save user in cookie
+        res.cookie('_id', user._id, cookieConfig);
+        // return user
+        res.status(200).json({
+            success: true,
+            message: 'Authentication successful',
+            user: { _id: user._id, name: user.name, email: user.email }
+        });
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({
             success: false,
             message: 'Authentication failed',
         });
     }
-
-    // check password
-    const match = await bcrypt.compare(req.body.password, user.password);
-
-    if (!match) {
-        return res.status(401).json({
-            success: false,
-            message: 'Authentication failed',
-        });
-    }
-
-    // create token
-    const token = await user.generateJWT();
-    // save token in cookie
-    res.cookie('token', 'Bearer ' + token, cookieConfig);
-    // save user in cookie
-    res.cookie('_id', user._id, cookieConfig);
-    // return user
-    res.status(200).json({
-        success: true,
-        message: 'Authentication successful',
-        user: { _id: user._id, name: user.name, email: user.email }
-    });
 }
 
 // LOGOUT USER

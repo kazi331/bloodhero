@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '@/context/authContext'
 import axios from '@/lib/axios'
-import { blood } from '@/lib/types'
+import { bloodType } from '@/lib/types'
 import { ArrowLeftCircle, Building, Calendar, Phone, User } from 'lucide-react'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
@@ -20,7 +20,7 @@ type donationData = {
     patient: string,
     phone: number,
     hospital: string,
-    type: blood,
+    type: bloodType,
     date: Date | string,
 }
 

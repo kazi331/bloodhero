@@ -49,6 +49,11 @@ export default async function middleware(
       return NextResponse.next();
     }
   }
+
+  // REDIRECT DASHBOARD PAGE TO DASHBOARD/DONORS
+  if (pathname == "/dashboard") {
+    return NextResponse.redirect(new URL("/dashboard/donors", request.url));
+  }
 }
 export const config = {
   matcher: ["/profile/:path*", "/dashboard/:path*", "/login", "/signup"],
