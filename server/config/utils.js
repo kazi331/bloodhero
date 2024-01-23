@@ -1,4 +1,3 @@
-import { clientURI } from "./urls.js"
 
 export const extractedId = (objID) => {
     return JSON.stringify(objID).replaceAll('"', '')
@@ -11,5 +10,5 @@ export const cookieConfig = {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
-    domain: clientURI,
+    // domain: clientURI,
 }
