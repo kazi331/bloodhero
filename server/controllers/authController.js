@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { cookieConfig } from '../config/utils.js';
 import User from '../models/userSchema.js';
+import { clientURI } from '../config/urls.js';
 
 // REGISTER USER
 const register = async (req, res) => {
@@ -103,7 +104,7 @@ const login = async (req, res) => {
         // res.setHeader('Content-Type', 'text/html'); // nextjs 
 
 
-        res.header('Access-Control-Allow-Origin', 'https://bloodhero.vercel.app');
+        res.header('Access-Control-Allow-Origin', clientURI);
         res.header('Access-Control-Allow-Credentials', true);
 
 

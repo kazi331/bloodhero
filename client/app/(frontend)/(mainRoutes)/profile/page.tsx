@@ -13,7 +13,7 @@ const Page = () => {
     return (
         <div className='px-6 bg-[#2d2d63] profile-bg h-full min-h-[calc(100vh-4rem)]'>
             <HeaderProfile userId={user?._id} />
-            {user.type ? <>
+            {user?.type ? <>
                 <ProfileArea user={user} />
                 <Donations donations={user?.donations} />
             </> :
