@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors(
     {
-        origin: ['http://localhost:3000', 'https://bloodhero.vercel.app'],
+        origin: ['https://bloodhero.vercel.app', 'http://localhost:3000'],
         credentials: true,
         // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'x-auth-token', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
     }
