@@ -7,6 +7,7 @@ import passport from 'passport';
 import './services/githubStrategy.js';
 import './services/googleStrategy.js';
 
+import { connectDB } from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import routes from './routes/routes.js';
 
