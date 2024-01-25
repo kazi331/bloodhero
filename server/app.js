@@ -14,9 +14,6 @@ import routes from './routes/routes.js';
 const app = express();
 
 // middlewares 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(cors(
     {
         origin: ['https://bloodhero.vercel.app', 'http://localhost:3000'],
@@ -24,6 +21,9 @@ app.use(cors(
         // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'x-auth-token', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
     }
 ))
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 
 // PASSPORT
