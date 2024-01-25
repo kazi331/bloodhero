@@ -3,7 +3,6 @@ import cors from 'cors';
 import 'dotenv/config';
 import express from 'express';
 import passport from 'passport';
-import { connectDB } from './config/db.js';
 
 import './services/githubStrategy.js';
 import './services/googleStrategy.js';
@@ -12,15 +11,16 @@ import authRoutes from './routes/authRoutes.js';
 import routes from './routes/routes.js';
 
 const app = express();
-
+const corsOptions = {
+    origin: ['https://bloodhero.vercel.app', 'http://localhost:3000'],
+    credentials: true,
+    optionsSuccessStatus: 200,
+    // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'x-auth-token', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
+}
+// pre-flight for cors
+app.options('*', cors(corsOptions));
 // middlewares 
-app.use(cors(
-    {
-        origin: ['https://bloodhero.vercel.app', 'http://localhost:3000'],
-        credentials: true,
-        // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'x-auth-token', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
-    }
-))
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
