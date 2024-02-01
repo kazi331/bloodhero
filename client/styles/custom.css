@@ -73,3 +73,8 @@
 .nav-active {
   @apply !text-gray-200 bg-gradient-to-tr from-[#363a4f] before:block before:absolute before:inset-0 before:w-1 before:bg-[#fa6393] shadow-lg;
 }
+
+.active-transparent-bg {
+  /* removes button clicks background in touch devices */
+  -webkit-tap-highlight-color: transparent;
+}
