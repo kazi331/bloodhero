@@ -32,7 +32,7 @@ const cardItems: cardType[] = [
         count: "235k",
         color: "text-blue-300",
         bg: "bg-[#fbefca]",
-        url: "/requests"
+        url: "#"
 
     }, {
         title: "Blood Bank",
@@ -48,7 +48,7 @@ const cardItems: cardType[] = [
         count: "more",
         color: "text-blue-300",
         bg: "bg-gray-100",
-        url: "/others"
+        url: "#"
 
     }
 ]
