@@ -11,18 +11,19 @@ export type donationType = {
 };
 
 export type userProps = {
+  uid?: string;
   _id: string;
-  name: string;
-  email?: string;
+  name?: string | null;
+  email?: string | null;
   dob?: string;
-  joined: string;
+  joined?: string;
   phone?: number;
   gender?: string;
   area?: string;
   type?: bloodType;
   isAvailable?: boolean;
   image?: string | null;
-  donations: donationType[] | null;
+  donations?: donationType[] | null;
   lastDonation?: string | null;
 };
 

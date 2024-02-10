@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import { toast } from "sonner";
 import app from "./firebaseConf";
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 export const socialLogin = (provider: AuthProvider) => {
   signInWithPopup(auth, provider)
