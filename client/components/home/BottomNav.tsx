@@ -46,14 +46,14 @@ const BottomNav = () => {
 type NavImgProps = { src: string | StaticImport, alt: string, url: String, pathname: String }
 
 const NavLink = ({ children, url }: { children: React.ReactNode, url: Url }) => {
-    return <Link href={url} className={`bottom-link flex flex-col items-center justify-center p-2 active:!bg-transparent `}>
+    return <Link href={url} className={`bottom-link flex flex-col items-center justify-center p-2 active-transparent-bg`}>
         {children}
     </Link>
 }
 
 const NavImg = ({ src, alt, url, pathname }: NavImgProps) => {
     return <Image src={src}
-        className={`transition-all hover:saturate-100 h-7 w-7  ${pathname === url ? "saturate-100 -translate-y-1" : "saturate-0"} `}
+        className={`transition-all hover:saturate-100 h-7 w-7 ${pathname === url ? "saturate-100 -translate-y-1" : "saturate-0"} `}
         alt={alt}
     />
 }

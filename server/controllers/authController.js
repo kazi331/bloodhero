@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { cookieConfig } from '../config/utils.js';
 import User from '../models/userSchema.js';
+import { clientURI } from '../config/urls.js';
 
 // REGISTER USER
 const register = async (req, res) => {
@@ -98,6 +99,15 @@ const login = async (req, res) => {
 
         // create token
         const token = await user.generateJWT();
+        // set header
+        // res.header('Access-Control-Allow-Credentials', true);
+        // res.setHeader('Content-Type', 'text/html'); // nextjs 
+
+
+        res.header('Access-Control-Allow-Origin', clientURI);
+        res.header('Access-Control-Allow-Credentials', true);
+
+
         // save token in cookie
         res.cookie('token', 'Bearer ' + token, cookieConfig);
         // save user in cookie

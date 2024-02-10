@@ -1,3 +1,4 @@
+
 export const extractedId = (objID) => {
     return JSON.stringify(objID).replaceAll('"', '')
 }

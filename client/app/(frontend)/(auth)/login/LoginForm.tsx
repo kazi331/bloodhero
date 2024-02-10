@@ -41,14 +41,14 @@ const LoginForm = () => {
             }
         } catch (err: any) {
             console.log(err.message)
-            if (err.response.status === 401) {
+            if (err.response?.status === 401) {
                 toast.error('Unauthorized', {
                     description: "Check your email and password"
                 })
                 return;
             }
-            toast.error(err.response?.data.message, {
-                description: "Check your email and password"
+            toast.error(err.response?.data?.message, {
+                description: "Authentication failed!"
             })
         }
     }
