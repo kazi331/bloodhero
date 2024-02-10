@@ -1,7 +1,7 @@
 'use client'
 import Error from "@/components/common/Error"
 import Captcha from "@/components/common/captcha"
-import axios from "@/lib/axios"
+import { emailRegister } from "@/lib/SocialLogin"
 import { Button } from "@components/ui/button"
 import { Input } from "@components/ui/input"
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react"
@@ -74,21 +74,7 @@ const Register = () => {
         if (!captchaVerified) {
             return toast.error('Please complete captcha verification')
         }
-        try {
-            const res = await axios.post('/auth/register', { ...fieldValues, email: fieldValues.email.toLowerCase() })
-            if (res.data.success) {
-                toast.success(res.data.message, {
-                    description: 'You can now login to your account!',
-                })
-                push('/login')
-            }
-        } catch (err: any) {
-            console.log(err.message)
-            toast.error(err.response?.data?.message, {
-                description: err.response?.data?.error || 'User Registration Failed!'
-            })
-        }
-
+        emailRegister(fieldValues.email, fieldValues.password)
     }
 
     return (
