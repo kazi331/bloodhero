@@ -31,7 +31,7 @@ const HeaderProfile = ({ userId }: { userId: string }) => {
         }
     }
     return (
-        <div className="topbar-h flex items-center justify-between ">
+        <div className="topbar-h flex items-center justify-between">
             <span />
             <p className='text-white font-semibold'>My Profile</p>
             <DropdownMenu>

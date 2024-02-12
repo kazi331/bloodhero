@@ -7,7 +7,7 @@ export const metadata = {
 const Page = () => {
     return (<div>
         <Header />
-        <div className="min-h-[calc(100vh-7rem)] flex items-center justify-center">Notifications</div>
+        <div className="min-h-[calc(100vh-7rem)] flex items-center justify-center">Blood Bank info</div>
     </div>
     )
 }
