@@ -8,7 +8,7 @@ const HeaderHome = () => {
         <div className="topbar-h flex items-center justify-between px-4">
             <span className="flex items-center space-x-1">
                 <Image src={mapIcon} alt="Map-icon" className='mr-1' />
-                <p className='text-primary/70 text-sm'>গোপালনগর, ব্রাহ্মণপাড়া, কুমিল্লা </p>
+                <p className='text-primary/70 text-sm font-tiro'>গোপালনগর, ব্রাহ্মণপাড়া, কুমিল্লা </p>
             </span>
             <Image src={toggleIcon} alt="Toggle button" className='w-5 h-5' />
         </div>

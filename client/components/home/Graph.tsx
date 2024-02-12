@@ -5,7 +5,7 @@ import graphNumber from 'public/images/graph-number.png'
 
 const Graph = () => {
     return (
-        <div className='mt-20 -mb-44 bg-gradient-to-b from-transparent to-slate-100'>
+        <div className='mt-20 -mb-44 bg-gradient-to-b from-transparent to-slate-50'>
             <div className="relative ">
                 <Image src={graphIndicator} alt="graph" className="w-2/3 -mb-28 h-auto " width={300} height={218} />
                 <div className="absolute -top-10 left-2/3 ">

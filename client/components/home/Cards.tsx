@@ -55,7 +55,7 @@ const cardItems: cardType[] = [
 
 const Cards = () => {
     return (
-        <div className="flex justify-center flex-wrap gap-4 py-3 bg-slate-50 p-3 pb-10">
+        <div className="flex justify-center flex-wrap gap-4 py-3 bg-gradient-to-b from-slate-50 p-3 pb-10">
             {
                 cardItems.map((item, index) => {
                     // return <Card key={index} item={item} />

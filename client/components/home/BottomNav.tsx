@@ -15,7 +15,7 @@ import profileIcon from 'public/icons/nav/profile.svg';
 const BottomNav = () => {
     const pathname = usePathname();
     return (
-        <div className="h-16 flex items-center justify-between w-full px-4 sticky left-0 bottom-0 bg-white  drop-shadow ">
+        <div className="h-16 flex items-center justify-between w-full px-4 sticky left-0 bottom-0 bg-white rounded-t-xl   drop-shadow  sm:bottom-2 sm:rounded-b-xl sm:rounded--none  ">
             <NavLink url="/" >
                 <NavImg src={homeIcon} alt="home icon" url="/" pathname={pathname} />
                 <Dot pathname={pathname} url="/" />
@@ -46,7 +46,9 @@ const BottomNav = () => {
 type NavImgProps = { src: string | StaticImport, alt: string, url: String, pathname: String }
 
 const NavLink = ({ children, url }: { children: React.ReactNode, url: Url }) => {
-    return <Link href={url} className={`bottom-link flex flex-col items-center justify-center p-2 active-transparent-bg`}>
+    return <Link
+        prefetch
+        href={url} className={`bottom-link flex flex-col items-center justify-center p-2 active-transparent-bg`}>
         {children}
     </Link>
 }
