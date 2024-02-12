@@ -53,10 +53,11 @@ const AddDonation = () => {
         // defaultValues: user,
     });
     const { user, loading } = useAuth();
+    // console.log(user)
 
     const onSubmit = async (fieldValues: donationData) => {
         try {
-            const res = await axios.post(`/donations`, fieldValues)
+            const res = await axios.post(`/donations`, fieldValues, { headers: { Authorization: `Bearer ${user.token}` } })
             if (res.data?.success) {
                 // console.log(res.data)
                 toast.success(res.data.message, {

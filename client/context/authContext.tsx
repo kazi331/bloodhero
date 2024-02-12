@@ -13,18 +13,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         setLoading(true)
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                axios.get(`/signed-in-user/${user.providerData[0].uid}`)
-                    .then(({ data }) => {
-                        setUser(data);
-                        localStorage.setItem('user', JSON.stringify(data));
-                    })
-                    .catch(err => console.log(err));
-                setLoading(false);
-            } else {
-                setUser({} as userProps)
-                setLoading(false);
+        onAuthStateChanged(auth, async (user) => {
+            try {
+
+                if (user) {
+                    const token = await user.getIdToken();
+                    const res = await axios.get(`/signed-in-user/${user.providerData[0].uid}`)
+                    setUser({ ...res.data, token })
+                    setLoading(false);
+                } else {
+                    setUser({} as userProps)
+                    setLoading(false);
+                }
+            } catch (error: any) {
+                console.log(error.message)
             }
         })
     }, [])
