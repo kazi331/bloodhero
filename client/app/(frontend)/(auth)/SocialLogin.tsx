@@ -1,5 +1,5 @@
 'use client'
-import { appleLogin, facebookLogin, googleLogin } from '@/lib/SocialLogin';
+import { appleLogin, facebookLogin, googleLogin } from '@/lib/logins';
 import { Button } from '@components/ui/button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';

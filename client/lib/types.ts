@@ -12,7 +12,7 @@ export type donationType = {
 
 export type userProps = {
   uid?: string;
-  _id: string;
+  _id?: string;
   name?: string | null;
   email?: string | null;
   dob?: string;

@@ -3,17 +3,17 @@ import { Schema, model } from 'mongoose';
 import { bloodTypes } from '../config/utils.js';
 
 const userSchema = new Schema({
+    uid: {
+        type: String,
+        required: [true, 'uid is required']
+    },
     name: String,
     email: String,
     password: { type: String, max: 20, min: 6 },
     provider: {
         type: String,
         required: true,
-        default: 'email',
     },
-    googleId: String,
-    githubId: String,
-    facebookId: String,
     gender: { type: String, enum: ['male', 'female'] },
     joined: { type: Date, default: Date.now, },
     area: String,

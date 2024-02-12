@@ -14,8 +14,7 @@ function Login() {
             Don&apos;t have an account?
             <Link href="/signup" className='hover:text-rose-400'> Sign Up here</Link>
         </p>
-    </>
-    );
+    </>)
 }
 
 export default Login;

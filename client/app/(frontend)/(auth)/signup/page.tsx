@@ -1,7 +1,7 @@
 'use client'
 import Error from "@/components/common/Error"
 import Captcha from "@/components/common/captcha"
-import { emailRegister } from "@/lib/SocialLogin"
+import { emailRegister } from "@/lib/logins"
 import { Button } from "@components/ui/button"
 import { Input } from "@components/ui/input"
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react"

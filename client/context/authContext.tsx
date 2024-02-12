@@ -1,4 +1,5 @@
-import { auth } from '@/lib/SocialLogin';
+import axios from '@/lib/axios';
+import { auth } from '@/lib/logins';
 import { userProps } from '@/lib/types';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
@@ -7,28 +8,21 @@ const AuthContext = createContext<{ user: userProps, loading: boolean }>({ user:
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
-
     const [user, setUser] = useState<userProps>({} as userProps);
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
         setLoading(true)
         onAuthStateChanged(auth, (user) => {
             if (user) {
+                axios.get(`/signed-in-user/${user.providerData[0].uid}`)
+                    .then(({ data }) => setUser(data))
+                    .catch(err => console.log(err));
                 setLoading(false);
-                console.log(user.providerData[0]);
-                setUser({
-                    _id: user.uid,
-                    name: user.displayName,
-                    email: user.email,
-                    image: user.photoURL,
-                    joined: user.metadata.creationTime,
-                })
             } else {
-                setLoading(false)
                 setUser({} as userProps)
+                setLoading(false);
             }
-
         })
     }, [])
 

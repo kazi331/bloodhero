@@ -11,13 +11,20 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { toast } from "sonner";
+import axios from "./axios";
 import app from "./firebaseConf";
 export const auth = getAuth(app);
 
 export const socialLogin = (provider: AuthProvider) => {
   signInWithPopup(auth, provider)
     .then((credential) => {
-      const user = credential.user;
+      const user = credential.user.providerData[0];
+      // save users into database
+      axios
+        .post("/auth/login", user)
+        .then()
+        .catch((err) => console.log(err));
+
       localStorage.setItem("user", JSON.stringify(user));
       if (user) {
         toast.success(`Welcome, ${user.displayName}`);
@@ -37,6 +44,8 @@ export const socialLogin = (provider: AuthProvider) => {
       } else if (error.message.includes("auth/user-cancelled")) {
         toast.error("User cancelled the sign-in flow");
       } else if (error.message.includes("auth/popup-closed-by-user")) {
+        toast.error("Popup closed by user");
+      } else if (error.message.includes("auth/cancelled-popup-request")) {
         toast.error("Popup closed by user");
       } else {
         toast.error(error.message);
@@ -78,7 +87,7 @@ export const emailRegister = (email: string, password: string) => {
 export const emailLogin = (email: string, password: string) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
+      const user = userCredential.user.providerData[0];
       localStorage.setItem("user", JSON.stringify(user));
       toast.success(`Welcome, ${user?.email}`);
     })

@@ -1,7 +1,7 @@
 import Error from '@/components/common/Error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { emailLogin } from '@/lib/SocialLogin';
+import { emailLogin } from '@/lib/logins';
 
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 

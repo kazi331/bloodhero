@@ -24,10 +24,7 @@ export default function FrontLayout({ children, }: { children: React.ReactNode }
 
     return (
         <AuthProvider>
-            <div className={`
-            ${siliguri.variable}
-            
-            `}>
+            <div className={`${siliguri.variable}`}>
                 <div className="container w-full max-w-[30rem]" >
                     <div className='h-full min-h-[calc(100vh-4rem)] bg-white'>
                         {children}

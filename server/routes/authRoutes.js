@@ -2,17 +2,17 @@ import express from 'express';
 import passport from 'passport';
 import { clientURI } from '../config/urls.js';
 import { cookieConfig } from '../config/utils.js';
-import { checkToken, login, logout, register, updateDonor } from '../controllers/authController.js';
+import { login, updateDonor } from '../controllers/authController.js';
 import checkLogin from '../middlewares/checkLogin.js';
 const router = express.Router();
 
 
 
 // AUTH RELATED ROUTES
-router.post('/register', register)
+// router.post('/register', register)
 router.post('/login', login)
-router.get('/logout', logout)
-router.get('/checktoken', checkToken)
+// router.get('/logout', logout)
+// router.get('/checktoken', checkToken)
 router.patch('/update/:donorId', checkLogin, updateDonor)
 
 // SOCIAL FAILED ROUTES
