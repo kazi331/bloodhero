@@ -20,8 +20,10 @@ const Page = () => {
             <TextContent />
             <Graph />
             <Cards />
-        </div>
+            </div>
+
     )
 }
 
 export default Page
+
