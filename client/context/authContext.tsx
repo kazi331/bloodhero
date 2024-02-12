@@ -16,7 +16,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 axios.get(`/signed-in-user/${user.providerData[0].uid}`)
-                    .then(({ data }) => setUser(data))
+                    .then(({ data }) => {
+                        setUser(data);
+                        localStorage.setItem('user', JSON.stringify(data));
+                    })
                     .catch(err => console.log(err));
                 setLoading(false);
             } else {

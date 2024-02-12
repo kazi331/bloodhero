@@ -39,11 +39,12 @@ const login = async (req, res) => {
 }
 
 // UPDATE USER
-const updateDonor = async (req, res) => {
+const updateProfile = async (req, res) => {
     try {
         // check if user already exists
-        const exist = await User.findById(req.user._id);
-
+        const exist = await User.findById(req.params.userId);
+        console.log('exist:', exist);
+        
         if (!exist) return res.status(404).json({
             success: false,
             message: 'User does not exists',
@@ -53,7 +54,7 @@ const updateDonor = async (req, res) => {
         // update the user with the given data in the body;
 
 
-        const user = await User.findByIdAndUpdate(req.user._id, { name, area, isAvailable, type, gender, dob, phone },)
+        const user = await User.findByIdAndUpdate(req.params.userId, { name, area, isAvailable, type, gender, dob, phone },)
 
         res.status(201).json({
             success: true,
@@ -75,5 +76,5 @@ const updateDonor = async (req, res) => {
 
 
 
-export { login, updateDonor };
+export { login, updateProfile };
 

@@ -1,14 +1,14 @@
 'use client'
 import { Input } from "@/components/ui/input"
+import { useAuth } from "@/context/authContext"
 import axios from "@/lib/axios"
 import { bloodType } from "@/lib/types"
 import { Button } from "@components/ui/button"
 import { ArrowLeftCircle, Calendar, Droplet, LocateIcon, Phone, User } from "lucide-react"
-import moment from "moment"
 import Link from "next/link"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import unions from 'public/data/villages.json'
-import { PropsWithChildren, useEffect, useState } from "react"
+import { PropsWithChildren, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -58,7 +58,7 @@ const UpdateUserData = () => {
     const [user, setUser] = useState<updateData>({} as updateData)
 
     const { push, back } = useRouter();
-    const { userId } = useParams();
+    const { user: currenUser, loading } = useAuth();
 
     // if (!user.name) return
 
@@ -67,9 +67,8 @@ const UpdateUserData = () => {
     });
 
     const onSubmit = async (fieldValues: updateData) => {
-        console.log(fieldValues)
         try {
-            const res = await axios.patch(`/auth/update/${userId}`, fieldValues)
+            const res = await axios.patch(`/auth/update/${currenUser._id}`, fieldValues)
             if (res.data?.success) {
                 // console.log(res.data)
                 toast.success(res.data.message, {
@@ -92,30 +91,32 @@ const UpdateUserData = () => {
         }
     }
 
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await axios.get(`/logged-user`);
-                setUser(res.data)
-                reset({ ...res.data, dob: moment(res.data.dob).format("YYYY-MM-DD") });
-            } catch (err: any) {
-                console.log(err.message);
-                toast.error(err.message)
-            }
-        }
-        getUser()
-    }, [userId, reset]);
+    /*  useEffect(() => {
+         const getUser = async () => {
+             try {
+                 const res = await axios.get(`/signed-in-user/${currenUser.uid}`);
+                 setUser(res.data)
+                 reset({ ...res.data, dob: moment(res.data.dob).format("YYYY-MM-DD") });
+             } catch (err: any) {
+                 console.log(err.message);
+                 toast.error(err.message)
+             }
+         }
+         getUser()
+     }, [userId, reset]); */
 
-    return (
+
+    if (loading) return <p>Loading...</p>
+    if (!loading && currenUser.uid) return (
         <>
-            <div className="p-10 rounded-tr-3xl rounded-tl-3xl text-center" style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px -10px 22px 0px' }}>
+            <div className="p-10 rounded-t-3xl text-center" style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px -10px 22px 0px' }}>
                 <h2 className="flex items-center justify-between mb-8">
                     <Link className="text-sm text-primary  flex  items-center" href="/profile"><ArrowLeftCircle size={18} className="mr-1" /> Profile </Link>
                     <span className="text-gray-600 text-lg font-medium title-font">Update Your Profile</span>
                     <span></span>
                 </h2>
 
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} >
                     {/* Name */}
                     <label htmlFor="name" className="flex relative mt-2">
                         <Input

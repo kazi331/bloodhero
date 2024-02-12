@@ -80,7 +80,6 @@ const updateUser = async (req, res) => {
 
     const updatedUser = await User.findOneAndUpdate({ _id: id }, req.body);
     if (updatedUser) {
-
         res.status(202).json({
             success: true,
             message: 'User updated successfully',

@@ -2,8 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import { clientURI } from '../config/urls.js';
 import { cookieConfig } from '../config/utils.js';
-import { login, updateDonor } from '../controllers/authController.js';
-import checkLogin from '../middlewares/checkLogin.js';
+import { login, updateProfile } from '../controllers/authController.js';
 const router = express.Router();
 
 
@@ -13,7 +12,7 @@ const router = express.Router();
 router.post('/login', login)
 // router.get('/logout', logout)
 // router.get('/checktoken', checkToken)
-router.patch('/update/:donorId', checkLogin, updateDonor)
+router.patch('/update/:userId', updateProfile)
 
 // SOCIAL FAILED ROUTES
 router.get("/failed/:provider", (req, res) => {

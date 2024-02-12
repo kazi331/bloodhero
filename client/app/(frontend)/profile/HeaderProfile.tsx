@@ -5,27 +5,19 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import axios from "@/lib/axios";
+import { auth } from "@/lib/logins";
+import { signOut } from "firebase/auth";
 import { Menu } from 'lucide-react';
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { toast } from "sonner";
 
-
-
 const HeaderProfile = ({ userId }: { userId: string }) => {
     const { push } = useRouter();
     const logout = async () => {
         try {
-            const res = await axios.get('/auth/logout')
-            if (res.data.success) {
-                toast.success(res.data.message, {
-                    description: 'You will be redirected to login page',
-                })
-            }
-            localStorage.removeItem('user')
+            signOut(auth)
             push('/login')
-
         } catch (err: any) {
             toast.error(err.response?.data.message)
         }
