@@ -12,8 +12,8 @@ const Profile = () => {
     const { push } = useRouter();
     const { user, loading } = useAuth();
     if (loading && !user) return <FullPageLoading />
-    if (!loading && !user.uid) return push('/login')
-    if (!loading && user.uid) {
+    if (!loading && !user?.uid) return push('/login')
+    if (!loading && user?.uid) {
         return (
             <div className='px-6 bg-[#2d2d63] profile-bg h-full min-h-[calc(100vh-4rem)]'>
                 <HeaderProfile userId={user.uid} />
@@ -33,7 +33,7 @@ const Profile = () => {
             </div >
         )
     }
-    return
+    return null;
 }
 
 export default Profile

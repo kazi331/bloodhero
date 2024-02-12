@@ -83,7 +83,7 @@ const AddDonation = () => {
 
     return (
         <div>
-            <div className="p-10 rounded-tr-3xl rounded-tl-3xl text-center" style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px -10px 22px 0px' }}>
+            <div className="p-10  text-center" >
                 <div className="flex items-center justify-between mb-8">
                     <Link className="text-sm text-primary  flex  items-center" href="/profile"><ArrowLeftCircle size={18} className="mr-1" /> Profile </Link>
                     <span className="text-gray-600 text-lg font-medium title-font">Add new donation</span>
@@ -133,7 +133,6 @@ const AddDonation = () => {
                     {errors.date && <Error>{errors.date.message}</Error>}
 
                     <Button disabled={isSubmitting} type="submit" className="mt-4 w-full hover:shadow-lg active:animate-out transition-all">Submit Donation</Button>
-
 
                 </form>
             </div>

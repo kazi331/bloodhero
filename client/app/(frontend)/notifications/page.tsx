@@ -24,11 +24,11 @@ const Page = () => {
         <Header />
         <div className="min-h-[calc(100vh-7rem)] flex flex-col items-center justify-center">
             <h1> Notifications</h1>
-            {user._id ? <>
+            {user?._id ? <>
                 <h3>{user.name || user.email}</h3>
                 <Button variant="destructive" onClick={logout} >Logout</Button>
             </> :
-                <Button variant="ghost"><Link href="/login">Login</Link></Button>
+                <Link href="/login"><Button variant="destructive_neon">Login</Button></Link>
             }
         </div>
     </div>

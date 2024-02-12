@@ -1,14 +1,16 @@
 'use client'
+import FullPageLoading from "@/components/common/FullPageLoading"
 import { Input } from "@/components/ui/input"
 import { useAuth } from "@/context/authContext"
 import axios from "@/lib/axios"
 import { bloodType } from "@/lib/types"
 import { Button } from "@components/ui/button"
 import { ArrowLeftCircle, Calendar, Droplet, LocateIcon, Phone, User } from "lucide-react"
+import moment from "moment"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import unions from 'public/data/villages.json'
-import { PropsWithChildren, useState } from "react"
+import { PropsWithChildren, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -58,7 +60,7 @@ const UpdateUserData = () => {
     const [user, setUser] = useState<updateData>({} as updateData)
 
     const { push, back } = useRouter();
-    const { user: currenUser, loading } = useAuth();
+    const { user: currentUser, loading } = useAuth();
 
     // if (!user.name) return
 
@@ -68,7 +70,7 @@ const UpdateUserData = () => {
 
     const onSubmit = async (fieldValues: updateData) => {
         try {
-            const res = await axios.patch(`/auth/update/${currenUser._id}`, fieldValues)
+            const res = await axios.patch(`/auth/update/${currentUser._id}`, fieldValues)
             if (res.data?.success) {
                 // console.log(res.data)
                 toast.success(res.data.message, {
@@ -77,7 +79,6 @@ const UpdateUserData = () => {
                 window.location.href = "/profile"
             }
         } catch (err: any) {
-            console.log(err.message)
             if (err.response?.data) {
                 toast.error(err.response.data.message || err.message, {
                     description: 'Please try again later!'
@@ -91,25 +92,25 @@ const UpdateUserData = () => {
         }
     }
 
-    /*  useEffect(() => {
-         const getUser = async () => {
-             try {
-                 const res = await axios.get(`/signed-in-user/${currenUser.uid}`);
-                 setUser(res.data)
-                 reset({ ...res.data, dob: moment(res.data.dob).format("YYYY-MM-DD") });
-             } catch (err: any) {
-                 console.log(err.message);
-                 toast.error(err.message)
-             }
-         }
-         getUser()
-     }, [userId, reset]); */
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                // const res = await axios.get(`/signed-in-user/${currentUser.uid}`);
+                setUser(currentUser as updateData)
+                // setUser(res.data)
+                reset({ ...currentUser as updateData, dob: moment(currentUser?.dob).format("YYYY-MM-DD") });
+            } catch (err: any) {
+                toast.error(err.message)
+            }
+        }
+        getUser()
+    }, [currentUser, reset]);
 
 
-    if (loading) return <p>Loading...</p>
-    if (!loading && currenUser.uid) return (
+    if (loading) return <FullPageLoading />
+    if (!loading && currentUser.uid) return (
         <>
-            <div className="p-10 rounded-t-3xl text-center" style={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px -10px 22px 0px' }}>
+            <div className="p-10  text-center" >
                 <h2 className="flex items-center justify-between mb-8">
                     <Link className="text-sm text-primary  flex  items-center" href="/profile"><ArrowLeftCircle size={18} className="mr-1" /> Profile </Link>
                     <span className="text-gray-600 text-lg font-medium title-font">Update Your Profile</span>
@@ -234,7 +235,5 @@ const UpdateUserData = () => {
 
 // error message component 
 const Error = ({ children }: PropsWithChildren) => <p className="text-red-500 text-left text-xs mt-1"> {children} </p>
-
-
 
 export default UpdateUserData;
