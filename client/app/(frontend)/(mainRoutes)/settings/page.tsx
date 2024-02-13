@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button"
+import Header from "./Header"
 
 const Page = () => {
 
     return (
-        <div className="text-white bg-black">
-            <h2>Settings Page</h2>
-            <Button />
+        <div>
+            <Header />
+            <div className="min-h-[calc(100vh-7rem)] flex items-center justify-center">
+                <h2>Settings</h2>
+            </div>
         </div>
     )
 }

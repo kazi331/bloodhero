@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import Header from "./Header"
 
 const Page = () => {
@@ -7,7 +6,7 @@ const Page = () => {
         <div>
             <Header />
             <div className="min-h-[calc(100vh-7rem)] flex items-center justify-center">
-                <h2>Notifications</h2>
+                <h2>Blood Bank</h2>
             </div>
         </div>
     )
