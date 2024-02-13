@@ -23,7 +23,7 @@ export const isAuthenticated = async (token: string) => {
 
 export const logout = async () => {
   // const res = await axios.get(`${serverURI}/api/auth/logout`);
-  const res = await axios.get(`http://localhost:5000/api/auth/logout`);
+  const res = await axios.get(`${serverURI}/api/auth/logout`);
   console.log(res.data);
   localStorage.removeItem("user");
 };
