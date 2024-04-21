@@ -1,4 +1,4 @@
-import { Hind_Siliguri, Inter, Tiro_Bangla } from 'next/font/google';
+import { Inter, Tiro_Bangla } from 'next/font/google';
 import '../styles/custom.css';
 import '../styles/globals.css';
 
@@ -83,10 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="developer-linkedin" content="https://www.linkedin.com/in/kazi331/" />
       </head>
       <body>
-        <main
-          // className={inter.className}
-          className={` ${tiro.variable}  ${inter.className} `}
-        >{children}</main>
+        <main className={` ${tiro.variable}  ${inter.className} `}>{children}</main>
       </body>
     </html>
   )

@@ -60,7 +60,7 @@ dependencies:
     specifier: ^1.5.1
     version: 1.5.1
   bear-react-carousel:
-    specifier: ^4.0.16
+    specifier: ^4.0.18
     version: 4.0.18(react-dom@18.2.0)(react@18.2.0)
   class-variance-authority:
     specifier: ^0.7.0
@@ -113,19 +113,19 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^20.8.0
+    specifier: ^20.8.7
     version: 20.8.7
   '@types/react':
-    specifier: ^18.2.23
+    specifier: ^18.2.29
     version: 18.2.29
   '@types/react-dom':
-    specifier: ^18.2.8
+    specifier: ^18.2.13
     version: 18.2.13
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.31)
   depcheck:
-    specifier: ^1.4.6
+    specifier: ^1.4.7
     version: 1.4.7
   postcss:
     specifier: ^8.4.31
