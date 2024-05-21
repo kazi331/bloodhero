@@ -41,21 +41,16 @@ const Captcha = ({ captchaText, captchaInput, setCaptchaText, setCaptchaInput, c
     }, []);
 
     return (
-
-        <div className='my-2 py-2 '>
-            {/* <canvas id='canvas' width={200} height={30} ></canvas> */}
-            {/* <p className='text-xs text-gray-500 mb-2' > Enter the text below to veirfy you are human </p> */}
-            <div className="flex items-center justify-center  space-x-2 md:space-x-4">
-                <div className='text-indigo-700 text-2xl tracking-widest font-sans font-bold whitespace-nowrap pointer-events-none select-none'>
-                    {
-                        captchaText.split("").map((item, index) => <span key={index}
-                        // style={{ color: `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`, }}
-                        >
-                            {item}
-                        </span>
-                        )
-                    }
-                </div>
+        <div className="grid grid-cols-12 space-x-2 md:space-x-4 my-2 py-2">
+            <div className='col-span-4 text-indigo-700 text-2xl tracking-widest font-sans font-bold whitespace-nowrap pointer-events-none select-none'>
+                {
+                    captchaText.split("").map((item, index) => <span key={index}>
+                        {item}
+                    </span>
+                    )
+                }
+            </div>
+            <div className='col-span-8 flex items-center justify-center gap-2'>
                 <div className='relative'>
                     <Input className='w-full py-0 pr-10 ' onChange={e => setCaptchaInput(e.target.value)} value={captchaInput} id="captcha" />
                     {captchaVerified && <CheckCircle className='text-green-500 font-bold block w-4 h-full  absolute top-0 right-4 ' />}
@@ -64,11 +59,7 @@ const Captcha = ({ captchaText, captchaInput, setCaptchaText, setCaptchaInput, c
                     <RefreshCcwIcon className='active:scale-90 transition-transform' aria-description='refresh' />
                 </button>
             </div>
-
         </div>
-
-
-
     )
 }
 
