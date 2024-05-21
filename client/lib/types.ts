@@ -1,27 +1,30 @@
-export type blood = "a" | "a-" | "b" | "b-" | "ab" | "ab-" | "o" | "o-";
+export type bloodType = "a" | "a-" | "b" | "b-" | "ab" | "ab-" | "o" | "o-";
+export type genderType = "male" | "female";
 
 export type donationType = {
   isApproved: boolean;
   _id: string;
   patient: string;
   hospital: string;
-  type?: blood;
+  type?: bloodType;
   date: string;
 };
 
 export type userProps = {
-  _id: string;
-  name: string;
-  email?: string;
+  token: any;
+  uid?: string;
+  _id?: string;
+  name?: string | null;
+  email?: string | null;
   dob?: string;
-  joined: string;
+  joined?: string;
   phone?: number;
   gender?: string;
   area?: string;
-  type?: blood;
+  type?: bloodType;
   isAvailable?: boolean;
   image?: string | null;
-  donations: donationType[] | null;
+  donations?: donationType[] | null;
   lastDonation?: string | null;
 };
 
@@ -29,25 +32,29 @@ export type donorType = {
   _id: string;
   name: string;
   area: string;
-  type: blood;
+  dob: Date | string;
+  type: bloodType;
   phone: number;
   donations?: donationType[];
   isAvailable: boolean;
-  image: string | null;
+  image?: string;
+  lastDonation: string | null;
+  joined: string;
+  gender: genderType;
 };
 
 export type donorProfileType = {
   _id: string;
   name: string;
-  type: blood;
+  type: bloodType;
   donations?: donationType[];
   isAvailable: boolean;
-  image: string | null;
+  image?: string;
   lastDonation: string | null;
   joined: string;
   phone: Number;
-  gender: "male" | "female";
-  age: Number;
+  gender: genderType;
+  dob: Date | string;
   area: string;
 };
 
@@ -60,7 +67,7 @@ export type formValues = {
   isAvailable?: boolean;
   image?: string | null;
   joined?: string;
-  gender: "male" | "female";
+  gender: genderType;
   area?: string;
 };
 

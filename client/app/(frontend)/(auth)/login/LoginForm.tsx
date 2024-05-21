@@ -1,7 +1,7 @@
 import Error from '@/components/common/Error';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import axios from '@/lib/axios';
+import { emailLogin } from '@/lib/logins';
 
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 
@@ -9,7 +9,6 @@ import { useRouter } from 'next/navigation';
 
 import { FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 
 const emailRegExp = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; // support only gmail.com
@@ -25,25 +24,8 @@ const LoginForm = () => {
         e.preventDefault();
         setShow(prev => !prev)
     }
-    const onSubmit = async (fieldValues: loginData) => {
-        try {
-            const res = await axios.post('/auth/login', { ...fieldValues, email: fieldValues.email.toLowerCase() })
-            if (res.data.success) {
-                // push('/profile')
-                localStorage.setItem('user', JSON.stringify(res.data?.user));
-                toast.success(res.data.message, {
-                    description: "You are being redirected to your profile..."
-                })
-                setTimeout(() => {
-                    window.location.href = '/profile' // this is a hack to reload the page and get new data from server
-                }, 1000);
-            }
-        } catch (err: any) {
-            console.log(err.message)
-            toast.error(err.response?.data.message, {
-                description: "Check your email and password"
-            })
-        }
+    const onSubmit = (fieldValues: loginData) => {
+        emailLogin(fieldValues.email, fieldValues.password);
     }
 
     return (

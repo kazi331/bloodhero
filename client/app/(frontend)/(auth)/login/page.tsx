@@ -10,12 +10,8 @@ function Login() {
         <SocialLogin />
         <Separator />
         <LoginForm />
-        <p className="leading-relaxed text-sm text-end mb-5 text-gray-600 select-none mt-6">
-            Don&apos;t have an account?
-            <Link href="/signup" className='hover:text-rose-400'> Sign Up here</Link>
-        </p>
-    </>
-    );
+        <Footer />
+    </>)
 }
 
 export default Login;
@@ -25,3 +21,8 @@ const Separator = () => <div className="flex items-center space-x-3 my-4">
     <span className='whitespace-nowrap text-gray-500 text-sm'>Or continue with</span>
     <div className='w-full h-0.5 rounded-full bg-gray-200 '></div>
 </div>
+
+const Footer = () => <p className="leading-relaxed text-sm text-end mb-5 text-gray-600 select-none mt-6">
+    Don&apos;t have an account?
+    <Link href="/signup" className='hover:text-rose-400'> Sign Up here</Link>
+</p>

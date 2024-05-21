@@ -3,8 +3,8 @@ import User from "../models/userSchema.js";
 const checkAdmin = async (req, res, next) => {
     try {
         const user = await User.findById(req.user._id);
-        if (user.role === 'admin') {
-            req.user.role = 'admin';
+        if (user.role === 'admin' || user.role === 'dev') {
+            req.user.role = user.role;
             next();
         } else {
             res.status(401).json({

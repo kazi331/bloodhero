@@ -1,3 +1,4 @@
+import { Inter, Tiro_Bangla } from 'next/font/google';
 import '../styles/custom.css';
 import '../styles/globals.css';
 
@@ -37,13 +38,29 @@ export const metadata = {
   developerGithub: 'https://github.com/kazi331',
   developerLinkedin: 'https://www.linkedin.com/in/kazi331/',
 };
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap'
+})
+
+
+const tiro = Tiro_Bangla({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-tiro',
+})
+
+
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
       <head>
         <title>Donate blood, save lives</title>
-        <meta name="description" content="Donate blood, save lives" />
+        <meta name="description" content="Donate blood, Save lives" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ffffff" />
 
@@ -61,12 +78,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="developer-email" content="kazisharifulislam52@gmail.com" />
         <meta name="developer-phone" content="+8801612178331" />
         <meta name="developer-address" content="Dhaka, Bangladesh" />
-        <meta name="developer-website" content="https://kazi-sharif.web.app" />
+        <meta name="developer-website" content="https://kazi331.vercel.app" />
         <meta name="developer-github" content="https://github.com/kazi331" />
         <meta name="developer-linkedin" content="https://www.linkedin.com/in/kazi331/" />
       </head>
       <body>
-        <main>{children}</main>
+        <main className={` ${tiro.variable}  ${inter.className} `}>{children}</main>
       </body>
     </html>
   )

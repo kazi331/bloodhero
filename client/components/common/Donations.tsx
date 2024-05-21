@@ -5,7 +5,7 @@ import Image from 'next/image'
 import bloodIcon from 'public/icons/home/blood.svg'
 
 
-const Donations = ({ donations }: { donations: donationType[] | null }) => {
+const Donations = ({ donations }: { donations: donationType[] | null | undefined }) => {
     return (
         <Tabs defaultValue="donations" className="mt-10 text-white/80">
             <TabsList className="w-full rounded-lg shadow bg-transparent mb-4">

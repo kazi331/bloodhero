@@ -67,3 +67,14 @@
 .info-item {
   @apply mt-1  bg-gradient-to-r from-gray-200/10  hover:bg-gray-200/10 rounded p-1 leading-tight;
 }
+.nav-item {
+  @apply flex items-center px-4 py-2 md:py-4 md:pl-8 text-[#606885] hover:text-gray-200 hover:bg-gradient-to-tr from-[#363a4f] transition-colors cursor-pointer;
+}
+.nav-active {
+  @apply !text-gray-200 bg-gradient-to-tr from-[#363a4f] before:block before:absolute before:inset-0 before:w-1 before:bg-[#fa6393] shadow-lg;
+}
+
+.active-transparent-bg {
+  /* removes button clicks background in touch devices */
+  -webkit-tap-highlight-color: transparent;
+}

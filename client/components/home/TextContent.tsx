@@ -1,15 +1,10 @@
 
 const TextContent = () => {
     return (
-        <div className="text-center my-10">
-            <h2 className="uppercase text-lg text-slate-500">Give the gift of life</h2>
-            <h1 className="uppercase text-3xl ">
-                <span className="font-medium text-primary/80">Donate</span>
-                <span className="font-bold text-primary"> Blood</span>
-            </h1>
-            <p className="text-center my-5 text-sm font-medium text-slate-500">
-                Each Donations can help save up to 3 lives!
-            </p>
+        <div className="text-center my-10 font-tiro">
+            <h2 className="uppercase text-lg text-slate-500 mb-2">তুচ্ছ নয় রক্ত দান, বাঁচাতে পারে একটি প্রাণ।</h2>
+            <h1 className="text-3xl sm:text-4xl font-bold text-primary/80 ">গোপালনগর রক্তিমালয় সংগঠন </h1>
+            <p className="text-center my-1  text-sm font-medium text-slate-500"> স্থাপিত ২০২১ ইং</p>
         </div>
     )
 }
