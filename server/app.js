@@ -13,8 +13,7 @@ import routes from './routes/routes.js';
 
 const app = express();
 const corsOptions = {
-    origin: [
-        'https://bloodhero.vercel.app', 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002',],
+    origin: ['https://bloodhero.vercel.app', 'http://localhost:3000', 'https://roktimaloy.org',],
     credentials: true,
     optionsSuccessStatus: 200,
     // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'x-auth-token', 'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
