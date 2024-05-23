@@ -32,6 +32,7 @@ export default async function middleware(
   // REDIRECT LOGGED IN USERS TO PROFILE
   if (pathname == "/login" || pathname == "/signup") {
     const token = request.cookies.get("token")?.value;
+    console.log(token)
     if (token) {
       try {
         // check  if the token is valid
