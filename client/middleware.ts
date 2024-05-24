@@ -32,7 +32,7 @@ export default async function middleware(
   // REDIRECT LOGGED IN USERS TO PROFILE
   if (pathname == "/login" || pathname == "/signup") {
     const token = request.cookies.get("token")?.value;
-    console.log(token)
+    console.log(token);
     if (token) {
       try {
         // check  if the token is valid
@@ -57,5 +57,12 @@ export default async function middleware(
   }
 }
 export const config = {
-  matcher: ["/profile/:path*", "/dashboard/:path*", "/login", "/signup"],
+  matcher: [
+    "/profile/:path*",
+    "/dashboard/:path*",
+    "/login",
+    "/signup",
+    "/((?!api|_next/static|_next/image|.*\\.png$|.*\\.jpg$).*)",
+  ],
+  // matcher: ["/((?!api|_next/static|_next/image|.*\\.png$|.*\\.jpg$).*)"],
 };

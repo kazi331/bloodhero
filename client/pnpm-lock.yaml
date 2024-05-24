@@ -60,7 +60,7 @@ dependencies:
     specifier: ^1.5.1
     version: 1.5.1
   bear-react-carousel:
-    specifier: ^4.0.16
+    specifier: ^4.0.18
     version: 4.0.18(react-dom@18.2.0)(react@18.2.0)
   class-variance-authority:
     specifier: ^0.7.0
@@ -113,19 +113,19 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^20.8.0
+    specifier: ^20.8.7
     version: 20.8.7
   '@types/react':
-    specifier: ^18.2.23
+    specifier: ^18.2.29
     version: 18.2.29
   '@types/react-dom':
-    specifier: ^18.2.8
+    specifier: ^18.2.13
     version: 18.2.13
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.31)
   depcheck:
-    specifier: ^1.4.6
+    specifier: ^1.4.7
     version: 1.4.7
   eslint:
     specifier: ^9.3.0
@@ -1923,7 +1923,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001550
+      caniuse-lite: 1.0.30001621
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1982,7 +1982,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001550
+      caniuse-lite: 1.0.30001621
       electron-to-chromium: 1.4.557
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
@@ -2017,8 +2017,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite@1.0.30001550:
-    resolution: {integrity: sha512-p82WjBYIypO0ukTsd/FG3Xxs+4tFeaY9pfT4amQL8KWtYH7H9nYwReGAbMTJ0hsmRO8IfDtsS6p3ZWj8+1c2RQ==}
+  /caniuse-lite@1.0.30001621:
+    resolution: {integrity: sha512-+NLXZiviFFKX0fk8Piwv3PfLPGtRqJeq2TiNoUff/qB5KJgwecJTvCXDpmlyP/eCI/GUEmp/h/y5j0yckiiZrA==}
 
   /chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -2953,7 +2953,7 @@ packages:
       '@next/env': 13.5.6
       '@swc/helpers': 0.5.2
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001550
+      caniuse-lite: 1.0.30001621
       postcss: 8.4.31
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
