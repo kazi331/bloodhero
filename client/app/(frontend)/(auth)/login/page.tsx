@@ -1,20 +1,10 @@
 'use client'
 import SocialLogin from '@/app/(frontend)/(auth)/SocialLogin';
-import { auth } from '@/lib/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import LoginForm from './LoginForm';
 
 
 function Login() {
-    const { push } = useRouter();
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) return push('/');
-        });
-    }, []);
     return (<>
         <h2 className="text-gray-600 text-lg font-bold title-font mb-6">Login to your Account</h2>
         <SocialLogin />

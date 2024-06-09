@@ -1,12 +1,12 @@
 'use client'
 import Error from "@/components/common/Error"
 import Captcha from "@/components/common/captcha"
-import axios from "@/lib/axios"
+import { auth } from "@/lib/firebase"
 import { Button } from "@components/ui/button"
 import { Input } from "@components/ui/input"
+import { User as UserType, createUserWithEmailAndPassword } from "firebase/auth"
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -53,7 +53,6 @@ const validation = {
 
 
 const Register = () => {
-    const { push } = useRouter();
 
     const [captchaVerified, setCaptchaVerified] = useState<boolean>(false)
     const [captchaText, setCaptchaText] = useState("");
@@ -74,20 +73,31 @@ const Register = () => {
         if (!captchaVerified) {
             return toast.error('Please complete captcha verification')
         }
-        try {
-            const res = await axios.post('/auth/register', { ...fieldValues, email: fieldValues.email.toLowerCase() })
-            if (res.data.success) {
-                toast.success(res.data.message, {
-                    description: 'You can now login to your account!',
-                })
-                push('/login')
-            }
-        } catch (err: any) {
-            console.log(err.message)
-            toast.error(err.response?.data?.message, {
-                description: err.response?.data?.error || 'User Registration Failed!'
+
+        createUserWithEmailAndPassword(auth, fieldValues.email, fieldValues.password)
+            .then(({ user }: { user: UserType }) => {
+                if (user) {
+                    toast.success('User Registration Successful!', {
+                        description: "Please login to continue."
+                    })
+                    console.log(user)
+                } else {
+                    toast.error('User Registration Failed!', {
+                        description: "Please try again."
+                    })
+                }
             })
-        }
+            .catch((err: any) => {
+                console.log(err.message)
+                if (err.message.includes("auth/email-already-in-use")) {
+                    return toast.error('Email already in use!', {
+                        description: "Please try with another email."
+                    })
+                }
+                toast.error(err.response?.data?.message, {
+                    description: err.response?.data?.error || 'User Registration Failed!'
+                })
+            });
 
     }
 

@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { AuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import {
+  AuthProvider,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { Dispatch, SetStateAction } from "react";
 import { toast } from "sonner";
 
@@ -23,6 +28,7 @@ export const loginWith = async (
   provider: AuthProvider,
   setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
+  setLoading(true);
   signInWithPopup(auth, provider)
     .then(({ user, providerId, operationType }) => {
       setLoading(false);
@@ -38,3 +44,13 @@ export const loginWith = async (
       console.log(err);
     });
 };
+
+// export const signup = async (email: string, password: string) => {
+//   try {
+//     const user = await signInWithEmailAndPassword(auth, email, password);
+//     console.log(user);
+//     return user;
+//   } catch (err: any) {
+//     console.log(err.message);
+//   }
+// };

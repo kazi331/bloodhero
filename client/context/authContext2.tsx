@@ -12,7 +12,7 @@ export const AuthProvider2 = ({ children }: { children: ReactNode }) => {
         setLoading(true);
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                console.log(user)
+                // console.log(user)
                 setUser(user)
                 setLoading(false);
                 // window.location.href = '/'
