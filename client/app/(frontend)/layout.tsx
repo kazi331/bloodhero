@@ -1,6 +1,7 @@
 'use client'
 import BottomNav from '@/components/home/BottomNav';
 import { AuthProvider } from "@/context/authContext";
+import { AuthProvider2 } from '@/context/authContext2';
 import { Galada, Hind_Siliguri } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 
@@ -24,7 +25,7 @@ const galada = Galada({
 export default function FrontLayout({ children, }: { children: React.ReactNode }) {
 
     return (
-        <AuthProvider>
+        <AuthProvider2>
             <div className={`${siliguri.variable}`}>
                 <div className="container w-full max-w-[30rem]" >
                     <div className='h-full min-h-[calc(100vh-4rem)] bg-white'>
@@ -35,6 +36,6 @@ export default function FrontLayout({ children, }: { children: React.ReactNode }
                 </div>
             </div >
             <NextTopLoader color='hsl(344deg 80% 56% / 70%)' />
-        </AuthProvider>
+        </AuthProvider2>
     )
 }

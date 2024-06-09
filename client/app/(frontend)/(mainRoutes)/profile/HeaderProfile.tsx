@@ -5,31 +5,22 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import axios from "@/lib/axios";
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Menu } from 'lucide-react';
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import { toast } from "sonner";
+import { useEffect } from "react";
 
 
 
 const HeaderProfile = ({ userId }: { userId: string }) => {
     const { push } = useRouter();
-    const logout = async () => {
-        try {
-            const res = await axios.get('/auth/logout')
-            if (res.data.success) {
-                toast.success(res.data.message, {
-                    description: 'You will be redirected to login page',
-                })
-            }
-            localStorage.removeItem('user')
-            push('/login')
-
-        } catch (err: any) {
-            toast.error(err.response?.data.message)
-        }
-    }
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (!user) return push('/login');
+        });
+    }, []);
     return (
         <div className="topbar-h flex items-center justify-between ">
             <span />
@@ -42,7 +33,7 @@ const HeaderProfile = ({ userId }: { userId: string }) => {
                     <Link href={`/profile/edit`}> <DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded" >Edit Profile</DropdownMenuItem></Link>
                     <Link href={`/profile/add-donation/${userId}`}><DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded">Add Donation</DropdownMenuItem></Link>
                     <Link href="/settings"><DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded">Settings</DropdownMenuItem></Link>
-                    <DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded" onSelect={logout} >Logout</DropdownMenuItem>
+                    <DropdownMenuItem className="hover:!bg-gray-300/40 hover:!text-gray-50 rounded" onSelect={() => signOut(auth)} >Logout</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>

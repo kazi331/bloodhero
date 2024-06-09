@@ -32,6 +32,7 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "dayjs": "^1.11.10",
+    "firebase": "^10.12.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.279.0",
     "moment": "^2.29.4",
