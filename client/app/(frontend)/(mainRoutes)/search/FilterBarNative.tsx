@@ -31,7 +31,7 @@ const FilterBarNative = () => {
                         onChange={(e) => handleChange(e, 'area')} name="area" id="area"
                         className='rounded-tl rounded-bl border w-3/5 border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-500 text-base pl-3 pr-10'
                     >
-                        <option value="" >যেকোন এলাকা</option>
+                        <option value="" > সিলেক্ট এরিয়া </option>
                         {
                             unions.map(union => {
                                 return (

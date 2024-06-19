@@ -3,7 +3,7 @@ import Error from '@/components/common/Error'
 import FullPageLoading from '@/components/common/FullPageLoading'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useAuth } from '@/context/authContext'
+import { useAuthFirebase } from '@/context/authContextFirebase'
 import axios from '@/lib/axios'
 import { bloodType } from '@/lib/types'
 import { ArrowLeftCircle, Building, Calendar, Phone, User } from 'lucide-react'
@@ -52,7 +52,7 @@ const AddDonation = () => {
     const { register, formState: { errors, isSubmitting, isValid }, reset, handleSubmit } = useForm<donationData>({
         // defaultValues: user,
     });
-    const { user, loading } = useAuth();
+    const { user, loading } = useAuthFirebase();
 
     const onSubmit = async (fieldValues: donationData) => {
         try {

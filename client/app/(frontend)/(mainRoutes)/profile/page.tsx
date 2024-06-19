@@ -1,14 +1,14 @@
 'use client'
 import Donations from '@/components/common/Donations'
 import FullPageLoading from '@/components/common/FullPageLoading'
-import { useAuth } from '@/context/authContext'
+import { useAuthFirebase } from '@/context/authContextFirebase'
 import { ExternalLink, Info } from 'lucide-react'
 import Link from 'next/link'
 import HeaderProfile from './HeaderProfile'
 import ProfileArea from './ProfileArea'
 
 const Page = () => {
-    const { user, loading } = useAuth();
+    const { user, loading } = useAuthFirebase();
     if (loading || !user) return <FullPageLoading />
     return (
         <div className='px-6 bg-[#2d2d63] profile-bg h-full min-h-[calc(100vh-4rem)]'>
