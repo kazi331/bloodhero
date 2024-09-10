@@ -8,7 +8,7 @@ export const metadata = {
   description: 'Donate blood, save lives and make a difference in the world. Find a blood donation center near you and schedule an appointment today!',
   url: 'https://bloodhero.vercel.app',
   image: 'https://bloodhero.vercel.app/images/og.png',
-  viewport: 'width=device-width, initial-scale=1',
+  // viewport: 'width=device-width, initial-scale=1',
   icon: '/favicon.ico',
   Heading: 'Join the life-saving community of blood donors',
   keywords: 'blood donation, blood, donate blood, save lives, blood donation app, blood donation website, blood donation center near me, blood donation website in bangladesh, blood donation website in bangladesh',
