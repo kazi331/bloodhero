@@ -27,6 +27,19 @@ const getLoggedUser = async (req, res) => {
         })
     }
 }
+// get signed in user
+const getSignedInUser = async (req, res) => {
+    try {
+        const user = await User.findOne({ uid: req.params.uid }, "-password -role -__v").populate("donations", "-donor -__v");
+        res.json(user);
+    } catch (err) {
+        res.status(404).json({
+            success: false,
+            message: "User not found",
+        })
+    }
+}
+
 // get all users
 const getUsers = async (req, res) => {
     try {
@@ -67,7 +80,6 @@ const updateUser = async (req, res) => {
 
     const updatedUser = await User.findOneAndUpdate({ _id: id }, req.body);
     if (updatedUser) {
-
         res.status(202).json({
             success: true,
             message: 'User updated successfully',
@@ -88,6 +100,6 @@ const updateUser = async (req, res) => {
 }
 
 export {
-    deleteUser, getLoggedUser, getUser, getUsers, updateUser
+    deleteUser, getLoggedUser, getSignedInUser, getUser, getUsers, updateUser
 };
 

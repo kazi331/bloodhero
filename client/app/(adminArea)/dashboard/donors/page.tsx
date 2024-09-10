@@ -2,7 +2,7 @@
 
 import { useDash } from "@/context/dashboardContext";
 
-const page = () => {
+const Page = () => {
     const { donors, loading } = useDash();
     console.log(donors, loading)
     return (
@@ -15,4 +15,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

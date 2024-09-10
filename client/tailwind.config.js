@@ -82,7 +82,7 @@ module.exports = {
         roboto: ['var(--font-roboto)'],
         tiro: ['var(--font-tiro)'],
         siliguri: ['var(--font-siliguri)'],
-      }
+        }
     },
   },
   plugins: [

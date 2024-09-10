@@ -2,11 +2,10 @@
 import BottomNav from '@/components/home/BottomNav';
 import { AuthProvider } from "@/context/authContext";
 import { Galada, Hind_Siliguri } from 'next/font/google';
-import NextTopLoader from 'nextjs-toploader';
-
 
 import React from 'react';
 import { Toaster } from 'sonner';
+
 
 const siliguri = Hind_Siliguri({
     subsets: ['latin'],
@@ -34,7 +33,6 @@ export default function FrontLayout({ children, }: { children: React.ReactNode }
                     <BottomNav />
                 </div>
             </div >
-            <NextTopLoader color='hsl(344deg 80% 56% / 70%)' />
         </AuthProvider>
     )
 }

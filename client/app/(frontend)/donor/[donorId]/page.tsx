@@ -14,7 +14,7 @@ import arrowLeft from 'public/icons/profile/arrow-left.svg';
 import { useEffect, useState } from 'react';
 
 
-const page = () => {
+const Page = () => {
     const [donor, setDonor] = useState<donorProfileType>({} as donorProfileType)
     const { back } = useRouter();
     const { donorId } = useParams();
@@ -95,4 +95,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

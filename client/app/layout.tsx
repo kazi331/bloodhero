@@ -1,4 +1,4 @@
-import { Hind_Siliguri, Inter, Tiro_Bangla } from 'next/font/google';
+import { Inter, Tiro_Bangla } from 'next/font/google';
 import '../styles/custom.css';
 import '../styles/globals.css';
 
@@ -8,7 +8,7 @@ export const metadata = {
   description: 'Donate blood, save lives and make a difference in the world. Find a blood donation center near you and schedule an appointment today!',
   url: 'https://bloodhero.vercel.app',
   image: 'https://bloodhero.vercel.app/images/og.png',
-  viewport: 'width=device-width, initial-scale=1',
+  // viewport: 'width=device-width, initial-scale=1',
   icon: '/favicon.ico',
   Heading: 'Join the life-saving community of blood donors',
   keywords: 'blood donation, blood, donate blood, save lives, blood donation app, blood donation website, blood donation center near me, blood donation website in bangladesh, blood donation website in bangladesh',
@@ -39,7 +39,6 @@ export const metadata = {
   developerLinkedin: 'https://www.linkedin.com/in/kazi331/',
 };
 
-
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap'
@@ -52,6 +51,7 @@ const tiro = Tiro_Bangla({
   display: 'swap',
   variable: '--font-tiro',
 })
+
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -83,9 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="developer-linkedin" content="https://www.linkedin.com/in/kazi331/" />
       </head>
       <body>
-        <main
-          className={` ${tiro.variable}  ${inter.className} `}
-        >{children}</main>
+        <main className={` ${tiro.variable}  ${inter.className} `}>{children}</main>
       </body>
     </html>
   )

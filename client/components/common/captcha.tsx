@@ -56,7 +56,7 @@ const Captcha = ({ captchaText, captchaInput, setCaptchaText, setCaptchaInput, c
                     {captchaVerified && <CheckCircle className='text-green-500 font-bold block w-4 h-full  absolute top-0 right-4 ' />}
                 </div>
                 <button onClick={() => generateCaptcha(6)} type='button' className='text-gray-600' tabIndex={-1}>
-                    <RefreshCcwIcon className='active:scale-90 transition-transform' aria-description='refresh' />
+                    <RefreshCcwIcon className='active:scale-90 transition-transform' />
                 </button>
             </div>
         </div>

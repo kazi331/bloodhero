@@ -3,11 +3,11 @@
 import { useDash } from "@/context/dashboardContext";
 import { useEffect } from "react";
 
-const requests = () => {
+const Requests = () => {
     const { requests, loading, loadRequests } = useDash();
     useEffect(() => {
         loadRequests();
-    }, []);
+    }, [loadRequests]);
     return (
         <>
             <title>Requests | Blood Hero</title>
@@ -18,4 +18,4 @@ const requests = () => {
     )
 }
 
-export default requests
+export default Requests

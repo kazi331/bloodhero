@@ -97,6 +97,7 @@ export const columns: ColumnDef<donationType>[] = [
         accessorKey: "isApproved",
         header: "Status",
         cell: ({ row }) => {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const { loadDonations } = useDash();
             return (<Select
                 defaultValue={row.getValue('isApproved') ? 'approved' : 'pending'}
@@ -127,6 +128,7 @@ export const columns: ColumnDef<donationType>[] = [
         accessorKey: "action",
         header: "Action",
         cell: ({ row }) => {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const { setDonationId, setDonor, modal, setModal } = useDash();
             const fetchDonor = async () => {
                 try {
