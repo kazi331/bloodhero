@@ -1,3 +1,4 @@
+// import DonorsGrid from "./DonorsGrid";
 import { Suspense } from "react";
 import DonorsGrid from "./DonorsGrid";
 import FilterBarNative from "./FilterBarNative";
@@ -7,11 +8,9 @@ const Page = () => {
     return (
         <div className="pb-5">
             <HeaderSearch />
-            <FilterBarNative />
+            <Suspense><FilterBarNative /></Suspense>
             {/* <FilterBarRadix /> */}
-            <Suspense>
-                <DonorsGrid />
-            </Suspense>
+            <Suspense><DonorsGrid /></Suspense>
             {/* <SelectBloodType /> */}
 
         </div>
