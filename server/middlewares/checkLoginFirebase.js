@@ -1,5 +1,5 @@
 import admin from 'firebase-admin';
-const checkLogin2 = async (req, res, next) => {
+const checkLoginFirebase = async (req, res, next) => {
     try {
         const idToken = req.headers.authorization;
 
@@ -17,4 +17,4 @@ const checkLogin2 = async (req, res, next) => {
     }
 };
 
-export default checkLogin2;
+export default checkLoginFirebase;

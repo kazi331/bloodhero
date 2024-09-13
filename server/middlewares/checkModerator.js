@@ -1,6 +1,6 @@
 import User from "../models/userSchema.js";
 
-const checkAdmin = async (req, res, next) => {
+const checkModerator = async (req, res, next) => {
     try {
         const user = await User.findById(req.userId);
         if (user.role === 'moderator') {
@@ -22,4 +22,4 @@ const checkAdmin = async (req, res, next) => {
 }
 
 
-export default checkAdmin;
+export default checkModerator;

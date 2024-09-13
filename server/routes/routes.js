@@ -4,7 +4,7 @@ import { getDonor, getDonors } from '../controllers/donorController.js';
 import { deleteUser, getSignedInUser, getUser, getUsers, updateUser } from '../controllers/userController.js';
 import checkAdmin from '../middlewares/checkAdmin.js';
 import checkLogin from '../middlewares/checkLogin.js';
-import checkLogin2 from '../middlewares/checkLogin2.js';
+import checkLoginFirebase from '../middlewares/checkLoginFirebase.js';
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ router.get('/donors', getDonors);
 router.get('/donors/:donorId', getDonor);
 
 // DONATION RELATED ROUTES 
-router.post('/donations', checkLogin2, createDonation) // for logged in users only
+router.post('/donations', checkLoginFirebase, createDonation) // for logged in users only
 router.post('/donations', checkLogin, checkAdmin, createDonation) // for admin only
 router.get('/donations', getDonations)
 router.get('/donations/:id', getDonation);
