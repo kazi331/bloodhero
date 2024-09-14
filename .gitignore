@@ -37,5 +37,6 @@ out/
 # Optional: Lock files (if you don't want to commit them)
 # pnpm doesn't use package-lock.json or yarn.lock
 
-
+log.txt
+.vercel
 bloodhero-admin.json
