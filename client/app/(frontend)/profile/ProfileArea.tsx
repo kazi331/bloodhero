@@ -11,7 +11,7 @@ const ProfileArea = ({ user }: { user: userProps }) => {
 
     return (
         <div className='grid grid-cols-1 xs:grid-cols-2 gap-4  text-white/90 pt-10'>
-            <Image src={user.image || profileImage} alt="ProfileImage" width={400} height={400} className='rounded-xl object-cover object-center' />
+            <Image src={user.image || profileImage} alt="ProfileImage" width={400} height={400} className='xs:rounded-xl object-cover object-center w-1/2 xs:w-full rounded-full m-auto' />
             <div className='flex flex-col '>
                 <h1 className='font-bold text-lg'>{user.name}</h1>
                 <div className='text-xs mt-1 capitalize text-gray-300'>

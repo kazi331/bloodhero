@@ -3,6 +3,7 @@ import FullPageLoading from "@/components/common/FullPageLoading";
 import { useAuth } from "@/context/authContext";
 import { useRouter } from "next/navigation";
 import Header from "./Header";
+import Error from "@/components/common/Error";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     const { push } = useRouter();
@@ -18,7 +19,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
 
     )
-    return null;
+    return <Error>Something went wrong!!</Error>;
 }
 
 export default AuthLayout

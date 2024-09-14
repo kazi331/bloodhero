@@ -21,7 +21,7 @@ const Donor = ({ donor }: { donor: donorType }) => {
                     <Link href={`/donor/${donor._id}`} className='text-lg text-white font-medium'>{donor.name}</Link>
                     <h2 className='capitalize' >{donor.area}</h2>
                     <div className='flex items-center space-x-2 mt-2 '>
-                        <Badge className='capitalize rounded-md' >{donor.type.split('')[0]} {donor.type?.split('')[1] === '-' ? 'Negative' : 'Positive'}</Badge>
+                        <Badge className='capitalize rounded-md whitespace-nowrap' >{donor.type.split('')[0]} {donor.type?.split('')[1] === '-' ? 'Negative' : 'Positive'}</Badge>
                         <Badge variant={`${donor.isAvailable ? 'active_neon' : 'inactive_neon'}`} >
                             {donor.isAvailable ? "Available" : "Unavailable"}
                         </Badge>
@@ -29,7 +29,7 @@ const Donor = ({ donor }: { donor: donorType }) => {
                     </div>
                 </div>
 
-                <div className='p-2 flex flex-col items-center justify-center ' >
+                <div className='p-2 hidden xs:flex flex-col items-center justify-center  ' >
                     <div className='relative'>
                         {coloredBlood}
                         <div className='absolute top-2 -right-1 flex items-center justify-center shadow  bg-gradient-to-tr from-[#FF78A9] to-[#DF1B49] text-white rounded-full  w-6 h-6 text-mono text-[10px] font-medium uppercase'>
