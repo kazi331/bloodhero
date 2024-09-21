@@ -37,3 +37,4 @@ out/
 # pnpm doesn't use package-lock.json or yarn.lock
 
 bloodhero-admin.json
+.vercel
