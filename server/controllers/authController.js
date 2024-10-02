@@ -43,7 +43,7 @@ const updateProfile = async (req, res) => {
     try {
         // check if user already exists
         const exist = await User.findById(req.params.userId);
-        console.log('exist:', exist);
+        // console.log('exist:', exist);
         
         if (!exist) return res.status(404).json({
             success: false,
